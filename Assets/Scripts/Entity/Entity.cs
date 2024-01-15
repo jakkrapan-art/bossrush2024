@@ -29,7 +29,7 @@ public class Entity : MonoBehaviour
 
       foreach(var action in _controller.KeyActions)
       {
-        if (Input.GetKeyDown(action.Key)) action.Value?.Invoke();
+        if (Input.GetKeyDown(action.Key)) action.Action?.Invoke();
       }
     }
   }
