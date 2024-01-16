@@ -10,6 +10,8 @@ public class Entity : MonoBehaviour
   [SerializeField]
   private EntityData _data;
 
+  protected StateMachine _stateMachine = null;
+
   #region Unity Functions
   private void Awake()
   {

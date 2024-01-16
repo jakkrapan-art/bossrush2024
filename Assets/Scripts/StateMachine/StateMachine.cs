@@ -6,9 +6,9 @@ public abstract class StateMachine
 {
   private State _currentState;
 
-  public StateMachine(State initialState) 
+  public void Init()
   {
-    _currentState = initialState;
+    _currentState = GetInitialState();
     _currentState.OnEnter();
   }
 
@@ -18,6 +18,8 @@ public abstract class StateMachine
     state.OnEnter();
     _currentState = state;
   }
+
+  protected abstract State GetInitialState();
 
   public void Update() { _currentState?.Update(); }
   public void FixedUpdate() { _currentState?.FixedUpdate(); }
