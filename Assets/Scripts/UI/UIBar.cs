@@ -14,18 +14,16 @@ public class UIBar : MonoBehaviour
   [SerializeField]
   private Text _barPercentValue = null;
   private Action<float> _onUpdateAction = null;
-  public void UpdateValue(float value)
+
+  public float GetBarValue() => _bar.value;
+  public void UpdateValue(float updateValue)
   {
-    if(_bar) _bar.value = value;
-    if(_barPercentValue)
+    float value = _bar.value + updateValue;
+
+    if (_bar) _bar.value = value;
+    if (_barPercentValue)
     {
       _barPercentValue.text = Mathf.RoundToInt(value * 100) + "%";
-      var rect = _barPercentValue.GetComponent<RectTransform>();
-      if(rect)
-      {
-        rect.pivot = new Vector2(value, rect.pivot.x);
-      }
-
       _onUpdateAction?.Invoke(value);
     }
   }
@@ -40,8 +38,14 @@ public class UIBar : MonoBehaviour
     _onUpdateAction -= action;
   }
 
-  public void SetBarColor(Color color)
+  public void SetBarFillColor(Color color)
   {
-    if(_barFill) _barFill.color = color;
+    if (_barFill) _barFill.color = color;
+  }
+
+  public Color GetBarFillColor()
+  {
+    if (_barFill) return _barFill.color;
+    return Color.black;
   }
 }
