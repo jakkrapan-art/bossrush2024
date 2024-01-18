@@ -6,7 +6,7 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
   private Rigidbody2D _rb;
-  private EntityController _controller;
+  protected EntityController _controller;
   [SerializeField]
   private EntityData _data;
 
@@ -18,11 +18,6 @@ public class Entity : MonoBehaviour
     _rb = GetComponent<Rigidbody2D>();
   }
 
-  private void Start()
-  {
-    _controller = new PlayerController();
-  }
-
   private void Update()
   {
     if(_controller != null)
@@ -31,7 +26,15 @@ public class Entity : MonoBehaviour
 
       foreach(var action in _controller.KeyActions)
       {
-        if (Input.GetKeyDown(action.Key)) action.Action?.Invoke();
+        switch(action.InputType)
+        {
+          case KeyActionInputType.Press:
+            if (Input.GetButtonDown(action.KeyName)) action.Action?.Invoke();
+            break;
+          case KeyActionInputType.Hold:
+            if (Input.GetButton(action.KeyName)) action.Action?.Invoke();
+            break;
+        }
       }
     }
   }

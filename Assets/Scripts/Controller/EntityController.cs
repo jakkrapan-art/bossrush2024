@@ -8,20 +8,27 @@ public abstract class EntityController
   public List<KeyActionPair> KeyActions { get; private set; } = new List<KeyActionPair>();
 
   public abstract Vector2 GetMoveInput();
-  public void AddKeyAction(KeyCode key, Action action)
+  public void AddKeyAction(string key, Action action, KeyActionInputType inputType)
   {
-    KeyActions.Add(new KeyActionPair(key, action));
+    KeyActions.Add(new KeyActionPair(key, action, inputType));
   }
 }
 
 public struct KeyActionPair
 {
-  public KeyCode Key { get; }
+  public string KeyName { get; }
   public Action Action { get; }
+  public KeyActionInputType InputType { get; }
 
-  public KeyActionPair(KeyCode key, Action action)
+  public KeyActionPair(string key, Action action, KeyActionInputType inputType)
   {
-    Key = key;
+    KeyName = key;
     Action = action;
+    InputType = inputType;
   }
+}
+
+public enum KeyActionInputType
+{
+  Press, Hold
 }
