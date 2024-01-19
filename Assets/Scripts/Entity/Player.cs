@@ -8,9 +8,9 @@ public class Player : Entity
   {
     _controller = new PlayerController(this);
 
-    _controller.AddKeyAction("Pickup", () =>
+    _controller.AddKeyAction(Input.GetButtonDown("Pickup"), () =>
     {
       //TODO: Implement for pickup action here
-    }, KeyActionInputType.Press);
+    });
   }
 }

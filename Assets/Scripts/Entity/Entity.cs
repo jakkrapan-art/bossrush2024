@@ -26,15 +26,7 @@ public class Entity : MonoBehaviour
 
       foreach(var action in _controller.KeyActions)
       {
-        switch(action.InputType)
-        {
-          case KeyActionInputType.Press:
-            if (Input.GetButtonDown(action.KeyName)) action.Action?.Invoke();
-            break;
-          case KeyActionInputType.Hold:
-            if (Input.GetButton(action.KeyName)) action.Action?.Invoke();
-            break;
-        }
+        if (action.DoAction?.Invoke() ?? false) action.Action?.Invoke();
       }
     }
   }
