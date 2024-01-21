@@ -11,7 +11,6 @@ public class PlayerController : EntityController
 
     AddKeyAction(()=> { return Input.GetButtonDown("PickupDrop"); }, () =>
     {
-      Debug.Log("Pickup/Drop");
       _player.PickDropItem();
     });
 
@@ -23,6 +22,7 @@ public class PlayerController : EntityController
 
     AddKeyAction(() => { return Input.GetButtonDown("Throw"); }, () =>
     {
+      Debug.Log("throw");
       _player.ThrowItem();
 
     });

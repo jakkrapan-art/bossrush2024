@@ -7,6 +7,7 @@ using static UnityEditor.Progress;
 public class Items : MonoBehaviour
 {
   protected Rigidbody2D _rb;
+  protected BoxCollider2D _coll2d;
   public float TimeToDestroy = 60;
   private bool isHolding;
   private float timeCountdownToDestoy;
@@ -14,6 +15,7 @@ public class Items : MonoBehaviour
   private void Awake()
   {
     _rb = GetComponent<Rigidbody2D>();
+    _coll2d = GetComponent<BoxCollider2D>();
   }
 
   void Start()
@@ -26,19 +28,32 @@ public class Items : MonoBehaviour
     isHolding = true;
     transform.parent = objectHand.transform;
     transform.localPosition = Vector2.zero;
-    
+    Destroy(_rb);
+    _coll2d.enabled = false;
   }
 
   public void Droped()
   {
     isHolding = false;
     transform.parent = null;
+    if (_rb == null)
+    {
+      _rb = gameObject.AddComponent<Rigidbody2D>();
+      _rb.gravityScale = 0f;
+    }
+    _coll2d.enabled = true;
   }
   public void Throw(Vector2 directionPlayer)
   {
     isHolding = false;
     transform.parent = null;
+    if (_rb == null)
+    {
+      _rb = gameObject.AddComponent<Rigidbody2D>();
+      _rb.gravityScale = 0f;
+    }
     _rb.velocity = directionPlayer;
+    _coll2d.enabled = true;
   }
 
   // Update is called once per frame
@@ -56,7 +71,8 @@ public class Items : MonoBehaviour
     {
       timeCountdownToDestoy = 0;
     }
-    if (_rb.velocity == Vector2.zero)
+    if(_rb != null)
+    if (_rb.velocity != Vector2.zero)
     {
       _rb.velocity -= _rb.velocity * Time.fixedDeltaTime;
     }

@@ -10,7 +10,8 @@ public class Player : Entity
   private Items _itemHolding;
   private Items _itemFinded;
 
-  private Vector2 directionPlayer;
+  [SerializeField]
+  private float _forceToThrow = 50;
 
   private void Start()
   {
@@ -28,8 +29,8 @@ public class Player : Entity
     }
     else
     {
-      _itemFinded.Kept(_handHoldingItem);
       _itemHolding = _itemFinded;
+      _itemFinded.Kept(_handHoldingItem);
     }
   }
 
@@ -37,7 +38,7 @@ public class Player : Entity
   {
     if (_itemHolding)
     {
-      _itemHolding.Throw(directionPlayer);
+      _itemHolding.Throw(directionPlayer * _forceToThrow);
       _itemHolding = null;
     }
   }
