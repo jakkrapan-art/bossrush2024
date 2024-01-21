@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class BossStateMachine : StateMachine
 {
-    private IdleState IdleState { get; }
-    private HungryState HungryState { get; }
-    private RageState RageState { get; }
-    private EnrageState EnrageState { get; }
-    private AlmostFullState AlmostFullState { get; }
-    private FullState FullState { get; }
+    public IdleState IdleState { get; private set; }
+    public HungryState HungryState { get; private set; }
+    public RageState RageState { get; private set; }
+    public EnrageState EnrageState { get; private set; }
+    public AlmostFullState AlmostFullState { get; private set; }
+    public FullState FullState { get; private set; }
     public BossStateMachine()
     {
-        IdleState = new IdleState();
-        HungryState = new HungryState();
-        RageState = new RageState();
-        EnrageState = new EnrageState();
-        AlmostFullState = new AlmostFullState();
-        FullState = new FullState();
+        this.IdleState = new IdleState(this);
+        this.HungryState = new HungryState(this);
+        this.RageState = new RageState(this);
+        this.EnrageState = new EnrageState(this);
+        this.AlmostFullState = new AlmostFullState(this);
+        this.FullState = new FullState(this);
 
         Init();
     }

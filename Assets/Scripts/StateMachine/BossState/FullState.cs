@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FullState : State
+public class FullState : BossStateBase
 {
-    public FullState()
+    public FullState(BossStateMachine stateMachine) : base(stateMachine)
     {
     }
 }
