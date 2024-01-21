@@ -8,7 +8,7 @@ public class Entity : MonoBehaviour
   private Rigidbody2D _rb;
   protected EntityController _controller;
   [SerializeField]
-  private EntityData _data;
+  protected EntityData _data;
 
   protected StateMachine _stateMachine = null;
 
