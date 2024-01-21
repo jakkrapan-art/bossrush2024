@@ -8,13 +8,14 @@ public class Boss : Entity
     private float _rage = 50.00f;
     [SerializeField]
     private float _ragePointIncreased = 0.16f;
+    public float GetRage() {  return _rage; }
+    public void DecreasedRage(float rage)
+    {
+        _rage -= rage;
+    }
     private void Awake()
     {
         _stateMachine = new BossStateMachine();
-    }
-    private void Start()
-    {
-
     }
 
     private void FixedUpdate()
@@ -64,10 +65,5 @@ public class Boss : Entity
     private float getRagePointPercentage()
     {
         return _rage / 100.00f;
-    }
-
-    public void DecreasedRage(float rage)
-    {
-        _rage -= rage;
     }
 }
