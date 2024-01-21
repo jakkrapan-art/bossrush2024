@@ -8,6 +8,29 @@ public class PlayerController : EntityController
   public PlayerController(Player player)
   {
     _player = player;
+
+    AddKeyAction(Input.GetButtonDown("PickupDrop"), () =>
+    {
+      Debug.Log("Pickup/Drop");
+      _player.PickDropItem();
+    });
+
+   /* AddKeyAction(Input.GetButtonDown("Drop"), () =>
+    {
+      _player.DropItem();
+
+    });*/
+
+    AddKeyAction(Input.GetButtonDown("Throw"), () =>
+    {
+      _player.ThrowItem();
+
+    });
+
+    AddKeyAction(Input.GetButtonDown("Interact"), () =>
+    {
+      //TODO: Implement for pickup action here
+    });
   }
 
   public override Vector2 GetMoveInput()
