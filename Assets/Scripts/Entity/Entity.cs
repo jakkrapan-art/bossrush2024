@@ -26,7 +26,7 @@ public class Entity : MonoBehaviour
 
       foreach(var action in _controller.KeyActions)
       {
-        if (action.DoAction) action.Action?.Invoke();
+        if (action.DoAction?.Invoke() ?? false) action.Action?.Invoke();
       }
     }
   }

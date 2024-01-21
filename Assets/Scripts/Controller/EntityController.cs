@@ -8,7 +8,7 @@ public abstract class EntityController
   public List<KeyActionPair> KeyActions { get; private set; } = new List<KeyActionPair>();
 
   public abstract Vector2 GetMoveInput();
-  public void AddKeyAction(bool DoAction, Action action)
+  public void AddKeyAction(Func<bool> DoAction, Action action)
   {
     KeyActions.Add(new KeyActionPair(DoAction, action));
   }
@@ -16,10 +16,10 @@ public abstract class EntityController
 
 public struct KeyActionPair
 {
-  public bool DoAction { get; }
+  public Func<bool> DoAction { get; }
   public Action Action { get; }
   
-  public KeyActionPair(bool doAction, Action action)
+  public KeyActionPair(Func<bool> doAction, Action action)
   {
     DoAction = doAction;
     Action = action;

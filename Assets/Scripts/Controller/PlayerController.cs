@@ -9,7 +9,7 @@ public class PlayerController : EntityController
   {
     _player = player;
 
-    AddKeyAction(Input.GetButtonDown("PickupDrop"), () =>
+    AddKeyAction(()=> { return Input.GetButtonDown("PickupDrop"); }, () =>
     {
       Debug.Log("Pickup/Drop");
       _player.PickDropItem();
@@ -21,13 +21,13 @@ public class PlayerController : EntityController
 
     });*/
 
-    AddKeyAction(Input.GetButtonDown("Throw"), () =>
+    AddKeyAction(() => { return Input.GetButtonDown("Throw"); }, () =>
     {
       _player.ThrowItem();
 
     });
 
-    AddKeyAction(Input.GetButtonDown("Interact"), () =>
+    AddKeyAction(() => { return Input.GetButtonDown("Interact"); }, () =>
     {
       //TODO: Implement for pickup action here
     });
