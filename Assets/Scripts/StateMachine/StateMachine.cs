@@ -4,25 +4,24 @@ using UnityEngine;
 
 public abstract class StateMachine
 {
-  public State CurrentState { get; protected set; } = null;
-
+  protected State _currentState = null;
   public State GetCurrentState() { return _currentState; }
 
   public void Init()
   {
-    CurrentState = GetInitialState();
-    CurrentState.OnEnter();
+    _currentState = GetInitialState();
+    _currentState.OnEnter();
   }
 
   public void ChangeState(State state)
   {
-    CurrentState.OnExit();
+    _currentState.OnExit();
     state.OnEnter();
-    CurrentState = state;
+    _currentState = state;
   }
 
   protected abstract State GetInitialState();
 
-  public void Update() { CurrentState?.Update(); }
-  public void FixedUpdate() { CurrentState?.FixedUpdate(); }
+  public void Update() { _currentState?.Update(); }
+  public void FixedUpdate() { _currentState?.FixedUpdate(); }
 }
