@@ -6,7 +6,7 @@ public abstract class StateMachine
 {
   public State CurrentState { get; protected set; } = null;
 
-  public State GetCurrentState() { return _currentState; }
+  public State GetCurrentState() { return CurrentState; }
 
   public void Init()
   {

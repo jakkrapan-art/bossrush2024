@@ -29,12 +29,14 @@ public class PlayerController : EntityController
 
     AddKeyAction(() => { return Input.GetButtonDown("Interact"); }, () =>
     {
-      //TODO: Implement for pickup action here
+      Debug.Log("InteractOject");
+      _player.StartInteractOject();
     });
   }
 
   public override Vector2 GetMoveInput()
   {
+    Debug.Log(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
     return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
   }
 }
