@@ -4,19 +4,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Progress;
 
-public class Items : MonoBehaviour
+public class Items : InteractOdject
 {
-  protected Rigidbody2D _rb;
-  protected BoxCollider2D _coll2d;
+  
   public float TimeToDestroy = 60;
-  private bool isHolding;
-  private float timeCountdownToDestoy;
+  private bool _isHolding;
+  private float _timeCountdownToDestoy;
 
-  private void Awake()
-  {
-    _rb = GetComponent<Rigidbody2D>();
-    _coll2d = GetComponent<BoxCollider2D>();
-  }
+  
 
   void Start()
   {
@@ -25,16 +20,18 @@ public class Items : MonoBehaviour
 
   public void Kept(GameObject objectHand)
   {
-    isHolding = true;
+    _isHolding = true;
     transform.parent = objectHand.transform;
     transform.localPosition = Vector2.zero;
     Destroy(_rb);
     _coll2d.enabled = false;
   }
 
+  
+
   public void Droped()
   {
-    isHolding = false;
+    _isHolding = false;
     transform.parent = null;
     if (_rb == null)
     {
@@ -45,7 +42,7 @@ public class Items : MonoBehaviour
   }
   public void Throw(Vector2 directionPlayer)
   {
-    isHolding = false;
+    _isHolding = false;
     transform.parent = null;
     if (_rb == null)
     {
@@ -59,17 +56,17 @@ public class Items : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (!isHolding)
+    if (!_isHolding)
     {
-      timeCountdownToDestoy += Time.deltaTime;
-      if (timeCountdownToDestoy > TimeToDestroy)
+      _timeCountdownToDestoy += Time.deltaTime;
+      if (_timeCountdownToDestoy > TimeToDestroy)
       {
         Destroy(this.gameObject);
       }
     }
     else
     {
-      timeCountdownToDestoy = 0;
+      _timeCountdownToDestoy = 0;
     }
     if(_rb != null)
     if (_rb.velocity != Vector2.zero)
