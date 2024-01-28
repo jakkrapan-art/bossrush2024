@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlantFirstState : PlantStateBase
+public class PlantSeedState : PlantStateBase
 {
   private Func<bool> _readyToGrow;
-  public PlantFirstState(PlantStateMachine stateMachine, Func<bool> readyToGrow) : base(stateMachine)
+  public PlantSeedState(PlantStateMachine stateMachine, Func<bool> readyToGrow) : base(stateMachine)
   {
     _readyToGrow = readyToGrow;
   }

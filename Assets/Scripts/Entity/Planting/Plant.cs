@@ -29,16 +29,6 @@ public class Plant : Entity
   private void Update()
   {
     if(_stateMachine != null) _stateMachine.Update();
-
-    if(Input.GetKeyDown(KeyCode.Alpha0))
-    {
-      FillWater();
-    }
-
-    if (Input.GetKeyDown(KeyCode.Alpha1))
-    {
-      AddFertilizer();
-    }
   }
 
   private void FixedUpdate()
@@ -75,4 +65,6 @@ public class Plant : Entity
   {
     return (PlantData) _data;
   }
+
+  public State GetCurrentState() => _stateMachine.GetCurrentState();
 }
