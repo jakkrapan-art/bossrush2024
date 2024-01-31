@@ -9,6 +9,7 @@ public class Plant : Entity
   public bool isWet { get; private set; } = false;
   public bool isFertilized { get; private set; } = false;
 
+  [field: SerializeField] public Items Product { get; }
   [field: SerializeField] public Animator _animator { get; private set; } = null;
 
   [SerializeField]
