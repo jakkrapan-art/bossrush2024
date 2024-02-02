@@ -10,13 +10,12 @@ public class Items : InteractOdject
   public float TimeToDestroy = 60;
   private bool _isHolding;
   private float _timeCountdownToDestoy;
+  [SerializeField]private ItemData _ItemData;
+  [SerializeField]private SpriteRenderer _ItemSprite;
+  public Sprite GetIconItem() {  return _ItemData.iconItem; }
+  public ItemData GetItemData() {  return _ItemData; }
 
-  
 
-  void Start()
-  {
-
-  }
 
   public void Kept(GameObject objectHand)
   {
@@ -52,6 +51,8 @@ public class Items : InteractOdject
     _rb.velocity = directionPlayer;
     _coll2d.enabled = true;
   }
+
+ 
 
   // Update is called once per frame
   void Update()

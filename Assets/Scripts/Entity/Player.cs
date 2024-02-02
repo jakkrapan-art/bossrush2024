@@ -8,8 +8,8 @@ public class Player : Entity
   [SerializeField]
   private GameObject _handHoldingItem;
   private Items _itemHolding;
-  private Items _itemFinded;
-  private Items _itemInteraction;
+  private InteractOdject _itemFinded;
+  private InteractOdject _itemInteraction;
 
   [SerializeField]
   private float _forceToThrow = 50;
@@ -22,17 +22,19 @@ public class Player : Entity
     _controller = new PlayerController(this);
   }
 
-  private void Update()
+  protected override void Update()
   {
+    base.Update();
     if (_isInteraction)
     {
-      //StopMove();
+      StopMove();
       _currentTimer += Time.deltaTime;
+      if (_currentTimer >= _timeToInteraction)
+      {
+        InteractFinish();
+      }
     }
-    if (_currentTimer >= _timeToInteraction)
-    {
-      InteractFinish();
-    }
+
   }
   public void PickDropItem()
   {
@@ -44,10 +46,10 @@ public class Player : Entity
         _itemHolding = null;
       }
     }
-    else
+    else if (_itemFinded.GetComponent<Items>())
     {
-      _itemHolding = _itemFinded;
-      _itemFinded.Kept(_handHoldingItem);
+      _itemHolding = _itemFinded.GetComponent<Items>();
+      _itemFinded.GetComponent<Items>().Kept(_handHoldingItem);
     }
   }
 
@@ -61,7 +63,7 @@ public class Player : Entity
   }
   public void StartInteractOject()
   {
-    if (!_itemFinded && _itemFinded.GetComponent<InteractOdject>() && !_isInteraction)
+    if (_itemFinded && !_isInteraction)
     {
       if (_itemFinded.CanInteract(_itemHolding))
       {
@@ -69,6 +71,8 @@ public class Player : Entity
         _timeToInteraction = _itemFinded.GetTimeToInteract();
         _itemInteraction = _itemFinded;
         _currentTimer = 0;
+        Debug.Log("StartInteractOject");
+
       }
     }
   }
@@ -79,6 +83,7 @@ public class Player : Entity
       _isInteraction = false;
       _itemInteraction.InteractResult();
       _itemInteraction = null;
+      Debug.Log("InteractFinish");
     }
   }
 
@@ -92,9 +97,9 @@ public class Player : Entity
 
   private void OnTriggerStay2D(Collider2D collision)
   {
-    if (collision.GetComponent<Items>())
+    if (collision.GetComponent<InteractOdject>())
     {
-      _itemFinded = collision.GetComponent<Items>();
+      _itemFinded = collision.GetComponent<InteractOdject>();
     }
   }
 

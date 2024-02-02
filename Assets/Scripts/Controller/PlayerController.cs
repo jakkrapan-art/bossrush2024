@@ -32,11 +32,17 @@ public class PlayerController : EntityController
       Debug.Log("InteractOject");
       _player.StartInteractOject();
     });
+
+    AddKeyAction(() => { return Input.GetButtonUp("Interact"); }, () =>
+    {
+      Debug.Log("CancelInteractOject");
+      _player.CancelInteractOject();
+    });
   }
 
   public override Vector2 GetMoveInput()
   {
-    Debug.Log(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+   
     return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
   }
 }

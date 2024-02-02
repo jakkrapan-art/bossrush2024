@@ -5,7 +5,7 @@ using UnityEngine;
 public class InteractOdject : MonoBehaviour
 {
   protected Rigidbody2D _rb;
-  protected BoxCollider2D _coll2d;
+  protected Collider2D _coll2d;
 
   [SerializeField] protected RecipeFoods _listItemCanInteract;
   [SerializeField] protected float _timeToInteract = 0;
@@ -22,7 +22,7 @@ public class InteractOdject : MonoBehaviour
   {
     if (_listItemCanInteract == null) return true;
 
-    foreach (Items item in _listItemCanInteract.ItemsInput)
+    foreach (ItemData item in _listItemCanInteract.ItemsInput)
     {
       if (item == itemToInteract)
       {

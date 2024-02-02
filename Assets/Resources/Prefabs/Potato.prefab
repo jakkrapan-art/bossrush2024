@@ -99,9 +99,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a1243763daf71743943c12f02b80ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _listItemCanInteract: []
+  _listItemCanInteract: {fileID: 0}
   _timeToInteract: 3
+  _ItemsOutput: {fileID: 0}
   TimeToDestroy: 60
+  _ItemData: {fileID: 11400000, guid: 17a5c477a2ee87b42bba431d0fb74bb1, type: 2}
+  _ItemSprite: {fileID: 3056151154658702250}
 --- !u!50 &3101750790425202304
 Rigidbody2D:
   serializedVersion: 4

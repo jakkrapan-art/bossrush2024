@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3101750790425202304}
   - component: {fileID: 756741625520856773}
   m_Layer: 0
-  m_Name: Chicken
+  m_Name: food1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5f8208e71b55720409e53afe5f256604, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4830119, g: 1, b: 0.32549024, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   _timeToInteract: 3
   _ItemsOutput: {fileID: 0}
   TimeToDestroy: 60
-  _ItemData: {fileID: 11400000, guid: 6934449310fa64140a1512733ef95ed4, type: 2}
+  _ItemData: {fileID: 11400000, guid: d3ee3576c66821f4aa9767065f154306, type: 2}
   _ItemSprite: {fileID: 3056151154658702250}
 --- !u!50 &3101750790425202304
 Rigidbody2D:

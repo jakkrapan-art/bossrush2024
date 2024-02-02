@@ -18,7 +18,7 @@ public class Entity : MonoBehaviour
     _rb = GetComponent<Rigidbody2D>();
   }
 
-  private void Update()
+  protected virtual void Update()
   {
     if (_controller != null)
     {
