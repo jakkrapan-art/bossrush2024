@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TestPlant
   m_EditorClassIdentifier: 
   MoveSpeed: 0
-  GrowTime: 25
+  GrowTime: 3

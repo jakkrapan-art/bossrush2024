@@ -10,13 +10,13 @@ public class Soil : InteractOdject
 
   private Items _interactingItem;
 
-  public bool IsAvailable() => _plant;
+  public bool IsAvailable() => _plant == null;
 
   public bool AddPlant(Plant plant)
   {
-    if (!IsAvailable()) return false;
-
+    if (!IsAvailable() || !plant) return false;
     _plant = plant;
+    _coll2d.enabled = false;
     return true;
   }
 
@@ -24,13 +24,13 @@ public class Soil : InteractOdject
   public void RemovePlant() 
   {
     if (!_plant || (_plant.GetCurrentState() is PlantMatureState == false)) return;
-
+    _coll2d.enabled = true;
     //TODO: give product to player
   }
 
   public bool FillWater()
   {
-    if (_isWet) return false;
+    if (_isWet || !_plant) return false;
     _isWet = true;
     _plant.FillWater();
     return true;
@@ -38,7 +38,7 @@ public class Soil : InteractOdject
 
   public bool AddFertilizer()
   {
-    if (_isFertilized) return false;
+    if (_isFertilized || !_plant) return false;
     _isFertilized = true;
     _plant.AddFertilizer();
     return true;
@@ -46,8 +46,17 @@ public class Soil : InteractOdject
 
   public override bool CanInteract(Items itemToInteract)
   {
+    if (!itemToInteract) return true;
+
     _interactingItem = itemToInteract;
-    return (itemToInteract is Seed) || (itemToInteract == null);
+    switch(itemToInteract)
+    {
+      case Seed:
+      case Fertilizer:
+      case WaterCan:
+        return true;
+      default: return false;
+    }
   }
 
   public override void InteractResult()
@@ -57,9 +66,15 @@ public class Soil : InteractOdject
       switch(_interactingItem)
       {
         case Seed seed:
-          if(AddPlant(seed.GetPlant()))
+          var plant = seed.GetPlant();
+          if (AddPlant(plant))
           {
             seed.Use();
+
+            var objPool = ObjectPool.GetInstance();
+            _plant = objPool.Get<Plant>(plant.name);
+            _plant.transform.SetParent(transform);
+            _plant.transform.localPosition = Vector2.zero;
           }
           break;
         case Fertilizer fertilizer:
