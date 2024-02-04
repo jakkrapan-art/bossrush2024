@@ -12,8 +12,10 @@ public class Entity : MonoBehaviour
 
   protected StateMachine _stateMachine = null;
   protected Vector2 directionPlayer;
+
+  private bool _isFacingRight = true;
   #region Unity Functions
-  private void Awake()
+  protected virtual void Awake()
   {
     _rb = GetComponent<Rigidbody2D>();
   }
@@ -22,8 +24,6 @@ public class Entity : MonoBehaviour
   {
     if (_controller != null)
     {
-      Move(_controller.GetMoveInput());
-
       foreach (var action in _controller.KeyActions)
       {
         if (action.DoAction?.Invoke() ?? false) action.Action?.Invoke();
@@ -36,6 +36,21 @@ public class Entity : MonoBehaviour
   {
     if (_rb)  _rb.velocity = direction * _data.MoveSpeed * Time.fixedDeltaTime;
     if (direction != Vector2.zero) directionPlayer = direction;
+
+    if(direction.x < 0 && _isFacingRight)
+    {
+      FlipX();
+    }
+    else if(direction.x > 0 && !_isFacingRight)
+    {
+      FlipX();
+    }
+  }
+
+  private void FlipX()
+  {
+    transform.Rotate(new Vector2(0, 180));
+    _isFacingRight = !_isFacingRight;
   }
 
   public void StopMove()

@@ -17,7 +17,7 @@ public class Items : InteractOdject
 
 
 
-  public void Kept(GameObject objectHand)
+  public virtual void Kept(GameObject objectHand)
   {
     _isHolding = true;
     transform.parent = objectHand.transform;
@@ -55,7 +55,7 @@ public class Items : InteractOdject
  
 
   // Update is called once per frame
-  void Update()
+  protected virtual void Update()
   {
     if (!_isHolding)
     {
