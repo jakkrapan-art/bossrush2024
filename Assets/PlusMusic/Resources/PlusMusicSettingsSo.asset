@@ -52,8 +52,8 @@ MonoBehaviour:
     saveAudioToCache: 1
     saveMetaToCache: 1
     bundleCacheWithGame: 0
-    projectId: 0
-    authToken: 
+    projectId: 5142
+    authToken: $2y$13$o//z8s52/.JDaKl1q.1xFO5JbcvBFfb.1Dxb15mmz1FyZHtRMZmt6
     autoLoadProject: 1
     autoPlayProject: 1
     autoTrackIndex: 0
