@@ -12,7 +12,7 @@ public class InteractOdject : MonoBehaviour
   [SerializeField] protected Items _ItemsOutput;
   // Start is called before the first frame update
 
-  private void Awake()
+  protected virtual void Awake()
   {
     _rb = GetComponent<Rigidbody2D>();
     _coll2d = GetComponent<BoxCollider2D>();
