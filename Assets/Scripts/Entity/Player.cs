@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class Player : Entity
 {
@@ -17,14 +14,27 @@ public class Player : Entity
   private float _currentTimer;
   private float _timeToInteraction;
 
+  private Animator _anim;
+
+  public Animator GetAnimator() => _anim;
+  public PlayerController GetController() => (PlayerController)_controller;
+
+  protected override void Awake()
+  {
+    base.Awake();
+    TryGetComponent(out _anim);
+  }
+
   private void Start()
   {
     _controller = new PlayerController(this);
+    _stateMachine = new PlayerStateMachine(this);
   }
 
   protected override void Update()
   {
     base.Update();
+    if (_stateMachine != null) _stateMachine.Update();
     if (_isInteraction)
     {
       StopMove();
@@ -34,8 +44,13 @@ public class Player : Entity
         InteractFinish();
       }
     }
-
   }
+
+  protected void FixedUpdate()
+  {
+    if (_stateMachine != null) _stateMachine.FixedUpdate();
+  }
+
   public void PickDropItem()
   {
     if (!_itemFinded)
