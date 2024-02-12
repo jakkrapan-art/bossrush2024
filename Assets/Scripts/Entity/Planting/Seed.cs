@@ -5,12 +5,12 @@ using UnityEngine;
 public class Seed : Items
 {
   [SerializeField]
-  private Plant _plant = null;
-  public Plant GetPlant() => _plant;
-
-  public static Seed Create(ObjectPool pool, Vector2 position)
+  private Items _product = null;
+  public Items GetProduct() => _product;
+  public static Seed Create(string name, Vector2 position)
   {
-    var obj = pool.Get<Seed>("Seed");
+    var pool = ObjectPool.GetInstance();
+    var obj = pool.Get<Seed>(name + "_seed");
     obj.transform.position = position;
     return obj;
   }

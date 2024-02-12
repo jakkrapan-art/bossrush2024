@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 7173063563506548737}
   - component: {fileID: 5683912646400756407}
   - component: {fileID: 5953127299882211558}
-  - component: {fileID: 6518555261994668730}
+  - component: {fileID: 4206907498545750551}
+  - component: {fileID: 1670375822555611924}
   m_Layer: 0
-  m_Name: TestPlant
+  m_Name: Plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 722823095
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 1628450861, guid: 2e685e0bde187d74aaf891f61cec3abd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -88,7 +89,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &7173063563506548737
 Animator:
   serializedVersion: 5
@@ -136,7 +137,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!114 &5953127299882211558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,14 +155,15 @@ MonoBehaviour:
   _ItemsOutput: {fileID: 0}
   TimeToDestroy: 60
   _ItemData: {fileID: 0}
-  _ItemSprite: {fileID: 0}
+  _itemSprite: {fileID: 0}
+  <Product>k__BackingField: {fileID: 0}
   <_animator>k__BackingField: {fileID: 0}
   _data: {fileID: 11400000, guid: 4f58aa5f5c28c834f9246a2d5f8242df, type: 2}
   _growProgressUI: {fileID: 1930182558187099860}
   _needWaterUI: {fileID: 8331778555740727503}
   _needFertilizerUI: {fileID: 8695589823632464644}
---- !u!61 &6518555261994668730
-BoxCollider2D:
+--- !u!70 &4206907498545750551
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -192,19 +194,44 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0.02, y: 0.12}
+  m_Size: {x: 0.34, y: 0.18}
+  m_Direction: 1
+--- !u!58 &1670375822555611924
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675084718601722303}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.5}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Radius: 0.5
 --- !u!1001 &6731062330575071209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -336,6 +363,10 @@ PrefabInstance:
     - target: {fileID: 2905970183941519830, guid: 6a4a75b6dfa66a34697e0f27c7a93581, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3506281151462887167, guid: 6a4a75b6dfa66a34697e0f27c7a93581, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 576283721
       objectReference: {fileID: 0}
     - target: {fileID: 4160775349582472243, guid: 6a4a75b6dfa66a34697e0f27c7a93581, type: 3}
       propertyPath: m_Name

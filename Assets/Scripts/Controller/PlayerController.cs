@@ -11,7 +11,7 @@ public class PlayerController : EntityController
 
     AddKeyAction(()=> { return Input.GetButtonDown("PickupDrop"); }, () =>
     {
-      _player.PickDropItem();
+      _player.PickOrDrop();
     });
 
    /* AddKeyAction(Input.GetButtonDown("Drop"), () =>

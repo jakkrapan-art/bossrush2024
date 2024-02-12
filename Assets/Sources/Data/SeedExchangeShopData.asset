@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6369294c75011be408d606924266f595, type: 3}
+  m_Name: SeedExchangeShopData
+  m_EditorClassIdentifier: 
+  normalSeedData:
+  - <seedName>k__BackingField: Cabbage
+    <shopIcon>k__BackingField: {fileID: 21300000, guid: 59041a4ba0f43864aa5cbef3f10741b2, type: 3}
+    <seedObj>k__BackingField: {fileID: 0}
+  - <seedName>k__BackingField: Potato
+    <shopIcon>k__BackingField: {fileID: 21300000, guid: f47fb5e9c7d32464b9ad4466e90e118e, type: 3}
+    <seedObj>k__BackingField: {fileID: 0}
+  - <seedName>k__BackingField: Carrot
+    <shopIcon>k__BackingField: {fileID: 21300000, guid: 035a5d0f1d61cb249ab6d1c126b8dc5c, type: 3}
+    <seedObj>k__BackingField: {fileID: 0}
+  - <seedName>k__BackingField: Wheats
+    <shopIcon>k__BackingField: {fileID: 21300000, guid: 0bc7782843c4d9e488f41c8ce855f834, type: 3}
+    <seedObj>k__BackingField: {fileID: 0}
+  exclusiveSeedData:
+  - <seedName>k__BackingField: Sweet Corn
+    <shopIcon>k__BackingField: {fileID: 21300000, guid: 44c78fe07ebc1aa42abb4b128d3f49e8, type: 3}
+    <seedObj>k__BackingField: {fileID: 0}
+  - <seedName>k__BackingField: Chilli
+    <shopIcon>k__BackingField: {fileID: 21300000, guid: 4c61dc9b655e55f45a06a487dc2a3042, type: 3}
+    <seedObj>k__BackingField: {fileID: 0}
+  - <seedName>k__BackingField: Sour Leaf
+    <shopIcon>k__BackingField: {fileID: 21300000, guid: 48a255c664cae464b85091e90f8ed77b, type: 3}
+    <seedObj>k__BackingField: {fileID: 0}

@@ -66,15 +66,14 @@ public class Soil : InteractOdject
       switch(_interactingItem)
       {
         case Seed seed:
-          var plant = seed.GetPlant();
-          if (AddPlant(plant))
+          var plant = ObjectPool.GetInstance().Get<Plant>("Plant");
+          if (plant && AddPlant(plant))
           {
             seed.Use();
-
-            var objPool = ObjectPool.GetInstance();
-            _plant = objPool.Get<Plant>(plant.name);
+            _plant = plant;
             _plant.transform.SetParent(transform);
             _plant.transform.localPosition = Vector2.zero;
+            _plant.Setup(seed.GetProduct());
           }
           break;
         case Fertilizer fertilizer:

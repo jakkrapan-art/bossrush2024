@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class ExampleStateMachineEntity : Entity
 {
-  private void Awake()
+  protected override void Awake()
   {
+    base.Awake();
     _stateMachine = new ExampleStateMachine();
   }
 
-  private void Update()
+  protected override void Update()
   {
     _stateMachine.Update();
   }

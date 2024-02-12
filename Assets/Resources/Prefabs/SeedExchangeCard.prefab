@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 10}
+  m_AnchoredPosition: {x: 0, y: 25.1}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &1991411519719046576
@@ -93,12 +93,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 46
+  m_fontSizeBase: 46
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 46
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
@@ -183,8 +183,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 12.5}
-  m_SizeDelta: {x: 65, y: 65}
+  m_AnchoredPosition: {x: 1.3417, y: 30.7583}
+  m_SizeDelta: {x: 140.5733, y: 140.5733}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5776500966960213989
 CanvasRenderer:
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 4481212739188764651}
   - component: {fileID: 3887097950607407064}
   m_Layer: 5
-  m_Name: SeedEnchangeCard
+  m_Name: SeedExchangeCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,7 +264,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 132.8125}
+  m_SizeDelta: {x: 256, y: 340}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5538378868148932956
 CanvasRenderer:
@@ -358,7 +358,7 @@ Animator:
   m_GameObject: {fileID: 5341750817246363373}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 06e3db8fcaa08ac449dd26a5eed1959f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 79bce673fc5db914a8d415853a067b6a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

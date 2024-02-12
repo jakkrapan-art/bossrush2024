@@ -12,7 +12,8 @@ public class PlantMatureState : PlantStateBase
   {
     base.OnEnter();
 
-    Debug.Log("enter mature state.");
-    _stateMachine.GetPlant().SetAnimatorBool("Mature", true);
+    var plant = _stateMachine.GetPlant();
+    plant.SetAnimatorBool("Mature", true);
+    plant.OnFullyGrowth();
   }
 }

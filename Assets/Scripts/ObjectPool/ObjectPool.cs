@@ -50,7 +50,18 @@ public class ObjectPool : MonoBehaviour
     if (!loadedResource) return;
 
     var instantiated = Instantiate(loadedResource);
-    instantiated.AddComponent<PoolingObject>().Setup(this, key);
+    instantiated.name = instantiated.name.Replace("(Clone)", "");
+    PoolingObject poolingObj = instantiated.GetComponent<PoolingObject>();
+
+    if (poolingObj)
+    {
+      poolingObj.Setup(this, key);
+    }
+    else
+    {
+      instantiated.AddComponent<PoolingObject>().Setup(this, key);
+    }
+
     SetActiveObject(instantiated, false);
     list.Enqueue(instantiated);
   }
@@ -69,22 +80,5 @@ public class ObjectPool : MonoBehaviour
   private void SetActiveObject<T>(T obj, bool active) where T : Object
   {
     if (obj is GameObject go) go.SetActive(active);
-  }
-}
-
-public class PoolingObject : MonoBehaviour
-{
-  private ObjectPool _pool;
-  private string _key;
-
-  public void Setup(ObjectPool pool, string key)
-  {
-    _pool = pool;
-    _key = key;
-  }
-
-  public void ReturnToPool()
-  {
-    _pool.Return(_key, gameObject);
   }
 }

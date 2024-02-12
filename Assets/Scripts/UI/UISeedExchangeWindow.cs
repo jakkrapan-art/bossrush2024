@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UISeedExchangeWindow : MonoBehaviour
+public class UISeedExchangeWindow : UIDialogBase
 {
   [SerializeField]
   private Button _closeBtn;
@@ -24,15 +24,22 @@ public class UISeedExchangeWindow : MonoBehaviour
   {
     void setupSlot(List<UISeedExchangeSlot> slotList, List<SlotParam> slotParamList)
     {
-      for (int i = 0; i < nmSlotsParam.Count; i++)
+      if (slotList != null && slotParamList != null)
       {
-        if (i > slotList.Count - 1) break;
-        else if (!slotList[i]) continue;
+        for (int i = 0; i < nmSlotsParam.Count; i++)
+        {
+          if (i > slotList.Count - 1) break;
+          else if (!slotList[i]) continue;
 
-        var slot = slotList[i];
-        var param = slotParamList[i];
+          var slot = slotList[i];
+          var param = slotParamList[i];
 
-        slot.Setup(param.iconImage, param.seedName, param.onChoose);
+          slot.Setup(param.iconImage, param.seedName, ()=> 
+          {
+            param.onChoose?.Invoke();
+            Close();
+          });
+        }
       }
     }
 
@@ -41,17 +48,9 @@ public class UISeedExchangeWindow : MonoBehaviour
 
     if (_closeBtn) _closeBtn.onClick.AddListener(() => 
     {
-      Hide();
+      Close();
     });
-  }
 
-  public void Show()
-  {
-    gameObject.SetActive(true);
-  }
-
-  public void Hide()
-  {
-    gameObject.SetActive(false);
+    Canvas.ForceUpdateCanvases();
   }
 }

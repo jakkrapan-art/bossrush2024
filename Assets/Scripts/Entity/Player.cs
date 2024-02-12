@@ -4,7 +4,9 @@ public class Player : Entity
 {
   [SerializeField]
   private GameObject _handHoldingItem;
-  private Items _itemHolding;
+  [SerializeField]
+  private Transform _dropItemPosition;
+  private Items _holdingItem;
   private InteractOdject _itemFinded;
   private InteractOdject _itemInteraction;
 
@@ -51,36 +53,49 @@ public class Player : Entity
     if (_stateMachine != null) _stateMachine.FixedUpdate();
   }
 
-  public void PickDropItem()
+  public void PickOrDrop()
   {
-    if (!_itemFinded)
+    if(_itemFinded && _itemFinded.TryGetComponent(out Items itemCompo))
     {
-      if (_itemHolding)
-      {
-        _itemHolding.Droped();
-        _itemHolding = null;
-      }
+      PickItem(itemCompo);
     }
-    else if (_itemFinded.GetComponent<Items>())
+    else
     {
-      _itemHolding = _itemFinded.GetComponent<Items>();
-      _itemFinded.GetComponent<Items>().Kept(_handHoldingItem);
+      DropItem();
     }
+  }
+
+  public void PickItem(Items item)
+  {
+    if (!item || item is Plant) return;
+
+    DropItem();
+
+    item.Kept(_handHoldingItem);
+    _holdingItem = item;
+  }
+
+  public void DropItem()
+  {
+    if (!_holdingItem) return;
+
+    if(_dropItemPosition) _holdingItem.Drop(_dropItemPosition.position);
+    _holdingItem = null;
   }
 
   public void ThrowItem()
   {
-    if (_itemHolding)
+    if (_holdingItem)
     {
-      _itemHolding.Throw(directionPlayer * _forceToThrow);
-      _itemHolding = null;
+      _holdingItem.Throw(directionPlayer * _forceToThrow);
+      _holdingItem = null;
     }
   }
   public void StartInteractOject()
   {
     if (_itemFinded && !_isInteraction)
     {
-      if (_itemFinded.CanInteract(_itemHolding))
+      if (_itemFinded.CanInteract(_holdingItem))
       {
         _isInteraction = true;
         _timeToInteraction = _itemFinded.GetTimeToInteract();

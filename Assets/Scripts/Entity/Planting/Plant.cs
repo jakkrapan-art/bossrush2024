@@ -9,7 +9,7 @@ public class Plant : Items
   public bool isWet { get; private set; } = false;
   public bool isFertilized { get; private set; } = false;
 
-  [field: SerializeField] public Items Product { get; }
+  [field: SerializeField] public Items Product { get; private set; }
   [field: SerializeField] public Animator _animator { get; private set; } = null;
 
   private PlantStateMachine _stateMachine = null;
@@ -52,9 +52,23 @@ public class Plant : Items
     if(_stateMachine != null) _stateMachine.FixedUpdate();
   }
 
-  public void SetPlantingSoil(Soil soil)
+  public void Setup(Items product)
   {
-    _plantingSoil = soil;
+    Product = product;
+  }
+
+  public void OnFullyGrowth()
+  {
+    var product = ObjectPool.GetInstance().Get<Items>(Product.name);
+    product.transform.position = transform.position;
+    if(TryGetComponent(out PoolingObject poolingObject))
+    {
+      poolingObject.ReturnToPool();
+    }
+    else
+    {
+      Destroy(this);
+    }
   }
 
   public void FillWater()
@@ -109,8 +123,7 @@ public class Plant : Items
 
   public override void Kept(GameObject objectHand)
   {
-    if (_stateMachine.CurrentState is PlantMatureState == false) return;
-    base.Kept(objectHand);
+    return;
   }
 
   public override void InteractResult()

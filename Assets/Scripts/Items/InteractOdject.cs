@@ -15,7 +15,7 @@ public class InteractOdject : MonoBehaviour
   protected virtual void Awake()
   {
     _rb = GetComponent<Rigidbody2D>();
-    _coll2d = GetComponent<BoxCollider2D>();
+    _coll2d = GetComponent<Collider2D>();
   }
 
   public virtual bool CanInteract(Items itemToInteract)
