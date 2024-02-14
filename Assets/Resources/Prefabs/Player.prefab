@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2083978622851054422}
   - component: {fileID: 6778129923720446277}
   - component: {fileID: 6792038154387176709}
+  - component: {fileID: 8581736780006915194}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -134,6 +135,7 @@ MonoBehaviour:
   _handHoldingItem: {fileID: 2424727082055439583}
   _dropItemPosition: {fileID: 795291686137338995}
   _forceToThrow: 15
+  _objDetector: {fileID: 0}
 --- !u!61 &2083978622851054422
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -235,6 +237,21 @@ CapsuleCollider2D:
   m_Offset: {x: -0.02, y: -0.02}
   m_Size: {x: 0.3, y: 0.1}
   m_Direction: 1
+--- !u!114 &8581736780006915194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177638360549078202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261784ab962b1b645a511c010c19b5a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerCollider: {fileID: 2083978622851054422}
+  _detectRange: 1.25
+  _positionOffset: {x: 0, y: 0.5, z: 0}
 --- !u!1 &2424727082055439583
 GameObject:
   m_ObjectHideFlags: 0

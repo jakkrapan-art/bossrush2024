@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Entity : MonoBehaviour
 {
-  private Rigidbody2D _rb;
+  protected Rigidbody2D _rb;
   protected EntityController _controller;
   [SerializeField]
   protected EntityData _data;

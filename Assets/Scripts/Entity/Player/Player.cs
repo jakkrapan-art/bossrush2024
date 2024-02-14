@@ -8,13 +8,16 @@ public class Player : Entity
   private Transform _dropItemPosition;
   private Items _holdingItem;
   private InteractOdject _itemFinded;
-  private InteractOdject _itemInteraction;
+  private InteractOdject _interactingObject;
 
   [SerializeField]
   private float _forceToThrow = 50;
   private bool _isInteraction;
   private float _currentTimer;
   private float _timeToInteraction;
+
+  [SerializeField]
+  private InteractDetector _objDetector = default;
 
   private Animator _anim;
 
@@ -55,9 +58,11 @@ public class Player : Entity
 
   public void PickOrDrop()
   {
-    if(_itemFinded && _itemFinded.TryGetComponent(out Items itemCompo))
+    if (!_objDetector) return;
+    var targetItem = _objDetector.GetDetectedItem();
+    if(targetItem) 
     {
-      PickItem(itemCompo);
+      PickItem(targetItem);
     }
     else
     {
@@ -93,51 +98,35 @@ public class Player : Entity
   }
   public void StartInteractOject()
   {
-    if (_itemFinded && !_isInteraction)
+    if (!_objDetector) return;
+    var interactTarget = _objDetector.GetInteractOdject();
+    if (interactTarget && !_isInteraction && interactTarget.CanInteract(_holdingItem))
     {
-      if (_itemFinded.CanInteract(_holdingItem))
-      {
-        _isInteraction = true;
-        _timeToInteraction = _itemFinded.GetTimeToInteract();
-        _itemInteraction = _itemFinded;
-        _currentTimer = 0;
-        Debug.Log("StartInteractOject");
-
-      }
+      _isInteraction = true;
+      _timeToInteraction = interactTarget.GetTimeToInteract();
+      _interactingObject = interactTarget;
+      _currentTimer = 0;
+      Debug.Log("StartInteractOject");
     }
   }
   public void InteractFinish()
   {
-    if (_itemInteraction && _isInteraction)
+    Debug.Log("interact finish");
+    if (_interactingObject && _isInteraction)
     {
       _isInteraction = false;
-      _itemInteraction.InteractResult();
-      _itemInteraction = null;
+      _interactingObject.InteractResult();
+      _interactingObject = null;
       Debug.Log("InteractFinish");
     }
   }
 
   public void CancelInteractOject()
   {
-    if (!_itemFinded && _isInteraction)
+    Debug.Log($"{_isInteraction} && {_rb.velocity.magnitude != 0}");
+    if (_isInteraction && _rb.velocity.magnitude != 0)
     {
       _isInteraction = false;
-    }
-  }
-
-  private void OnTriggerStay2D(Collider2D collision)
-  {
-    if (collision.GetComponent<InteractOdject>())
-    {
-      _itemFinded = collision.GetComponent<InteractOdject>();
-    }
-  }
-
-  private void OnTriggerExit2D(Collider2D collision)
-  {
-    if (collision.GetComponent<Items>())
-    {
-      _itemFinded = null;
     }
   }
 }
