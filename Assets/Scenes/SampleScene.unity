@@ -2363,10 +2363,6 @@ PrefabInstance:
       propertyPath: _rage
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4973821335972762724, guid: b3bf1933d70f88c4693d0108f9d25736, type: 3}
-      propertyPath: _ragePointIncreased
-      value: 0.015
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
