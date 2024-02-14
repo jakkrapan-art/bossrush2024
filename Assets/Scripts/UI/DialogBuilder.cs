@@ -43,4 +43,13 @@ public class DialogBuilder : MonoBehaviour
   {
 
   }
+
+  public void CreateBossRageBar(Action<UIBar> onCreateSuccess)
+  {
+    CreateUI<UIBar>("BossHpBar", (ui) =>
+    {
+      if (!ui) return;
+      onCreateSuccess?.Invoke(ui);
+    });
+  }
 }

@@ -16,9 +16,13 @@ public class UIBar : MonoBehaviour
   private Action<float> _onUpdateAction = null;
 
   public float GetBarValue() => _bar.value;
-  public void UpdateValue(float updateValue)
+  public void SetMaxValue(float value)
   {
-    float value = _bar.value + updateValue;
+    _bar.maxValue = value;
+  }
+  public void UpdateValue(float newVal)
+  {
+    float value = newVal;
 
     if (_bar) _bar.value = value;
     if (_barPercentValue)
