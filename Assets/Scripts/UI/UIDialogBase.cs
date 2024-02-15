@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Jakkrapan.ObjectPool;
 
 [RequireComponent(typeof(PoolingObject))]
 public class UIDialogBase : MonoBehaviour

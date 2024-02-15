@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Jakkrapan.ObjectPool;
 
 [RequireComponent(typeof(Animator))]
 public class Plant : Items

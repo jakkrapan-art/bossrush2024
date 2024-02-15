@@ -27,7 +27,7 @@ public class Items : InteractOdject
   public virtual void Kept(GameObject objectHand)
   {
     _isHolding = true;
-    transform.parent = objectHand.transform;
+    transform.SetParent(objectHand.transform);
     transform.localPosition = Vector2.zero;
     Destroy(_rb);
     _coll2d.enabled = false;
@@ -39,7 +39,7 @@ public class Items : InteractOdject
   public void Drop(Vector2 position)
   {
     _isHolding = false;
-    transform.parent = null;
+    transform.SetParent(null);
     transform.position = position;
     if (_rb == null)
     {
@@ -52,7 +52,7 @@ public class Items : InteractOdject
   public void Throw(Vector2 directionPlayer)
   {
     _isHolding = false;
-    transform.parent = null;
+    transform.SetParent(null);
     if (_rb == null)
     {
       _rb = gameObject.AddComponent<Rigidbody2D>();

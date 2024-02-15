@@ -33,10 +33,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1154121615082661390}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -35}
-  m_SizeDelta: {x: 0, y: 75.03}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 600, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &4337356904002450878
 CanvasRenderer:
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 4007259779037817848}
   - component: {fileID: 3912555829274918262}
   - component: {fileID: 5679879854864436898}
-  - component: {fileID: 4290498451908236890}
+  - component: {fileID: 8281978995900676829}
   m_Layer: 5
   m_Name: UISeedExchange
   m_TagString: Untagged
@@ -377,7 +377,7 @@ MonoBehaviour:
   - {fileID: 8625683053574724627}
   - {fileID: 3211210587477340334}
   - {fileID: 5316735519873415068}
---- !u!114 &4290498451908236890
+--- !u!114 &8281978995900676829
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -386,7 +386,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4135714920270287050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b76a6c335aa575745836948dff2505d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d85c4e32d902b748a97ac3f9da62aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4526127619171119483
@@ -586,9 +586,9 @@ RectTransform:
   - {fileID: 5690166772389364854}
   m_Father: {fileID: 1154121615082661390}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -125.03}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 600, y: 0}
   m_SizeDelta: {x: 1170, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &983808431722474356

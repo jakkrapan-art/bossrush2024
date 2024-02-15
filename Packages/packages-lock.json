@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.jakkrapan.objectpool": {
+      "version": "git@github.com:jakkrapan-art/unity-package-objectpool.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "93e8137c2701695387c3c60baffa82d6a05670e9"
+    },
     "com.unity.2d.animation": {
       "version": "9.0.4",
       "depth": 1,
