@@ -60,7 +60,7 @@ public class Soil : InteractOdject
     }
   }
 
-  public override void InteractResult()
+  public override void InteractResult(Player player = null)
   {
     if(_interactingItem)
     {

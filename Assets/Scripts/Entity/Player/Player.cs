@@ -115,7 +115,7 @@ public class Player : Entity
     if (_interactingObject && _isInteraction)
     {
       _isInteraction = false;
-      _interactingObject.InteractResult();
+      _interactingObject.InteractResult(this);
       _interactingObject = null;
       Debug.Log("InteractFinish");
     }

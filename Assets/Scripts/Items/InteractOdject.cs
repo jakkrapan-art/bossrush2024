@@ -1,3 +1,4 @@
+using Jakkrapan.ObjectPool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,8 +35,18 @@ public class InteractOdject : MonoBehaviour
 
   public float GetTimeToInteract() { return _timeToInteract; }
 
-  public virtual void InteractResult()
+  public virtual void InteractResult(Player player = null)
   {
-    Debug.Log("get new item");
+    if(player)
+    {
+      Debug.Log("get new item");
+      ObjectPool pool = ObjectPool.GetInstance();
+      var item = pool.Get<Items>(_ItemsOutput.name);
+      if (item)
+      {
+        item.transform.SetParent(null);
+        item.transform.position = player.transform.position;
+      }
+    }
   }
 }

@@ -127,12 +127,12 @@ public class Plant : Items
     return;
   }
 
-  public override void InteractResult()
+  public override void InteractResult(Player player = null)
   {
     switch(_stateMachine.CurrentState)
     {
       case PlantMatureState:
-        base.InteractResult();
+        base.InteractResult(player);
         break;
       case PlantSeedState:
         if(_interactingItem)

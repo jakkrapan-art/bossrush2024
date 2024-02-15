@@ -48,7 +48,7 @@ public class Oven : InteractOdject
       return false;
     }
   }
-  public override void InteractResult()
+  public override void InteractResult(Player player = null)
   {
     Debug.Log("get new item");
   }

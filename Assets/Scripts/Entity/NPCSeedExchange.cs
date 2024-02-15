@@ -54,9 +54,9 @@ public class NPCSeedExchange : InteractOdject
     }
   }
 
-  public override void InteractResult()
+  public override void InteractResult(Player player = null)
   {
-    base.InteractResult();
+    base.InteractResult(null);
     DialogBuilder.GetInstance().OpenSeedExchangeDialog(_normalShopSlotParams, _exclusiveShopSlotParams);
   }
 }
