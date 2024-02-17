@@ -60,7 +60,7 @@ public class Soil : InteractOdject
     }
   }
 
-  public override void InteractResult(Player player = null)
+  public override void InteractResult()
   {
     if(_interactingItem)
     {
@@ -89,13 +89,6 @@ public class Soil : InteractOdject
             waterCan.Use(1);
           }
           break;
-      }
-    }
-    else
-    {
-      if(_plant && _plant.GetCurrentState() is PlantMatureState)
-      {
-        //TODO: Add product to player hand
       }
     }
 

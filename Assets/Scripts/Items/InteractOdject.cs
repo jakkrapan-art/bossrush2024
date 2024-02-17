@@ -11,12 +11,18 @@ public class InteractOdject : MonoBehaviour
   [SerializeField] protected RecipeFoods _listItemCanInteract;
   [SerializeField] protected float _timeToInteract = 0;
   [SerializeField] protected Items _ItemsOutput;
+  private Player _interactor = null;
   // Start is called before the first frame update
 
   protected virtual void Awake()
   {
     _rb = GetComponent<Rigidbody2D>();
     _coll2d = GetComponent<Collider2D>();
+  }
+
+  public void Interact(Player interactor)
+  {
+    _interactor = interactor;
   }
 
   public virtual bool CanInteract(Items itemToInteract)
@@ -35,18 +41,17 @@ public class InteractOdject : MonoBehaviour
 
   public float GetTimeToInteract() { return _timeToInteract; }
 
-  public virtual void InteractResult(Player player = null)
+  public virtual void InteractResult()
   {
-    if(player)
+    if(_interactor && _ItemsOutput)
     {
-      Debug.Log("get new item");
-      ObjectPool pool = ObjectPool.GetInstance();
-      var item = pool.Get<Items>(_ItemsOutput.name);
-      if (item)
+      var item = ObjectPool.GetInstance().Get<Items>(_ItemsOutput.name);
+      if(item)
       {
-        item.transform.SetParent(null);
-        item.transform.position = player.transform.position;
+        _interactor.PickItem(item);
       }
     }
+
+    _interactor = null;
   }
 }

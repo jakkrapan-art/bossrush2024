@@ -24,10 +24,11 @@ public class NPCSeedExchange : InteractOdject
     {
       var objPool = ObjectPool.GetInstance();
       var seed = objPool.Get<Seed>(name + "_seed");
-      seed.transform.SetParent(null);
-      if(_dropProductPoint)
+      if (seed)
       {
-        seed.transform.position = _dropProductPoint.position;
+        seed.transform.SetParent(null);
+        _ItemsOutput = seed;
+        InteractResult();
       }
     }
     
@@ -49,14 +50,21 @@ public class NPCSeedExchange : InteractOdject
       {
         iconImage = d.shopIcon,
         seedName = d.seedName,
-        onChoose = () => onChoose(d.seedName.Replace(" ", "")),
-      });
+        onChoose = () => onChoose(d.seedName.Replace(" ", ""))
+    });
     }
   }
 
-  public override void InteractResult(Player player = null)
+  public override void InteractResult()
   {
-    base.InteractResult(null);
-    DialogBuilder.GetInstance().OpenSeedExchangeDialog(_normalShopSlotParams, _exclusiveShopSlotParams);
+    if(_ItemsOutput)
+    {
+      base.InteractResult();
+      _ItemsOutput = null;
+    }
+    else
+    {
+      DialogBuilder.GetInstance().OpenSeedExchangeDialog(_normalShopSlotParams, _exclusiveShopSlotParams);
+    }
   }
 }

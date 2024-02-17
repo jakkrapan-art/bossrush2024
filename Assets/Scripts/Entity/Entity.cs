@@ -12,6 +12,8 @@ public class Entity : MonoBehaviour
 
   protected StateMachine _stateMachine = null;
   protected Vector2 directionPlayer;
+  protected bool _enableMove = true;
+  public void SetEnableMove(bool enable) => _enableMove = enable;
 
   private bool _isFacingRight = true;
   #region Unity Functions
@@ -34,6 +36,8 @@ public class Entity : MonoBehaviour
 
   public void Move(Vector2 direction)
   {
+    if (!_enableMove) return;
+
     if (_rb)  _rb.velocity = direction * _data.MoveSpeed * Time.fixedDeltaTime;
     if (direction != Vector2.zero) directionPlayer = direction;
 

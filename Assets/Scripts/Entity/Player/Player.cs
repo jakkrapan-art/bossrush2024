@@ -102,11 +102,13 @@ public class Player : Entity
     var interactTarget = _objDetector.GetInteractOdject();
     if (interactTarget && !_isInteraction && interactTarget.CanInteract(_holdingItem))
     {
+      interactTarget.Interact(this);
       _isInteraction = true;
       _timeToInteraction = interactTarget.GetTimeToInteract();
       _interactingObject = interactTarget;
       _currentTimer = 0;
       Debug.Log("StartInteractOject");
+      SetEnableMove(false);
     }
   }
   public void InteractFinish()
@@ -115,10 +117,11 @@ public class Player : Entity
     if (_interactingObject && _isInteraction)
     {
       _isInteraction = false;
-      _interactingObject.InteractResult(this);
+      _interactingObject.InteractResult();
       _interactingObject = null;
       Debug.Log("InteractFinish");
     }
+    SetEnableMove(true);
   }
 
   public void CancelInteractOject()

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6634574914029582055}
   - component: {fileID: 513539888634289410}
   - component: {fileID: 1811791607312240467}
-  - component: {fileID: 2083978622851054422}
   - component: {fileID: 6778129923720446277}
   - component: {fileID: 6792038154387176709}
   - component: {fileID: 8581736780006915194}
@@ -136,51 +135,6 @@ MonoBehaviour:
   _dropItemPosition: {fileID: 795291686137338995}
   _forceToThrow: 15
   _objDetector: {fileID: 0}
---- !u!61 &2083978622851054422
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 177638360549078202}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.43}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.07}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!95 &6778129923720446277
 Animator:
   serializedVersion: 5
@@ -249,9 +203,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 261784ab962b1b645a511c010c19b5a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCollider: {fileID: 2083978622851054422}
-  _detectRange: 1.25
-  _positionOffset: {x: 0, y: 0.5, z: 0}
+  _playerCollider: {fileID: 6792038154387176709}
+  _detectRange: 0.8
+  _positionOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &2424727082055439583
 GameObject:
   m_ObjectHideFlags: 0
