@@ -1,0 +1,3 @@
+[submodule "Packages/Packages/ObjectPool"]
+	path = Packages/Packages/ObjectPool
+	url = git@github.com:jakkrapan-art/unity-package-objectpool.git

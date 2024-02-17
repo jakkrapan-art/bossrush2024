@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.jakkrapan.objectpool": "git@github.com:jakkrapan-art/unity-package-objectpool.git",
     "com.unity.cinemachine": "2.9.7",
     "com.unity.collab-proxy": "2.2.0",
     "com.unity.feature.2d": "2.0.0",
