@@ -7,6 +7,7 @@ using Jakkrapan.ObjectPool;
 public class DialogBuilder : MonoBehaviour
 {
   private static DialogBuilder _instance = null;
+  private Dictionary<string, GameObject> _dialogObjects = new Dictionary<string, GameObject>();
 
   private static void CreateInstance()
   {
@@ -26,9 +27,25 @@ public class DialogBuilder : MonoBehaviour
 
   private void CreateUI<T>(string path, Action<T> onCreateSuccess) where T : MonoBehaviour
   {
-    ObjectPool pool = ObjectPool.GetInstance();
-    var obj = pool.Get<T>(path);
-    onCreateSuccess?.Invoke(obj);
+    if (_dialogObjects.ContainsKey(path))
+    {
+      GameObject dialogObject = _dialogObjects[path];
+      if(dialogObject)
+      {
+        dialogObject.SetActive(true);
+        onCreateSuccess(dialogObject as T);
+      }
+    }
+    else
+    {
+      ObjectPool pool = ObjectPool.GetInstance();
+      var obj = pool.Get<T>(path);
+      if(obj && obj is MonoBehaviour mono)
+      {
+        _dialogObjects.Add(path, mono.gameObject);
+      }
+      onCreateSuccess?.Invoke(obj);
+    }
   }
 
   public void OpenSeedExchangeDialog(List<UISeedExchangeWindow.SlotParam> normalExchangeSlotParams, List<UISeedExchangeWindow.SlotParam> exclusiveExchangeSlotParams)
