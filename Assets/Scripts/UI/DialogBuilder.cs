@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Jakkrapan.ObjectPool;
 
 public class DialogBuilder : MonoBehaviour
 {

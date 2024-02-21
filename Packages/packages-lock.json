@@ -1,11 +1,5 @@
 {
   "dependencies": {
-    "com.jakkrapan.objectpool": {
-      "version": "file:ObjectPool",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
     "com.unity.2d.animation": {
       "version": "9.0.4",
       "depth": 1,

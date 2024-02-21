@@ -1,6 +1,3 @@
-using Jakkrapan.ObjectPool;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractOdject : MonoBehaviour
