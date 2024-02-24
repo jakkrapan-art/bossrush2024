@@ -36,7 +36,6 @@ public class PlayerController : EntityController
 
   public override Vector2 GetMoveInput()
   {
-   
     return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
   }
 }

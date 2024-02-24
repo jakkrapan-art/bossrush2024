@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Animator))]
-public class Plant : Items
+public class Plant : InteractOdject
 {
   public bool isWet { get; private set; } = false;
   public bool isFertilized { get; private set; } = false;
@@ -21,7 +21,6 @@ public class Plant : Items
   [SerializeField]
   private Image _needFertilizerUI = default;
 
-  private Soil _plantingSoil;
   public bool IsReadyToGrow() => isWet && isFertilized;
   private Items _interactingItem;
 
@@ -39,15 +38,14 @@ public class Plant : Items
     SetActiveNeedWaterUI(true);
   }
 
-  protected override void Update()
+  private void Update()
   {
-    base.Update();
-    if(_stateMachine != null) _stateMachine.Update();
+    _stateMachine?.Update();
   }
 
   private void FixedUpdate()
   {
-    if(_stateMachine != null) _stateMachine.FixedUpdate();
+    _stateMachine?.FixedUpdate();
   }
 
   public void Setup(Items product)
@@ -59,14 +57,7 @@ public class Plant : Items
   {
     var product = ObjectPool.GetInstance().Get<Items>(Product.name);
     product.transform.position = transform.position;
-    if(TryGetComponent(out PoolingObject poolingObject))
-    {
-      poolingObject.ReturnToPool();
-    }
-    else
-    {
-      Destroy(this);
-    }
+    ObjectPool.ReturnObjectToPool(this);
   }
 
   public void FillWater()
@@ -117,11 +108,6 @@ public class Plant : Items
   {
     _interactingItem = itemToInteract;
     return true;
-  }
-
-  public override void Kept(GameObject objectHand)
-  {
-    return;
   }
 
   public override void InteractResult()

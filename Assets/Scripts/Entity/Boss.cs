@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Assertions.Comparers;
 
-public class Boss : Entity
+public class Boss : Entity, IHitableObject
 {
   private readonly float MAX_RAGE = 100;
   [SerializeField]
@@ -119,5 +119,11 @@ public class Boss : Entity
   private float getRagePointPercentage()
   {
     return _rage / MAX_RAGE;
+  }
+
+  public bool TakeDamage(Items hitter, float damage)
+  {
+    Debug.Log(gameObject.name + " take " + damage + " damage from " + hitter.name);
+    return false;
   }
 }

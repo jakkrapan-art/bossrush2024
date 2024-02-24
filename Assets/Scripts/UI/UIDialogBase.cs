@@ -1,16 +1,10 @@
 using System;
 using UnityEngine;
+using UnityEngine.Pool;
 
-[RequireComponent(typeof(PoolingObject))]
 public class UIDialogBase : MonoBehaviour
 {
-  private PoolingObject _poolingObject;
   private Action _onCloseAction;
-
-  protected virtual void Awake()
-  {
-    _poolingObject = GetComponent<PoolingObject>();
-  }
 
   public void AddCloseListener(Action action)
   {
@@ -25,8 +19,6 @@ public class UIDialogBase : MonoBehaviour
   public virtual void Close()
   {
     _onCloseAction?.Invoke();
-
-    if (_poolingObject) _poolingObject.ReturnToPool();
-    else Destroy(gameObject);
+    ObjectPool.ReturnObjectToPool(this);
   }
 }

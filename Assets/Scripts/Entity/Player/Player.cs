@@ -6,6 +6,8 @@ public class Player : Entity
   private GameObject _handHoldingItem;
   [SerializeField]
   private Transform _dropItemPosition;
+  [SerializeField]
+  private Transform _throwItemPoint;
   private Items _holdingItem;
   private InteractOdject _itemFinded;
   private InteractOdject _interactingObject;
@@ -72,7 +74,7 @@ public class Player : Entity
 
   public void PickItem(Items item)
   {
-    if (!item || item is Plant) return;
+    if (!item) return;
 
     DropItem();
 
@@ -92,7 +94,7 @@ public class Player : Entity
   {
     if (_holdingItem)
     {
-      _holdingItem.Throw(directionPlayer * _forceToThrow);
+      _holdingItem.Throw(_throwItemPoint.position, directionPlayer * _forceToThrow);
       _holdingItem = null;
     }
   }
@@ -107,19 +109,16 @@ public class Player : Entity
       _timeToInteraction = interactTarget.GetTimeToInteract();
       _interactingObject = interactTarget;
       _currentTimer = 0;
-      Debug.Log("StartInteractOject");
       SetEnableMove(false);
     }
   }
   public void InteractFinish()
   {
-    Debug.Log("interact finish");
     if (_interactingObject && _isInteraction)
     {
       _isInteraction = false;
       _interactingObject.InteractResult();
       _interactingObject = null;
-      Debug.Log("InteractFinish");
     }
     SetEnableMove(true);
   }

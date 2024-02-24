@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -17,31 +18,42 @@ public class ObjectPool : MonoBehaviour
     return pool;
   }
 
-  private Dictionary<string, Queue<Object>> objectsInPool = new Dictionary<string, Queue<Object>>();
-
-  public T Get<T>(string key) where T : Object
+  public static void ReturnObjectToPool<T>(T obj) where T : MonoBehaviour
   {
-    return GetObjectInPool<T>(key);
+    ObjectPool pool = GetInstance();
+    string key = obj.gameObject.name.Replace("(Clone)", "");
+
+    pool.Return(key, obj);
   }
 
-  public void Return<T>(string key, T obj) where T : Object
+  private Dictionary<string, Queue<object>> objectsInPool = new Dictionary<string, Queue<object>>();
+
+  public T Get<T>(string key, Transform parent = null) where T:Object
+  {
+    var obj = GetObjectInPool<T>(key);
+    if (!obj) return default;
+    SetParent(obj, parent);
+
+    return obj;
+  }
+
+  public void Return<T>(string key, T obj)
   {
     if (!objectsInPool.ContainsKey(key)) throw new System.Exception("Cannot return object to not exist key. key = " + key);
-    if (obj is GameObject go) go.transform.SetParent(transform);
-    SetActiveObject(obj, false);
     objectsInPool[key].Enqueue(obj);
+    SetActiveObject(obj, false);
   }
 
   private void CreateObject<T>(string key) where T : Object
   {
-    Queue<Object> list;
+    Queue<object> list;
     if (objectsInPool.ContainsKey(key))
     {
       list = objectsInPool[key];
     }
     else
     {
-      list = new Queue<Object>();
+      list = new Queue<object>();
       objectsInPool.Add(key, list);
     }
 
@@ -49,23 +61,13 @@ public class ObjectPool : MonoBehaviour
     if (!loadedResource) return;
 
     var instantiated = Instantiate(loadedResource);
-    if (instantiated is MonoBehaviour mono)
+    if(instantiated is GameObject go)
+    {
+      go.name = go.name.Replace("(Clone)", "");
+    }
+    else if (instantiated is MonoBehaviour mono)
     {
       mono.name = mono.name.Replace("(Clone)", "");
-      PoolingObject poolingObj = mono.GetComponent<PoolingObject>();
-
-      if (poolingObj)
-      {
-        poolingObj.Setup(this, key);
-      }
-      else
-      {
-        mono.gameObject.AddComponent<PoolingObject>().Setup(this, key);
-      }
-    }
-    else
-    {
-      Debug.LogError("loadedResource is not GameObject. type = " + instantiated.GetType());
     }
 
     SetActiveObject(instantiated, false);
@@ -77,14 +79,39 @@ public class ObjectPool : MonoBehaviour
     if (!objectsInPool.ContainsKey(key) || objectsInPool[key].Count == 0 || objectsInPool[key] == null) CreateObject<T>(key);
 
     var list = objectsInPool[key];
-    if (list.Count == 0) return null;
+    if (list.Count == 0) return default;
     var obj = list.Dequeue();
     SetActiveObject(obj, true);
-    return obj as T;
+    return (T)obj;
   }
 
-  private void SetActiveObject<T>(T obj, bool active) where T : Object
+  private void SetActiveObject<T>(T obj, bool active)
   {
-    if (obj is GameObject go) go.SetActive(active);
+    GameObject targetToSet = null;
+    if (obj is GameObject go)
+    {
+      targetToSet = go;
+    }
+    else if (obj is MonoBehaviour mono)
+    {
+      targetToSet = mono.gameObject;
+    }
+
+    targetToSet.SetActive(active);
+  }
+
+  private void SetParent<T>(T obj, Transform parent)
+  {
+    GameObject targetToSet = null;
+    if (obj is GameObject go) 
+    {
+      targetToSet = go;
+    }
+    else if(obj is MonoBehaviour mono)
+    {
+      targetToSet = mono.gameObject;
+    }
+
+    if (targetToSet) targetToSet.transform.SetParent(parent);
   }
 }
