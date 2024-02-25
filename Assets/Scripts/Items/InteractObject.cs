@@ -8,7 +8,7 @@ public class InteractObject : MonoBehaviour
   [SerializeField] protected RecipeFoods _listItemCanInteract;
   [SerializeField] protected float _timeToInteract = 0;
   [SerializeField] protected Items _ItemsOutput;
-  private Player _interactor = null;
+  protected Player _interactor = null;
 
   protected virtual void Awake()
   {

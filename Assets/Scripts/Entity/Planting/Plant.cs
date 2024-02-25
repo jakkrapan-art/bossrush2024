@@ -120,7 +120,6 @@ public class Plant : InteractObject, IPoolingObject
 
   public override void InteractResult()
   {
-    Debug.Log("interact result at current state = " + _stateMachine?.CurrentState ?? "N/A");
     if(_stateMachine.CurrentState is PlantSeedState)
     {
       if (_interactingItem)

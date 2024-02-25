@@ -16,15 +16,13 @@ public class NPCSeedExchange : InteractObject
   private void Setup()
   {
     if (!_shopData) return;
-    void onChoose(string name)
+    void onChoose(string plantName)
     {
-      var objPool = ObjectPool.GetInstance();
-      var seed = objPool.Get<Seed>(name + "_seed");
-      if (seed)
+      var seed = ObjectPool.GetInstance().Get<Seed>(plantName + "_seed");
+      if (_interactor && seed)
       {
-        seed.transform.SetParent(null);
-        _ItemsOutput = seed;
-        InteractResult();
+        _interactor.PickItem(seed);
+        _interactor = null;
       }
     }
     
@@ -53,14 +51,6 @@ public class NPCSeedExchange : InteractObject
 
   public override void InteractResult()
   {
-    if(_ItemsOutput)
-    {
-      base.InteractResult();
-      _ItemsOutput = null;
-    }
-    else
-    {
-      DialogBuilder.GetInstance().OpenSeedExchangeDialog(_normalShopSlotParams, _exclusiveShopSlotParams);
-    }
+    DialogBuilder.GetInstance().OpenSeedExchangeDialog(_normalShopSlotParams, _exclusiveShopSlotParams);
   }
 }
