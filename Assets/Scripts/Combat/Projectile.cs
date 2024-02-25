@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviour
     if(_rb)
     {
       _rb.AddForce(speed * direction);
-      _rb.drag = 0.6f;
+      _rb.drag = 0f;
       //_rb.velocity = speed * direction * Time.fixedDeltaTime;
     }
   }
@@ -57,9 +57,19 @@ public class Projectile : MonoBehaviour
     var veloTemp = _rb.velocity;
     _rb.velocity = Vector3.zero;
     _rb.velocity = veloTemp * -1;
-    _rb.drag = 4.2f;
+    _rb.drag += 3.5f;
   }
 
+  #region Unity Functions
+  private void Update()
+  {
+    if (Time.frameCount % 5 != 0) return;
+
+    if(_rb)
+    {
+      _rb.drag += 0.08f;
+    }
+  }
   private void OnTriggerEnter2D(Collider2D otherCollider)
   {
     if (otherCollider.gameObject.TryGetComponent(out IHitableObject hitable))
@@ -71,4 +81,5 @@ public class Projectile : MonoBehaviour
       Knockback();
     }
   }
+  #endregion
 }

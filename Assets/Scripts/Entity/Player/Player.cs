@@ -12,8 +12,6 @@ public class Player : Entity
   private InteractObject _itemFinded;
   private InteractObject _interactingObject;
 
-  [SerializeField]
-  private float _forceToThrow = 50;
   private bool _isInteraction;
   private float _currentTimer;
   private float _timeToInteraction;
@@ -94,7 +92,7 @@ public class Player : Entity
   {
     if (_holdingItem)
     {
-      _holdingItem.Throw(_throwItemPoint.position, directionPlayer * _forceToThrow);
+      _holdingItem.Throw(_throwItemPoint.position, directionPlayer, Const.THROW_FORCE);
       _holdingItem = null;
     }
   }

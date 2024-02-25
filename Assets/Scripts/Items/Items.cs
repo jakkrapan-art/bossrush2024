@@ -56,13 +56,13 @@ public class Items : InteractObject, IPoolingObject
     _onDroppedAction?.Invoke();
   }
 
-  public void Throw(Vector2 startPoint, Vector2 directionPlayer)
+  public void Throw(Vector2 startPoint, Vector2 directionPlayer, float force)
   {
     ClearParent();
 
     transform.position = startPoint;
     var projectile = gameObject.AddComponent<Projectile>();
-    projectile.Setup(this, 25, directionPlayer, (hit) => { Debug.Log("hit:" + hit); });
+    projectile.Setup(this, force, directionPlayer, (hit) => { Debug.Log("hit:" + hit); });
   }
 
   public void ReturnToPool()
