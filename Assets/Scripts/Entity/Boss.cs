@@ -9,11 +9,6 @@ public class Boss : Entity, IHitableObject
   private float _rage = 50.00f;
   [SerializeField]
   private float _ragePointIncreased = 0.16f;
-  public float GetRage() => Mathf.Clamp(_rage, 0, MAX_RAGE);
-  public void DecreasedRage(float rage)
-  {
-    _rage -= rage;
-  }
 
   private UIBar _bossRageBar = null;
   protected override void Awake()
@@ -55,13 +50,18 @@ public class Boss : Entity, IHitableObject
 
   protected override void Update()
   {
-    if (_rage < MAX_RAGE)
-    {
-      _rage += _ragePointIncreased * Time.deltaTime;
-      if (_rage > MAX_RAGE) _rage = MAX_RAGE;
-    }
+    UpdateRageValue(_ragePointIncreased * Time.deltaTime);
+    _stateMachine?.Update();
+  }
 
-    _stateMachine.Update();
+  private void FixedUpdate()
+  {
+    _stateMachine?.FixedUpdate();
+  }
+
+  private void UpdateRageValue(float updateValue)
+  {
+    _rage = Mathf.Clamp(_rage + updateValue, 0, MAX_RAGE);
     handleStateByRagePoint();
 
     if (_bossRageBar)
@@ -70,9 +70,9 @@ public class Boss : Entity, IHitableObject
     }
   }
 
-  private void FixedUpdate()
+  private void StartRageIncreaseTimer()
   {
-    _stateMachine.FixedUpdate();
+
   }
 
   private void handleStateByRagePoint()
@@ -126,7 +126,7 @@ public class Boss : Entity, IHitableObject
     switch(hitObj)
     {
       case Product product:
-        Debug.Log(gameObject.name + " take " + product.GetDamage() + " damage from " + hitObj.name);
+        UpdateRageValue(-product.GetDamage());
         return true;
       default:
         return false;
