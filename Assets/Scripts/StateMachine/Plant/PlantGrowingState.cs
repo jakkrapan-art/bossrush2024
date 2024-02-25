@@ -15,10 +15,9 @@ public class PlantGrowingState : PlantStateBase
   {
     base.OnEnter();
 
-    Debug.Log("enter grow state.");
     var plant = _stateMachine.GetPlant();
+    _stateMachine.GetPlant().UpdateUIGrowProgressValue(0);
     plant.SetAnimatorBool("Growing", true);
-
     plant.SetActiveUIGrowProgress(true);
   }
 

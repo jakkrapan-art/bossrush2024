@@ -9,8 +9,8 @@ public class Player : Entity
   [SerializeField]
   private Transform _throwItemPoint;
   private Items _holdingItem;
-  private InteractOdject _itemFinded;
-  private InteractOdject _interactingObject;
+  private InteractObject _itemFinded;
+  private InteractObject _interactingObject;
 
   [SerializeField]
   private float _forceToThrow = 50;
@@ -98,10 +98,10 @@ public class Player : Entity
       _holdingItem = null;
     }
   }
-  public void StartInteractOject()
+  public void StartInteractObject()
   {
     if (!_objDetector) return;
-    var interactTarget = _objDetector.GetInteractOdject();
+    var interactTarget = _objDetector.GetInteractObject();
     if (interactTarget && !_isInteraction && interactTarget.CanInteract(_holdingItem))
     {
       interactTarget.Interact(this);
@@ -109,7 +109,7 @@ public class Player : Entity
       _timeToInteraction = interactTarget.GetTimeToInteract();
       _interactingObject = interactTarget;
       _currentTimer = 0;
-      SetEnableMove(false);
+      //SetEnableMove(false);
     }
   }
   public void InteractFinish()
@@ -121,14 +121,5 @@ public class Player : Entity
       _interactingObject = null;
     }
     SetEnableMove(true);
-  }
-
-  public void CancelInteractOject()
-  {
-    Debug.Log($"{_isInteraction} && {_rb.velocity.magnitude != 0}");
-    if (_isInteraction && _rb.velocity.magnitude != 0)
-    {
-      _isInteraction = false;
-    }
   }
 }

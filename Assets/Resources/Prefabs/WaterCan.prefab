@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1537567185955848781}
   - component: {fileID: 4170439777951994016}
-  - component: {fileID: 5421824886000615702}
   - component: {fileID: 6988261509655823464}
+  - component: {fileID: 948157565951866484}
   m_Layer: 0
   m_Name: WaterCan
   m_TagString: Untagged
@@ -86,8 +86,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!61 &5421824886000615702
-BoxCollider2D:
+--- !u!114 &6988261509655823464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983144139976188846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a827bced44974649adc4beae3620c73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listItemCanInteract: {fileID: 0}
+  _timeToInteract: 0
+  _ItemsOutput: {fileID: 0}
+  _timeToDestroy: 60
+  _ItemData: {fileID: 0}
+  _itemSprite: {fileID: 0}
+--- !u!70 &948157565951866484
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -119,33 +137,5 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1.28, y: 0.64}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &6988261509655823464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8983144139976188846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a827bced44974649adc4beae3620c73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _listItemCanInteract: {fileID: 0}
-  _timeToInteract: 0
-  _ItemsOutput: {fileID: 0}
-  TimeToDestroy: 60
-  _ItemData: {fileID: 0}
-  _itemSprite: {fileID: 0}
+  m_Size: {x: 0.29, y: 0.15}
+  m_Direction: 1

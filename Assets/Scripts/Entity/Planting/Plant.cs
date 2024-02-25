@@ -1,13 +1,14 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Animator))]
-public class Plant : InteractOdject
+public class Plant : InteractObject, IPoolingObject
 {
-  public bool isWet { get; private set; } = false;
-  public bool isFertilized { get; private set; } = false;
+  public bool _isWet { get; private set; } = false;
+  public bool _isFertilized { get; private set; } = false;
 
-  [field: SerializeField] public Items Product { get; private set; }
+  [field: SerializeField] public Product Product { get; private set; }
   [field: SerializeField] public Animator _animator { get; private set; } = null;
 
   private PlantStateMachine _stateMachine = null;
@@ -21,7 +22,9 @@ public class Plant : InteractOdject
   [SerializeField]
   private Image _needFertilizerUI = default;
 
-  public bool IsReadyToGrow() => isWet && isFertilized;
+  private Action<Product> _onFullyGrowth = null;
+
+  public bool IsReadyToGrow() => _isWet && _isFertilized;
   private Items _interactingItem;
 
   protected override void Awake()
@@ -30,12 +33,6 @@ public class Plant : InteractOdject
 
     _animator = GetComponent<Animator>();
     _stateMachine = new PlantStateMachine(this);
-  }
-
-  private void Start()
-  {
-    SetActiveNeedFertilizedUI(true);
-    SetActiveNeedWaterUI(true);
   }
 
   private void Update()
@@ -48,27 +45,38 @@ public class Plant : InteractOdject
     _stateMachine?.FixedUpdate();
   }
 
-  public void Setup(Items product)
+  public void Setup(Product product, Action<Product> onFullyGrowth)
   {
     Product = product;
+    _onFullyGrowth = onFullyGrowth;
+    _interactingItem = null;
+    _isFertilized = false;
+    _isWet = false;
+
+    SetActiveNeedFertilizedUI(true);
+    SetActiveNeedWaterUI(true);
+
+    _stateMachine = new PlantStateMachine(this);
   }
 
   public void OnFullyGrowth()
   {
-    var product = ObjectPool.GetInstance().Get<Items>(Product.name);
+    var product = ObjectPool.GetInstance().Get<Product>(Product.name);
     product.transform.position = transform.position;
+    _onFullyGrowth?.Invoke(product);
+    //return to pool process
     ObjectPool.ReturnObjectToPool(this);
   }
 
   public void FillWater()
   {
-    isWet = true;
+    _isWet = true;
     SetActiveNeedWaterUI(false);
   }
 
   public void AddFertilizer()
   {
-    isFertilized = true;
+    _isFertilized = true;
     SetActiveNeedFertilizedUI(false);
   }
 
@@ -112,29 +120,29 @@ public class Plant : InteractOdject
 
   public override void InteractResult()
   {
-    switch(_stateMachine.CurrentState)
+    Debug.Log("interact result at current state = " + _stateMachine?.CurrentState ?? "N/A");
+    if(_stateMachine.CurrentState is PlantSeedState)
     {
-      case PlantMatureState:
-        base.InteractResult();
-        break;
-      case PlantSeedState:
-        if(_interactingItem)
+      if (_interactingItem)
+      {
+        switch (_interactingItem)
         {
-          switch(_interactingItem)
-          {
-            case WaterCan:
-              FillWater();
-              break;
-            case Fertilizer fertilizer:
-              if(!isFertilized)
-              {
-                AddFertilizer();
-                fertilizer.Use();
-              }
-              break;
-          }
+          case WaterCan:
+            FillWater();
+            break;
+          case Fertilizer fertilizer:
+            if (!_isFertilized)
+            {
+              AddFertilizer();
+              fertilizer.Use();
+            }
+            break;
         }
-        break;
+      }
     }
+  }
+
+  public void ResetPoolingObject()
+  {
   }
 }

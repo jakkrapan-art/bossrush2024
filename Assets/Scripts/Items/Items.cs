@@ -1,12 +1,31 @@
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 
-public class Items : InteractOdject
+public class Items : InteractObject, IPoolingObject
 {
   
   public float _timeToDestroy = 60;
   [SerializeField]private ItemData _ItemData;
-  [SerializeField]private SpriteRenderer _itemSprite;
+  private Action _onPickedAction = null;
+  public void AddOnPickedListener(Action action)
+  {
+    _onPickedAction += action;
+  }
+  public void RemoveOnPickedListener(Action action)
+  {
+    _onPickedAction -= action;
+  }
+
+  private Action _onDroppedAction = null;
+  public void AddOnDroppedAction(Action action)
+  {
+    _onDroppedAction += action;
+  }
+
+  public void RemoveOnDroppedAction(Action action)
+  {
+    _onDroppedAction -= action;
+  }
 
   private bool _countingTime = false;
 
@@ -16,8 +35,6 @@ public class Items : InteractOdject
   protected override void Awake()
   {
     base.Awake();
-
-    _itemSprite = GetComponent<SpriteRenderer>();
   }
 
   public virtual void Kept(GameObject objectHand)
@@ -26,7 +43,7 @@ public class Items : InteractOdject
     transform.localPosition = Vector2.zero;
     Destroy(_rb);
     _coll2d.enabled = false;
-
+    _onPickedAction?.Invoke();
     StopCountTimeForDestroy();
   }
 
@@ -35,6 +52,8 @@ public class Items : InteractOdject
     ClearParent();
     StartCountTimeForDestroy(Const.ITEM_LIFETIME);
     transform.position = position;
+
+    _onDroppedAction?.Invoke();
   }
 
   public void Throw(Vector2 startPoint, Vector2 directionPlayer)
@@ -86,9 +105,6 @@ public class Items : InteractOdject
       ReturnToPool();
     }
   }
-    /*if (_rb != null)
-      if (_rb.velocity != Vector2.zero)
-      {
-        _rb.velocity -= _rb.velocity * Time.fixedDeltaTime;
-      }*/
+
+  public virtual void ResetPoolingObject() {}
 }

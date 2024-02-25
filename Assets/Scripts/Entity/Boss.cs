@@ -121,9 +121,15 @@ public class Boss : Entity, IHitableObject
     return _rage / MAX_RAGE;
   }
 
-  public bool TakeDamage(Items hitter, float damage)
+  public bool OnHit(Items hitObj)
   {
-    Debug.Log(gameObject.name + " take " + damage + " damage from " + hitter.name);
-    return false;
+    switch(hitObj)
+    {
+      case Product product:
+        Debug.Log(gameObject.name + " take " + product.GetDamage() + " damage from " + hitObj.name);
+        return true;
+      default:
+        return false;
+    }
   }
 }

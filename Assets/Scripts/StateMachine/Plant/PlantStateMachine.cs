@@ -16,6 +16,8 @@ public class PlantStateMachine : StateMachine
     GrowingState = new PlantGrowingState(this, plant.GetPlantData().GrowTime);
     MatureState = new PlantMatureState(this);
     Init();
+
+    Debug.Log("create new PlantStateMachine with current state = " + CurrentState);
   }
 
   public Plant GetPlant() => _plant;

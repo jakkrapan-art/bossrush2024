@@ -24,7 +24,7 @@ public class PlayerController : EntityController
     AddKeyAction(() => { return Input.GetButtonDown("Interact"); }, () =>
     {
       Debug.Log("InteractOject");
-      _player.StartInteractOject();
+      _player.StartInteractObject();
     });
 
     /*AddKeyAction(() => { return Input.GetButtonUp("Interact"); }, () =>

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InteractOdject : MonoBehaviour
+public class InteractObject : MonoBehaviour
 {
   protected Rigidbody2D _rb;
   protected Collider2D _coll2d;
@@ -9,7 +9,6 @@ public class InteractOdject : MonoBehaviour
   [SerializeField] protected float _timeToInteract = 0;
   [SerializeField] protected Items _ItemsOutput;
   private Player _interactor = null;
-  // Start is called before the first frame update
 
   protected virtual void Awake()
   {

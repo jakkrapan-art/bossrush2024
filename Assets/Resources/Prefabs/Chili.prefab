@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8975851919024247910}
   - component: {fileID: 3060854969770788028}
-  - component: {fileID: 8418431371234633920}
   - component: {fileID: 4561402067949784200}
+  - component: {fileID: 3480728207790079179}
   m_Layer: 0
   m_Name: Chili
   m_TagString: Untagged
@@ -86,24 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &8418431371234633920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090321861617251798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a1243763daf71743943c12f02b80ec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _listItemCanInteract: {fileID: 0}
-  _timeToInteract: 0
-  _ItemsOutput: {fileID: 0}
-  TimeToDestroy: 60
-  _ItemData: {fileID: 0}
-  _itemSprite: {fileID: 0}
 --- !u!58 &4561402067949784200
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -139,3 +121,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &3480728207790079179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090321861617251798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6fc0eb59b9a52c40b18b6f9c48daee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listItemCanInteract: {fileID: 0}
+  _timeToInteract: 0
+  _ItemsOutput: {fileID: 0}
+  _timeToDestroy: 60
+  _ItemData: {fileID: 0}

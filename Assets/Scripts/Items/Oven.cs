@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Oven : InteractOdject
+public class Oven : InteractObject
 {
   private bool _isCooking = false;
   private float _currentTimer;

@@ -11,13 +11,13 @@ public class InteractDetector : MonoBehaviour
   [SerializeField] private Vector3 _positionOffset = Vector3.zero;
   private int _delayFrameRate = 5;
 
-  private InteractOdject _target = null;
+  private InteractObject _target = null;
   public Items GetDetectedItem()
   {
     if(_target is Items targetItem) return targetItem;
     else return null;
   }
-  public InteractOdject GetInteractOdject() => _target;
+  public InteractObject GetInteractObject() => _target;
 
   private void Update()
   {
@@ -31,11 +31,11 @@ public class InteractDetector : MonoBehaviour
   {
     SetActivePlayerCollider(false);
     var hit = Physics2D.OverlapCircleAll(transform.position, _detectRange);
-    InteractOdject nearestInteractObj = null;
+    InteractObject nearestInteractObj = null;
     float nearestDistance = 0;
     foreach(var detectedObj in hit) 
     {
-      if(detectedObj.TryGetComponent(out InteractOdject obj))
+      if(detectedObj.TryGetComponent(out InteractObject obj))
       {
         float itemDistance = Vector2.Distance(GetPosition(), obj.transform.position);
         if (!nearestInteractObj || (itemDistance < nearestDistance))

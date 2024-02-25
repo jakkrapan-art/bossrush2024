@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Soil : InteractOdject
+public class Soil : InteractObject
 {
   private Plant _plant;
   private bool _isWet;
@@ -18,12 +18,11 @@ public class Soil : InteractOdject
     return true;
   }
 
-  //TODO: Return the plant's product
   public void RemovePlant() 
   {
     if (!_plant || (_plant.GetCurrentState() is PlantMatureState == false)) return;
+    _plant = null;
     _coll2d.enabled = true;
-    //TODO: give product to player
   }
 
   public bool FillWater()
@@ -59,33 +58,26 @@ public class Soil : InteractOdject
 
   public override void InteractResult()
   {
-    if(_interactingItem)
+    if(_interactingItem && _interactingItem is Seed seed)
     {
-      switch(_interactingItem)
+      var plant = ObjectPool.GetInstance().Get<Plant>("Plant");
+      if (plant && AddPlant(plant))
       {
-        case Seed seed:
-          var plant = ObjectPool.GetInstance().Get<Plant>("Plant");
-          if (plant && AddPlant(plant))
+        seed.Use();
+        _plant = plant;
+        _plant.transform.SetParent(transform);
+        _plant.transform.localPosition = Vector2.zero;
+        _plant.Setup(seed.GetProduct(), (product) => 
+        {
+          product.AddOnPickedListener(() =>
           {
-            seed.Use();
-            _plant = plant;
-            _plant.transform.SetParent(transform);
-            _plant.transform.localPosition = Vector2.zero;
-            _plant.Setup(seed.GetProduct());
-          }
-          break;
-        case Fertilizer fertilizer:
-          if(AddFertilizer())
-          {
-            fertilizer.Use();
-          }
-          break;
-        case WaterCan waterCan:
-          if(FillWater())
-          {
-            waterCan.Use(1);
-          }
-          break;
+            RemovePlant();
+            product.RemoveOnPickedListener(() =>
+            {
+              RemovePlant();
+            });
+          });
+        });
       }
     }
 

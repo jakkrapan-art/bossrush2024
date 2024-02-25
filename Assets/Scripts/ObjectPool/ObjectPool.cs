@@ -18,11 +18,15 @@ public class ObjectPool : MonoBehaviour
     return pool;
   }
 
-  public static void ReturnObjectToPool<T>(T obj) where T : MonoBehaviour
+  public static void ReturnObjectToPool<T>(T obj) where T : IPoolingObject
   {
     ObjectPool pool = GetInstance();
-    string key = obj.gameObject.name.Replace("(Clone)", "");
+    if(obj is MonoBehaviour mono == false)
+    {
+      return;
+    }
 
+    string key = mono.name.Replace("(Clone)", "");
     pool.Return(key, obj);
   }
 
@@ -37,11 +41,12 @@ public class ObjectPool : MonoBehaviour
     return obj;
   }
 
-  public void Return<T>(string key, T obj)
+  public void Return<T>(string key, T obj) where T : IPoolingObject
   {
     if (!objectsInPool.ContainsKey(key)) throw new System.Exception("Cannot return object to not exist key. key = " + key);
-    objectsInPool[key].Enqueue(obj);
     SetActiveObject(obj, false);
+    obj.ResetPoolingObject();
+    objectsInPool[key].Enqueue(obj);
   }
 
   private void CreateObject<T>(string key) where T : Object

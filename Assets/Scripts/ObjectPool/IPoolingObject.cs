@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IHitableObject
+public interface IPoolingObject
 {
-  public bool OnHit(Items hitObj);
+  public void ResetPoolingObject();
 }

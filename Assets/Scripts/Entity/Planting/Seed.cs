@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class Seed : Items
+public class Seed : Items, IPoolingObject
 {
   [SerializeField]
-  private Items _product = null;
-  public Items GetProduct() => _product;
+  private Product _product = null;
+  public Product GetProduct() => _product;
 
   public void Use()
   {

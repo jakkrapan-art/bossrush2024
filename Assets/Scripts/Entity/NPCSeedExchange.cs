@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCSeedExchange : InteractOdject
+public class NPCSeedExchange : InteractObject
 {
   [SerializeField] private SeedExchangeShopData _shopData;
-
-  [SerializeField] private Transform _dropProductPoint;
 
   private List<UISeedExchangeWindow.SlotParam> _normalShopSlotParams;
   private List<UISeedExchangeWindow.SlotParam> _exclusiveShopSlotParams;
