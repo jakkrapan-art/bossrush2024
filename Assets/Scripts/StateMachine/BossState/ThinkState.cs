@@ -12,7 +12,7 @@ public class ThinkState : BossStateBase
   public override void OnEnter()
   {
     Debug.Log("Enter ThinkState state.");
-    _stateMachine.Boss.ShowThinking();
+    _stateMachine.Boss.ShowThinking(null);
     base.OnEnter();
   }
 

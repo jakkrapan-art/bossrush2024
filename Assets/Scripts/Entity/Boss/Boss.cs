@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Comparers;
@@ -145,9 +146,17 @@ public class Boss : Entity, IHitableObject
     }
   }
 
-  public void ShowThinking()
+  public void ShowThinking(Action callback)
+  {
+    StartCoroutine(DoShowThinking(4, callback));
+  }
+
+  private IEnumerator DoShowThinking(float second, Action callback)
   {
     SetActiveThinkingBubble(true);
+    yield return new WaitForSeconds(second);
+    callback?.Invoke();
+    HideThinking();
   }
 
   public void HideThinking()
@@ -169,7 +178,7 @@ public class Boss : Entity, IHitableObject
       var eatResult = _stomach.Eat(food);
       if(eatResult == BossStomach.EatResult.Think || eatResult == BossStomach.EatResult.Eat)
       {
-        if (eatResult == BossStomach.EatResult.Think) ShowThinking();
+        if (eatResult == BossStomach.EatResult.Think) ShowThinking(_stomach.RandomRequestFood);
 
         UpdateRageValue(-food.GetDamage());
         return true;

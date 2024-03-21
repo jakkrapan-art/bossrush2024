@@ -7,7 +7,7 @@ public class BossStomach
   {
     Eat = 0, NotEat = 1, Think = 2
   }
-  private int eatCount = 0;
+  private int _eatCount = 0;
 
   private string _requestFood = null;
   private int MAX_PLANT_EAT = 2;
@@ -33,7 +33,7 @@ public class BossStomach
 
   public EatResult Eat(Product product)
   {
-    if (_eating != null && product == _eating && (Time.time < _startEat + DELAY_EAT))
+    if ((_eatCount == MAX_PLANT_EAT && string.IsNullOrEmpty(_requestFood)) || (_eating != null && product == _eating && (Time.time < _startEat + DELAY_EAT)))
     {
       return EatResult.NotEat;
     }
@@ -57,25 +57,24 @@ public class BossStomach
 
     if(increaseEatCount)
     {
-      eatCount++;
-      Debug.Log("increase eat count, current = " + eatCount);
+      _eatCount++;
+
+      if (_eatCount >= MAX_PLANT_EAT)
+      {
+        return EatResult.Think;
+      }
     }
 
-    if (eatCount == MAX_PLANT_EAT)
-    {
-      RandomRequestFood();
-    }
     return EatResult.Eat;
   }
 
   private void Digest()
   {
-    Debug.Log("Digest!");
-    eatCount = 0;
+    _eatCount = 0;
     _requestFood = null;
   }
 
-  private void RandomRequestFood()
+  public void RandomRequestFood()
   {
     if(_foodList == null || _foodList.Length == 0)
     {
@@ -85,7 +84,5 @@ public class BossStomach
 
     int index = Random.Range(0, _foodList.Length);
     _requestFood = _foodList[index];
-
-    Debug.Log("I WANT TO EAT " + _requestFood.ToUpper() + "!!!");
   }
 }

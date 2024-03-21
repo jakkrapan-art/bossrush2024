@@ -17,7 +17,6 @@ public class PlantSeedState : PlantStateBase
 
     if(_readyToGrow?.Invoke() ?? false)
     {
-      Debug.Log("Plant ready to grow changing to grow state");
       _stateMachine.ChangeState(_stateMachine.GrowingState);
     }
   }
