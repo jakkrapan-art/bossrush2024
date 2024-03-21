@@ -5,5 +5,5 @@ using UnityEngine;
 public class RecipeFoods : ScriptableObject
 {
   public List<ItemData> ItemsInput;
-  public Items ItemOutput;
+  public Product ItemOutput;
 }

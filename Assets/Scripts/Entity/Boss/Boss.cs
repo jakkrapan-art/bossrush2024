@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Comparers;
 
@@ -9,12 +10,21 @@ public class Boss : Entity, IHitableObject
   private float _rage = 50.00f;
   [SerializeField]
   private float _ragePointIncreased = 0.16f;
+  private BossSkillController _skillController = null;
+  private BossStomach _stomach = null;
+
+  [SerializeField]
+  private GameObject _thinkingBubble = null;
 
   private UIBar _bossRageBar = null;
   protected override void Awake()
   {
     base.Awake();
-    _stateMachine = new BossStateMachine();
+    _stateMachine = new BossStateMachine(this);
+    _skillController = new BossSkillController(this);
+    _stomach = new BossStomach();
+
+    SetupPossibleRequestFood();
   }
 
   private void Start()
@@ -46,12 +56,15 @@ public class Boss : Entity, IHitableObject
 
       _bossRageBar = bar;
     });
+
+    HideThinking();
   }
 
   protected override void Update()
   {
     UpdateRageValue(_ragePointIncreased * Time.deltaTime);
     _stateMachine?.Update();
+    if (_skillController != null && _skillController.CanUse()) _skillController.TriggerSkill(_rage);
   }
 
   private void FixedUpdate()
@@ -126,10 +139,55 @@ public class Boss : Entity, IHitableObject
     switch(hitObj)
     {
       case Product product:
-        UpdateRageValue(-product.GetDamage());
-        return true;
+        return DoEat(product);
       default:
         return false;
     }
+  }
+
+  public void ShowThinking()
+  {
+    SetActiveThinkingBubble(true);
+  }
+
+  public void HideThinking()
+  {
+    SetActiveThinkingBubble(false);
+  }
+
+  private void SetActiveThinkingBubble(bool active)
+  {
+    if (_thinkingBubble == null) return;
+
+    _thinkingBubble.SetActive(active);
+  }
+
+  private bool DoEat(Product food)
+  {
+    if (_stomach != null)
+    {
+      var eatResult = _stomach.Eat(food);
+      if(eatResult == BossStomach.EatResult.Think || eatResult == BossStomach.EatResult.Eat)
+      {
+        if (eatResult == BossStomach.EatResult.Think) ShowThinking();
+
+        UpdateRageValue(-food.GetDamage());
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
+
+    return false;
+  }
+
+  private void SetupPossibleRequestFood()
+  {
+    if (_data is BossData == false) throw new Exception("Data in Boss " + name + " is not a type of BossData.");
+    var foodList = ((BossData)_data).PossibleRequestFoods;
+    if (_stomach == null) return;
+    _stomach.SetupRequestFoods(foodList);
   }
 }

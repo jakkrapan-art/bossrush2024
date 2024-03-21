@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class StateMachine
 {
   public State CurrentState { get; protected set; } = null;
+  public State PreviousState { get; protected set; } = null;
 
   public State GetCurrentState() { return CurrentState; }
 
@@ -17,6 +18,7 @@ public abstract class StateMachine
   public void ChangeState(State state)
   {
     CurrentState.OnExit();
+    PreviousState = CurrentState;
     state.OnEnter();
     CurrentState = state;
   }

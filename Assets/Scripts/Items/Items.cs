@@ -62,7 +62,7 @@ public class Items : InteractObject, IPoolingObject
 
     transform.position = startPoint;
     var projectile = gameObject.AddComponent<Projectile>();
-    projectile.Setup(this, force, directionPlayer, (hit) => { Debug.Log("hit:" + hit); });
+    projectile.Setup(this, force, directionPlayer, null) ;
   }
 
   public void ReturnToPool()
