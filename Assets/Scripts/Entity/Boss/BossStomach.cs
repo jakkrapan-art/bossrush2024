@@ -10,13 +10,18 @@ public class BossStomach
   private int _eatCount = 0;
 
   private string _requestFood = null;
-  private int MAX_PLANT_EAT = 2;
+  private int _maxPlantEat = 2;
 
   private Product _eating = null;
   private float _startEat = 0;
   private const float DELAY_EAT = 0.05f;
 
   private string[] _foodList;
+
+  public BossStomach(int maxPlantEat)
+  {
+    _maxPlantEat = maxPlantEat;
+  }
 
   public void SetupRequestFoods(Product[] products)
   {
@@ -33,7 +38,7 @@ public class BossStomach
 
   public EatResult Eat(Product product)
   {
-    if ((_eatCount == MAX_PLANT_EAT && string.IsNullOrEmpty(_requestFood)) || (_eating != null && product == _eating && (Time.time < _startEat + DELAY_EAT)))
+    if ((_eatCount == _maxPlantEat && string.IsNullOrEmpty(_requestFood)) || (_eating != null && product == _eating && (Time.time < _startEat + DELAY_EAT)))
     {
       return EatResult.NotEat;
     }
@@ -59,7 +64,7 @@ public class BossStomach
     {
       _eatCount++;
 
-      if (_eatCount >= MAX_PLANT_EAT)
+      if (_eatCount >= _maxPlantEat)
       {
         return EatResult.Think;
       }

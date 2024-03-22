@@ -21,9 +21,10 @@ public class Boss : Entity, IHitableObject
   protected override void Awake()
   {
     base.Awake();
+    BossData bossData = GetBossData();
     _stateMachine = new BossStateMachine(this);
     _skillController = new BossSkillController(this);
-    _stomach = new BossStomach();
+    _stomach = new BossStomach(bossData.MaxPlant);
 
     SetupPossibleRequestFood();
   }
@@ -194,9 +195,14 @@ public class Boss : Entity, IHitableObject
 
   private void SetupPossibleRequestFood()
   {
-    if (_data is BossData == false) throw new Exception("Data in Boss " + name + " is not a type of BossData.");
-    var foodList = ((BossData)_data).PossibleRequestFoods;
+    var foodList = GetBossData().PossibleRequestFoods;
     if (_stomach == null) return;
     _stomach.SetupRequestFoods(foodList);
+  }
+
+  private BossData GetBossData()
+  {
+    if (_data is BossData == false) throw new Exception("Data in Boss " + name + " is not a type of BossData.");
+    return (BossData)_data;
   }
 }
