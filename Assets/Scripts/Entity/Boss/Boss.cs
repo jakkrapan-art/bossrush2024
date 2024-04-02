@@ -18,6 +18,7 @@ public class Boss : Entity, IHitableObject
   private GameObject _thinkingBubble = null;
 
   private UIBar _bossRageBar = null;
+  private FoodRequest _foodRequest = null;
   protected override void Awake()
   {
     base.Awake();

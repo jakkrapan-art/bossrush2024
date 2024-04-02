@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIFoodRequest : UIBossParticle
+public class UIFoodRequestBubble : UIBossParticle
 {
   [SerializeField] private Image _foodImage = default;
 

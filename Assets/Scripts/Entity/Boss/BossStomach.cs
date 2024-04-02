@@ -9,36 +9,29 @@ public class BossStomach
   }
   private int _eatCount = 0;
 
-  private string _requestFood = null;
+  private string _desireFood = null;
   private int _maxPlantEat = 2;
 
   private Product _eating = null;
   private float _startEat = 0;
   private const float DELAY_EAT = 0.05f;
 
-  private string[] _foodList;
+  private FoodRequest _foodRequest = null;
 
   public BossStomach(int maxPlantEat)
   {
     _maxPlantEat = maxPlantEat;
   }
 
-  public void SetupRequestFoods(Product[] products)
+  public void SetupRequestFoods(PossibleFoodList possibleFoodList)
   {
-    if (_foodList != null) throw new System.Exception("foodList already setup for BossStomatch.");
-
-    _foodList = new string[products.Length];
-    for (int i = 0; i < products.Length; i++)
-    {
-      Product product = products[i];
-      string name = product.name.Replace("(Clone)", "");
-      _foodList[i] = name;
-    }
+    if (_foodRequest != null) throw new System.Exception("foodList already setup for BossStomatch.");
+    _foodRequest = new FoodRequest(possibleFoodList);
   }
 
   public EatResult Eat(Product product)
   {
-    if ((_eatCount == _maxPlantEat && string.IsNullOrEmpty(_requestFood)) || (_eating != null && product == _eating && (Time.time < _startEat + DELAY_EAT)))
+    if ((_eatCount == _maxPlantEat && string.IsNullOrEmpty(_desireFood)) || (_eating != null && product == _eating && (Time.time < _startEat + DELAY_EAT)))
     {
       return EatResult.NotEat;
     }
@@ -47,9 +40,9 @@ public class BossStomach
     _startEat = Time.time;
     bool increaseEatCount = true;
 
-    if (!string.IsNullOrEmpty(_requestFood))
+    if (!string.IsNullOrEmpty(_desireFood))
     {
-      if(!_requestFood.Equals(product.name))
+      if(!_desireFood.Equals(product.name))
       {
         return EatResult.NotEat;
       }
@@ -76,18 +69,24 @@ public class BossStomach
   private void Digest()
   {
     _eatCount = 0;
-    _requestFood = null;
+    _desireFood = null;
   }
 
   public void RandomRequestFood()
   {
-    if(_foodList == null || _foodList.Length == 0)
+    if (_foodRequest == null) throw new System.Exception("Cannot call RandomRequestFood if not setup yet");
+
+    Product randomResult = _foodRequest.GetRandomFood();
+
+    if(randomResult == null) 
+    { 
+      _desireFood = "chili"; 
+    }
+    else
     {
-      _requestFood = "chili";
-      return;
+      _desireFood = randomResult.name;
     }
 
-    int index = Random.Range(0, _foodList.Length);
-    _requestFood = _foodList[index];
+    Debug.LogWarning("I WANT TO EAT " + _desireFood + "!!!");
   }
 }
