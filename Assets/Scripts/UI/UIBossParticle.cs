@@ -6,6 +6,11 @@ public class UIBossParticle : MonoBehaviour
 {
   private Coroutine _hideDelayCoroutine = null;
 
+  private void Start()
+  {
+    Hide();
+  }
+
   public void Show(float second)
   {
     gameObject.SetActive(true);
