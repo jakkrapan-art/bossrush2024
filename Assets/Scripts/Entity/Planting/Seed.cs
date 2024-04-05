@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Seed : Items, IPoolingObject
+public class Seed : Item, IPoolingObject
 {
   [SerializeField]
   private Product _product = null;

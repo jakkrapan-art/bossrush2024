@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Items : InteractObject, IPoolingObject
+public class Item : InteractableObject, IPoolingObject
 {
   
   public float _timeToDestroy = 60;

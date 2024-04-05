@@ -13,7 +13,11 @@ public class Entity : MonoBehaviour
   protected StateMachine _stateMachine = null;
   protected Vector2 directionPlayer;
   protected bool _enableMove = true;
-  public void SetEnableMove(bool enable) => _enableMove = enable;
+  public void SetEnableMove(bool enable)
+  {
+    Debug.Log("set enable move to " + enable);
+    _enableMove = enable;
+  }
 
   private bool _isFacingRight = true;
   #region Unity Functions

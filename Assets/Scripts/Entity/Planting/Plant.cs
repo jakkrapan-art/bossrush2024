@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Animator))]
-public class Plant : InteractObject, IPoolingObject
+public class Plant : InteractableObject, IPoolingObject
 {
   public bool _isWet { get; private set; } = false;
   public bool _isFertilized { get; private set; } = false;
@@ -25,7 +25,6 @@ public class Plant : InteractObject, IPoolingObject
   private Action<Product> _onFullyGrowth = null;
 
   public bool IsReadyToGrow() => _isWet && _isFertilized;
-  private Items _interactingItem;
 
   protected override void Awake()
   {
@@ -49,7 +48,6 @@ public class Plant : InteractObject, IPoolingObject
   {
     Product = product;
     _onFullyGrowth = onFullyGrowth;
-    _interactingItem = null;
     _isFertilized = false;
     _isWet = false;
 
@@ -112,19 +110,13 @@ public class Plant : InteractObject, IPoolingObject
 
   public State GetCurrentState() => _stateMachine.GetCurrentState();
 
-  public override bool CanInteract(Items itemToInteract)
+  public override ResultData Interact(Item interactingItem)
   {
-    _interactingItem = itemToInteract;
-    return true;
-  }
-
-  public override void InteractResult()
-  {
-    if(_stateMachine.CurrentState is PlantSeedState)
+    if (_stateMachine.CurrentState is PlantSeedState)
     {
-      if (_interactingItem)
+      if (interactingItem)
       {
-        switch (_interactingItem)
+        switch (interactingItem)
         {
           case WaterCan:
             FillWater();
@@ -134,11 +126,14 @@ public class Plant : InteractObject, IPoolingObject
             {
               AddFertilizer();
               fertilizer.Use();
+              return new ResultData { clearHand = true };
             }
             break;
         }
       }
     }
+
+    return base.Interact(interactingItem);
   }
 
   public void ResetPoolingObject()

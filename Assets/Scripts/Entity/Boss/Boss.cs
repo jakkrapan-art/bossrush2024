@@ -32,7 +32,7 @@ public class Boss : Entity, IHitableObject
 
   private void Start()
   {
-    DialogBuilder.GetInstance().CreateBossRageBar((bar) => 
+    UICreator.GetInstance().CreateBossRageBar((bar) => 
     {
       if (!bar) return;
 
@@ -137,7 +137,7 @@ public class Boss : Entity, IHitableObject
     return _rage / MAX_RAGE;
   }
 
-  public bool OnHit(Items hitObj)
+  public bool OnHit(Item hitObj)
   {
     switch(hitObj)
     {

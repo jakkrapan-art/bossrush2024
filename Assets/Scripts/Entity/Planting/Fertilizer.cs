@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Fertilizer : Items, IPoolingObject
+public class Fertilizer : Item, IPoolingObject
 {
 
   public void Use()

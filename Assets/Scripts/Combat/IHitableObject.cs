@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IHitableObject
 {
-  public bool OnHit(Items hitObj);
+  public bool OnHit(Item hitObj);
 }

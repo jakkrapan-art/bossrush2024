@@ -17,10 +17,9 @@ public class UISeedExchangeWindow : UIDialogBase
   {
     public Sprite iconImage;
     public string seedName;
-    public Action onChoose;
   }
 
-  public void Setup(List<SlotParam> nmSlotsParam, List<SlotParam> exSlotsParam)
+  public void Setup(List<SlotParam> nmSlotsParam, List<SlotParam> exSlotsParam, Action<string> onChoose)
   {
     void setupSlot(List<UISeedExchangeSlot> slotList, List<SlotParam> slotParamList)
     {
@@ -36,7 +35,7 @@ public class UISeedExchangeWindow : UIDialogBase
 
           slot.Setup(param.iconImage, param.seedName, ()=> 
           {
-            param.onChoose?.Invoke();
+            onChoose?.Invoke(param.seedName);
             Close();
           });
         }

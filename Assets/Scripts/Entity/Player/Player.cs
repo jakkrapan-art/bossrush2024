@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class Player : Entity
@@ -8,9 +10,9 @@ public class Player : Entity
   private Transform _dropItemPosition;
   [SerializeField]
   private Transform _throwItemPoint;
-  private Items _holdingItem;
-  private InteractObject _itemFinded;
-  private InteractObject _interactingObject;
+  private Item _holdingItem;
+  private InteractableObject _itemFinded;
+  private InteractableObject _interactingObject;
 
   private bool _isInteraction;
   private float _currentTimer;
@@ -70,7 +72,7 @@ public class Player : Entity
     }
   }
 
-  public void PickItem(Items item)
+  public void PickItem(Item item)
   {
     if (!item) return;
 
@@ -100,22 +102,60 @@ public class Player : Entity
   {
     if (!_objDetector) return;
     var interactTarget = _objDetector.GetInteractObject();
-    if (interactTarget && !_isInteraction && interactTarget.CanInteract(_holdingItem))
+    if (interactTarget != null && !_isInteraction)
     {
-      interactTarget.Interact(this);
-      _isInteraction = true;
-      _timeToInteraction = interactTarget.GetTimeToInteract();
-      _interactingObject = interactTarget;
-      _currentTimer = 0;
-      //SetEnableMove(false);
+      var result = interactTarget.Interact(_holdingItem);
+      if (result.clearHand)
+      {
+        _holdingItem.ReturnToPool();
+        _holdingItem = null;
+      }
+
+      if (result.waitTime > 0)
+      {
+        _isInteraction = true;
+        _timeToInteraction = result.waitTime;
+        _interactingObject = interactTarget;
+        _currentTimer = 0;
+        SetEnableMove(false);
+      }
+
+      if(result.returnItem != null)
+      {
+        PickItem(result.returnItem);
+      }
+
+      if(result.waitResult != null)
+      {
+        SetEnableMove(false);
+        StartCoroutine(WaitForInteractResult(result.waitResult));
+      }
     }
   }
+
+  private IEnumerator WaitForInteractResult(Func<InteractableObject.WaitResultData> func)
+  {
+    if (func == null) yield break;
+    InteractableObject.WaitResultData result = default;
+    yield return new WaitUntil(()=> 
+    {
+      result = func.Invoke();
+      return result.finish;
+    });
+
+    if(result.resultItem != null)
+    {
+      PickItem(result.resultItem);
+    }
+
+    SetEnableMove(true);
+  }
+
   public void InteractFinish()
   {
     if (_interactingObject && _isInteraction)
     {
       _isInteraction = false;
-      _interactingObject.InteractResult();
       _interactingObject = null;
     }
     SetEnableMove(true);

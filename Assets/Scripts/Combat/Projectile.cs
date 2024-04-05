@@ -4,10 +4,10 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
   private Action<IHitableObject> _onHit;
-  private Items _source;
+  private Item _source;
   private Rigidbody2D _rb;
 
-  public void Setup(Items source, float speed, Vector2 direction, Action<IHitableObject> onHit)
+  public void Setup(Item source, float speed, Vector2 direction, Action<IHitableObject> onHit)
   {
     _rb = GetComponent<Rigidbody2D>();
     if(_rb) _rb.freezeRotation = true;

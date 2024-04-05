@@ -5,16 +5,19 @@ using UnityEngine;
 public class FoodRequest
 {
   private PossibleFoodList _foodList;
-  private Dictionary<float, Product> _foodMapCache = new Dictionary<float, Product>();
+
+  private UIFoodRequest _ui;
+
   public FoodRequest(PossibleFoodList possibleFoodList)
   {
     _foodList = possibleFoodList;
+
+    CreateUI();
   }
 
   public Product GetRandomFood()
   {
     float randomResult = Random.Range(0, 1f);
-    if (_foodMapCache.ContainsKey(randomResult)) return _foodMapCache[randomResult];
     Product result = null;
     float currentPossibility = 0f;
     for (int i = 0; i < _foodList.PossibleFoods.Length; i++)
@@ -27,7 +30,6 @@ public class FoodRequest
         (i > 0 && currentPossibility > randomResult && randomResult > currentPossibility - _foodList.PossibleFoods[i - 1].possibility))
       {
         result = _foodList.PossibleFoods[i].product;
-        SaveCache(result, randomResult);
         break;
       }
     }
@@ -35,14 +37,20 @@ public class FoodRequest
     return result;
   }
 
-  private void SaveCache(Product product, float randomResult) 
+  private void CreateUI()
   {
-    if (product == null || _foodMapCache.ContainsKey(randomResult)) return;
-
-    _foodMapCache.Add(randomResult, product);
+    UICreator.GetInstance().CreateFoodRequestUI(ui =>
+    {
+      _ui = ui;
+    });
   }
 
-  private void CreateUI()
+  public void ShowUI(RecipeFoods food)
+  {
+
+  }
+
+  public void HideUI()
   {
 
   }

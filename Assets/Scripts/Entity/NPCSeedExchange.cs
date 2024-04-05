@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCSeedExchange : InteractObject
+public class NPCSeedExchange : InteractableObject
 {
   [SerializeField] private SeedExchangeShopData _shopData;
 
   private List<UISeedExchangeWindow.SlotParam> _normalShopSlotParams;
   private List<UISeedExchangeWindow.SlotParam> _exclusiveShopSlotParams;
+
+  private Seed _resultSeed;
 
   private void Start()
   {
@@ -16,15 +18,6 @@ public class NPCSeedExchange : InteractObject
   private void Setup()
   {
     if (!_shopData) return;
-    void onChoose(string plantName)
-    {
-      var seed = ObjectPool.GetInstance().Get<Seed>(plantName + "_seed");
-      if (_interactor && seed)
-      {
-        _interactor.PickItem(seed);
-        _interactor = null;
-      }
-    }
     
     _normalShopSlotParams = new List<UISeedExchangeWindow.SlotParam>();
     foreach (var d in _shopData.normalSeedData)
@@ -33,7 +26,6 @@ public class NPCSeedExchange : InteractObject
       {
         iconImage = d.shopIcon,
         seedName = d.seedName,
-        onChoose = () => onChoose(d.seedName.Replace(" ", "")),
       });
     }
 
@@ -44,13 +36,27 @@ public class NPCSeedExchange : InteractObject
       {
         iconImage = d.shopIcon,
         seedName = d.seedName,
-        onChoose = () => onChoose(d.seedName.Replace(" ", ""))
     });
     }
   }
 
-  public override void InteractResult()
+  public override ResultData Interact(Item interactingItem)
   {
-    DialogBuilder.GetInstance().OpenSeedExchangeDialog(_normalShopSlotParams, _exclusiveShopSlotParams);
+    UICreator.GetInstance().OpenSeedExchangeDialog(_normalShopSlotParams, _exclusiveShopSlotParams, (plantName) => 
+    {
+      var seed = ObjectPool.GetInstance().Get<Seed>(plantName.Replace(" ", "") + "_seed");
+      if(seed != null) _resultSeed = seed;
+    });
+
+    return new ResultData { waitResult = waitForChooseSeed };
+  }
+
+  private WaitResultData waitForChooseSeed()
+  {
+    if(_resultSeed == null) return new WaitResultData { finish = false };
+
+    Seed resultSeed = _resultSeed;
+    _resultSeed = null;
+    return new WaitResultData { finish = true, resultItem = resultSeed };
   }
 }

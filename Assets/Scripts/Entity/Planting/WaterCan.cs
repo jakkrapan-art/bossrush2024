@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WaterCan : Items
+public class WaterCan : Item
 {
   private int _maxWater = 10;
   private int _currentWater;
