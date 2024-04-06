@@ -1,0 +1,26 @@
+{
+  "name": "ai.plusmusic",
+  "version": "1.0.14",
+  "displayName": "PlusMusic Audio Co-Pilot Plugin",
+  "description": "Soundtrack Games in Minutes. AI powered adaptive audio plugin for seamlessly merging songs from PlusMusic's extensive catalog into your gaming experiences.",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "documentationUrl": "https://dev.plusmusic.ai/",
+  "changelogUrl": "https://dev.plusmusic.ai/articles/changelog",
+  "licensesUrl": "https://www.plusmusic.ai/",
+  "dependencies": {
+ },
+ "keywords": [
+    "music",
+    "ai",
+    "adaptive",
+    "generative",
+    "dynamic",
+    "dj"
+  ],
+  "author": {
+    "name": "PlusMusic",
+    "email": "unity@plusmusic.ai",
+    "url": "https://www.plusmusic.ai/"
+  }
+}

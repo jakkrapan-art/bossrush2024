@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8603925080177884106
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8603925080177884104}
+  - component: {fileID: -4661817879317259477}
+  m_Layer: 0
+  m_Name: PM_LoadAllTracks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8603925080177884104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8603925080177884106}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-4661817879317259477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8603925080177884106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6615fda3c12701240af1f994e538a2b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  developerComments: 'Use this script to preload (cache) tracks that you are using
+    in your game to improve in-game loading times.
+
+    It is best to attach this
+    script to an initial splash/loading/menu scene at the beginning of your game.
+
+
+    -
+    ''Load All Tracks''
+
+    Ignores the two optional lists and preloads all tracks
+    in your project
+
+    - ''Load By Track Id''
+
+    Add the unique Track IDs of
+    each track you want to preload
+
+    - ''Load By Project Array Index''
+
+    Add
+    the array indecies of your project tracks you want to preload
+
+
+'
+  selectLoadType: 0
+  loadTracksById: 
+  loadTracksByArrayIndex: 
