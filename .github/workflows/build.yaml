@@ -48,8 +48,9 @@ jobs:
 
       - name: Restore changes after tests
         run: |
-          git reset --hard origin/master
-          git status
+          git add .
+          git commit -m "ci: automate commit"
+          git push
 
       # Build
       - name: Build project
