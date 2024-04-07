@@ -12,16 +12,19 @@ jobs:
         targetPlatform:
           - WebGL
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout project
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           lfs: true
-      - uses: actions/cache@v4
+      - name: Cache project
+        uses: actions/cache@v4
         with:
           path: Library
           key: Library-${{ matrix.targetPlatform }}
           restore-keys: Library-
-      - uses: game-ci/unity-test-runner@v4
+      - name: Test run
+        uses: game-ci/unity-test-runner@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
@@ -30,7 +33,10 @@ jobs:
           projectPath: ./
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           unityVersion: "2022.3.16f1"
-      - uses: game-ci/unity-builder@v4
+      - name: Echo changes
+        run: echo git status
+      - name: Build project
+        uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
@@ -38,14 +44,16 @@ jobs:
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
           unityVersion: "2022.3.16f1"
-      - uses: actions/cache@v3
+      - name: Cache build
+        uses: actions/cache@v4
         with:
           path: path/to/your/project/Library
           key: Library-Defeed-${{ matrix.targetPlatform }}
           restore-keys: |
             Library-Defeed-
             Library-
-      - uses: actions/upload-artifact@v3
+      - name: Upload build
+        uses: actions/upload-artifact@v3
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
