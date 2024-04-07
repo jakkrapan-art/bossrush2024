@@ -16,7 +16,7 @@ jobs:
         run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
 
       - name: Restore LFS cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: lfs-cache
         with:
           path: .git/lfs
@@ -29,7 +29,7 @@ jobs:
           git reset --hard
 
       # Cache
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
@@ -47,7 +47,10 @@ jobs:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Restore changes after tests
-        run: git restore .
+        run: |
+          git restore .
+          git reset --hard
+          git status
 
       # Build
       - name: Build project
