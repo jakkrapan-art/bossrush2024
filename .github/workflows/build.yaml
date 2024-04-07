@@ -1,46 +1,55 @@
-name: Build project
-permissions:
-  contents: write
-on: [push, pull_request, workflow_dispatch]
-
 jobs:
-  buildForAllSupportedPlatforms:
-    name: Build for ${{ matrix.targetPlatform }}
+  build:
+    name: Build my project ✨
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        targetPlatform:
-          - WebGL
     steps:
-      - name: Checkout project
+      # Checkout (without LFS)
+      - name: Checkout repository
         uses: actions/checkout@v4
+
+      # Git LFS
+      - name: Create LFS file list
+        run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
+
+      - name: Restore LFS cache
+        uses: actions/cache@v3
+        id: lfs-cache
         with:
-          fetch-depth: 0
-          lfs: true
-      - name: Cache project
-        uses: actions/cache@v4
+          path: .git/lfs
+          key: ${{ runner.os }}-lfs-${{ hashFiles('.lfs-assets-id') }}
+
+      - name: Git LFS Pull
+        run: |
+          git lfs pull
+          git add .
+          git reset --hard
+
+      # Cache
+      - uses: actions/cache@v3
         with:
           path: Library
-          key: Library-${{ matrix.targetPlatform }}
-          restore-keys: Library-
-      - name: Test run
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+
+      # Test
+      - name: Run tests
         uses: game-ci/unity-test-runner@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          projectPath: ./
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          unityVersion: "2022.3.16f1"
-      - name: Update changes after run test
+
+      - name: Commit changes after tests
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add .
-          git commit -m "generated"
-          git push
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -A
+          git commit -m "ci: automate commit changes"
+
+      # Build
       - name: Build project
         uses: game-ci/unity-builder@v4
         env:
@@ -48,18 +57,10 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          targetPlatform: ${{ matrix.targetPlatform }}
-          unityVersion: "2022.3.16f1"
-      - name: Cache build
-        uses: actions/cache@v4
+          targetPlatform: WebGL
+
+      # Output
+      - uses: actions/upload-artifact@v3
         with:
-          path: path/to/your/project/Library
-          key: Library-Defeed-${{ matrix.targetPlatform }}
-          restore-keys: |
-            Library-Defeed-
-            Library-
-      - name: Upload build
-        uses: actions/upload-artifact@v3
-        with:
-          name: Build-${{ matrix.targetPlatform }}
-          path: build/${{ matrix.targetPlatform }}
+          name: Build
+          path: build
