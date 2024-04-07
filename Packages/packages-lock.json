@@ -1,11 +1,5 @@
 {
   "dependencies": {
-    "ai.plusmusic": {
-      "version": "file:PlusMusic",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
     "com.unity.2d.animation": {
       "version": "9.0.4",
       "depth": 1,
