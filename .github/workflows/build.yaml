@@ -1,5 +1,5 @@
 name: Build project
-
+permission: write
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
@@ -33,8 +33,13 @@ jobs:
           projectPath: ./
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           unityVersion: "2022.3.16f1"
-      - name: Restore changes after run test
-        run: git restore --source=HEAD --staged --worktree --recurse-submodules .
+      - name: Update changes after run test
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "generated"
+          git push
       - name: Build project
         uses: game-ci/unity-builder@v4
         env:
