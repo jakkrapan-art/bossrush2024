@@ -7,11 +7,9 @@ jobs:
     name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         targetPlatform:
-          - StandaloneWindows
-          - StandaloneWindows64
           - WebGL
     steps:
       - uses: actions/checkout@v4
@@ -29,7 +27,7 @@ jobs:
         with:
           projectPath: ./
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          packageMode: true
+          unityVersion: "2022.3.16f1"
       - uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
