@@ -33,8 +33,8 @@ jobs:
           projectPath: ./
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           unityVersion: "2022.3.16f1"
-      - name: Check for changes
-        run: git status
+      - name: Restore changes after run test
+        run: git restore --source=HEAD --staged --worktree --recurse-submodules .
       - name: Build project
         uses: game-ci/unity-builder@v4
         env:
