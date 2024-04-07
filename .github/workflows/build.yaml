@@ -48,8 +48,7 @@ jobs:
 
       - name: Restore changes after tests
         run: |
-          git restore .
-          git reset --hard
+          git reset --hard origin/master
           git status
 
       # Build
