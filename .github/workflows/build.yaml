@@ -46,12 +46,8 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Commit changes after tests
-        run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add -A
-          git commit -m "ci: automate commit changes"
+      - name: Restore changes after tests
+        run: git restore .
 
       # Build
       - name: Build project
