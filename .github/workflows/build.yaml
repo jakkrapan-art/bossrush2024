@@ -46,10 +46,6 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Restore changes after tests
-        run: |
-          git restore .
-          git clean -f -d
       # Build
       - name: Build project
         uses: game-ci/unity-builder@v4
