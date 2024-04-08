@@ -94,7 +94,7 @@ jobs:
           path: build
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@latest
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: main
           folder: build/WebGL
