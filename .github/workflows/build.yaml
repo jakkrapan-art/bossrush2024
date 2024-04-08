@@ -6,6 +6,13 @@ jobs:
   test:
     name: Test my project
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        targetPlatform:
+          - StandaloneWindows # Build a Windows standalone.
+          - StandaloneWindows64 # Build a Windows 64-bit standalone.
+          - WebGL # WebGL.
     steps:
       # Checkout
       - name: Checkout repository
@@ -65,3 +72,8 @@ jobs:
         with:
           name: Build
           path: build
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Build-${{ matrix.targetPlatform }}
+          path: build/${{ matrix.targetPlatform }}
