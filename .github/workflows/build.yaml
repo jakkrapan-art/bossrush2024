@@ -79,8 +79,6 @@ jobs:
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
-      - run: |
-          ls -la build
 
   deploy-to-github-pages:
     name: Deploy to GitHub Pages
@@ -92,7 +90,7 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: Build-WebGL
+          name: WebGL
           path: build/WebGL
 
       - name: Deploy
