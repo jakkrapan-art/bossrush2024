@@ -79,6 +79,8 @@ jobs:
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
+      - run: |
+          echo "Build-${{ matrix.targetPlatform }}" >> $GITHUB_OUTPUT
 
   deploy-to-github-pages:
     name: Deploy to GitHub Pages
