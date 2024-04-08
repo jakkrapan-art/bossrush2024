@@ -2,17 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OvenIdleState : MonoBehaviour
+public class OvenIdleState : OvenStateBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  public OvenIdleState(OvenStateMachine stateMachine, Oven oven, string animationName) : base(stateMachine, oven, animationName)
+  {
+  }
 }

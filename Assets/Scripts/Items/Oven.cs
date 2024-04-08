@@ -11,6 +11,7 @@ public class Oven : InteractableObject
   private int _currentIndex = 0;
 
   private OvenStateMachine _stateMachine;
+  public float CookTime { get; private set; }
 
   public Animator GetAnimator() => _animator;
 
@@ -18,6 +19,16 @@ public class Oven : InteractableObject
   {
     base.Awake();
     _stateMachine = new OvenStateMachine(this);
+  }
+
+  private void Update()
+  {
+    _stateMachine?.Update();
+  }
+
+  private void FixedUpdate()
+  {
+    _stateMachine?.FixedUpdate();
   }
 
 
@@ -46,6 +57,10 @@ public class Oven : InteractableObject
 
   private void Cook()
   {
+    //determine the receipe and get cook time
+    CookTime = 5f;
+
     _isCooking = true;
+    if(_stateMachine != null) _stateMachine.ChangeState(_stateMachine.CookState);
   }
 }

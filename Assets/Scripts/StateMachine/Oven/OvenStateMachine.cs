@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class OvenStateMachine : StateMachine
 {
+  public OvenIdleState IdleState { get; private set; }
+  public OvenCookState CookState { get; private set; }
+
   public OvenStateMachine(Oven oven)
   {
-    
+    IdleState = new OvenIdleState(this, oven, "idle");
+    CookState = new OvenCookState(this, oven, "cook");
+
+    Init();
   }
 
   protected override State GetInitialState()
   {
-    throw new System.NotImplementedException();
+    return IdleState;
   }
 }

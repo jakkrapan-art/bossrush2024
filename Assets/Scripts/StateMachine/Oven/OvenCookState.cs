@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OvenCookState : MonoBehaviour
+public class OvenCookState : OvenStateBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  private float _cookTime;
+  public OvenCookState(OvenStateMachine stateMachine, Oven oven, string animationName) : base(stateMachine, oven, animationName)
+  {
+  }
 
-    // Update is called once per frame
-    void Update()
+  public override void OnEnter()
+  {
+    base.OnEnter();
+    _cookTime = _oven.CookTime;
+  }
+
+  public override void Update()
+  {
+    base.Update();
+    if(Time.time >= _startTime + _cookTime)
     {
-        
+      _stateMachine.ChangeState(_stateMachine.IdleState);
     }
+  }
 }
