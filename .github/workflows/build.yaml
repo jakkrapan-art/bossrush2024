@@ -90,7 +90,7 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: WebGL
+          name: Build-WebGL
           path: build/WebGL
 
       - name: Deploy
