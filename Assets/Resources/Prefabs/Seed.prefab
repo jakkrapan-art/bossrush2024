@@ -139,12 +139,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9722a5b093094ea47aa87281fb5a0367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _listItemCanInteract: {fileID: 0}
+  _interactColl: {fileID: 2904803012790356769}
   _timeToInteract: 0
   _ItemsOutput: {fileID: 0}
-  TimeToDestroy: 60
+  _timeToDestroy: 60
   _ItemData: {fileID: 0}
-  _itemSprite: {fileID: 0}
   _product: {fileID: 0}
 --- !u!58 &2904803012790356769
 CircleCollider2D:

@@ -18,7 +18,8 @@ public class InteractableObject : MonoBehaviour
   }
 
   protected Rigidbody2D _rb;
-  protected Collider2D _coll2d;
+  [SerializeField]
+  protected Collider2D _interactColl;
 
   [SerializeField] protected float _timeToInteract = 0;
   [SerializeField] protected Item _ItemsOutput;
@@ -26,7 +27,7 @@ public class InteractableObject : MonoBehaviour
   protected virtual void Awake()
   {
     _rb = GetComponent<Rigidbody2D>();
-    _coll2d = GetComponent<Collider2D>();
+    if(_interactColl == null) _interactColl = GetComponent<Collider2D>();
   }
 
   public virtual InteractResultData Interact(Item interactingItem)

@@ -18,8 +18,10 @@ MonoBehaviour:
     - {fileID: 3480728207790079179, guid: 570c1cb3b557dcf48a850608ddbb8796, type: 3}
     - {fileID: 8075015159592406130, guid: b003e02672c629246879ca67265956e3, type: 3}
     - {fileID: -8240322045746239133, guid: 7d0c5abaf3511c7499c1fee002f5c129, type: 3}
+    <CookTime>k__BackingField: 5
   - <Food>k__BackingField: {fileID: -8617915551082307646, guid: a4c990d8729566d4584767d11a05c315, type: 3}
     <Materials>k__BackingField:
     - {fileID: 3480728207790079179, guid: 570c1cb3b557dcf48a850608ddbb8796, type: 3}
     - {fileID: 9003320043489682887, guid: 175e42cc4621d7843b1ce610e7e8c660, type: 3}
     - {fileID: -8240322045746239133, guid: 7d0c5abaf3511c7499c1fee002f5c129, type: 3}
+    <CookTime>k__BackingField: 15

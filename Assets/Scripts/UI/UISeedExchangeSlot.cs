@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +7,7 @@ public class UISeedExchangeSlot : MonoBehaviour
   [SerializeField]
   private Image _iconImage = default;
   [SerializeField]
-  private TMP_Text _seedName = default;
+  private Text _seedName = default;
   private Button _button = default;
 
   public void Setup(Sprite icon, string name, Action onChoose)

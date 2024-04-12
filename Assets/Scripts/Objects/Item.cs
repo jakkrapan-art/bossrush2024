@@ -42,7 +42,7 @@ public class Item : InteractableObject, IPoolingObject
     transform.SetParent(objectHand.transform);
     transform.localPosition = Vector2.zero;
     Destroy(_rb);
-    _coll2d.enabled = false;
+    _interactColl.enabled = false;
     _onPickedAction?.Invoke();
     StopCountTimeForDestroy();
   }
@@ -67,7 +67,7 @@ public class Item : InteractableObject, IPoolingObject
 
   public void ReturnToPool()
   {
-    if (_coll2d) _coll2d.enabled = true;
+    if (_interactColl) _interactColl.enabled = true;
     ObjectPool.ReturnObjectToPool(this);
   }
 
@@ -79,9 +79,9 @@ public class Item : InteractableObject, IPoolingObject
       _rb = gameObject.AddComponent<Rigidbody2D>();
       _rb.gravityScale = 0f;
     }
-    if(_coll2d)
+    if(_interactColl)
     {
-      _coll2d.enabled = true;
+      _interactColl.enabled = true;
     }
   }
 

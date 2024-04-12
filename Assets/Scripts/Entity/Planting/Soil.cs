@@ -10,7 +10,7 @@ public class Soil : InteractableObject
   {
     if (!IsAvailable() || !plant) return false;
     _plant = plant;
-    _coll2d.enabled = false;
+    _interactColl.enabled = false;
     return true;
   }
 
@@ -18,7 +18,7 @@ public class Soil : InteractableObject
   {
     if (!_plant || (_plant.GetCurrentState() is PlantMatureState == false)) return;
     _plant = null;
-    _coll2d.enabled = true;
+    _interactColl.enabled = true;
   }
 
   public override InteractResultData Interact(Item interactingItem)
