@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6778129923720446277}
   - component: {fileID: 6792038154387176709}
   - component: {fileID: 8581736780006915194}
+  - component: {fileID: 868733262263373736}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -135,7 +136,7 @@ MonoBehaviour:
   _handHoldingItem: {fileID: 2424727082055439583}
   _dropItemPosition: {fileID: 795291686137338995}
   _throwItemPoint: {fileID: 7809270907629792606}
-  _forceToThrow: 15
+  _dynamicSortingOrder: {fileID: 868733262263373736}
   _objDetector: {fileID: 8581736780006915194}
 --- !u!95 &6778129923720446277
 Animator:
@@ -208,6 +209,22 @@ MonoBehaviour:
   _playerCollider: {fileID: 6792038154387176709}
   _detectRange: 0.8
   _positionOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &868733262263373736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177638360549078202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28739b5ccbdb5e04584b2a3e2b64ff9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _alwaysUpdate: 1
+  _sr: {fileID: 6634574914029582055}
+  _orderOffset: 0
+  _linkTo: {fileID: 0}
 --- !u!1 &1037285056320073621
 GameObject:
   m_ObjectHideFlags: 0

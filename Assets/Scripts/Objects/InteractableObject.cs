@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(DynamicSortingOrder))]
 public class InteractableObject : MonoBehaviour
 {
   public struct InteractResultData
@@ -28,6 +29,7 @@ public class InteractableObject : MonoBehaviour
   {
     _rb = GetComponent<Rigidbody2D>();
     if(_interactColl == null) _interactColl = GetComponent<Collider2D>();
+    if(!gameObject.TryGetComponent(out DynamicSortingOrder _)) gameObject.AddComponent<DynamicSortingOrder>();
   }
 
   public virtual InteractResultData Interact(Item interactingItem)

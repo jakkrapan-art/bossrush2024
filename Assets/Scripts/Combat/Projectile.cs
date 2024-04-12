@@ -4,15 +4,17 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
   private Action<IHitableObject> _onHit;
+  private Action _onStop;
   private Item _source;
   private Rigidbody2D _rb;
 
-  public void Setup(Item source, float speed, Vector2 direction, Action<IHitableObject> onHit)
+  public void Setup(Item source, float speed, Vector2 direction, Action<IHitableObject> onHit, Action onStop = null)
   {
     _rb = GetComponent<Rigidbody2D>();
     if(_rb) _rb.freezeRotation = true;
     _onHit = onHit;
     _source = source;
+    _onStop = onStop;
     source.enabled = false;
     SetFlyVelocity(speed, direction);
   }
@@ -65,9 +67,14 @@ public class Projectile : MonoBehaviour
   {
     if (Time.frameCount % 5 != 0) return;
 
-    if(_rb)
+    if(_rb != null)
     {
       _rb.drag += 0.08f;
+      if(_rb.velocity == Vector2.zero)
+      {
+        _onStop?.Invoke();
+        Destroy(this);
+      }
     }
   }
   private void OnTriggerEnter2D(Collider2D otherCollider)

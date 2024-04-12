@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Player : Entity
 {
@@ -13,6 +15,10 @@ public class Player : Entity
   private Item _holdingItem;
   private InteractableObject _itemFinded;
   private InteractableObject _interactingObject;
+
+  [SerializeField]
+  private DynamicSortingOrder _dynamicSortingOrder = null;
+  private DynamicSortingOrder _sortingOrderLinked = null;
 
   private bool _isInteraction;
   private float _currentTimer;
@@ -72,6 +78,8 @@ public class Player : Entity
     }
   }
 
+  private Action<int> _updateLinkedSortingOrderValueCallback;
+
   public void PickItem(Item item)
   {
     if (!item) return;
@@ -80,24 +88,52 @@ public class Player : Entity
 
     item.Kept(_handHoldingItem);
     _holdingItem = item;
+
+    if (_dynamicSortingOrder != null && item.TryGetComponent(out _sortingOrderLinked))
+    {
+      _updateLinkedSortingOrderValueCallback = (newVal) =>
+      {
+        if (_sortingOrderLinked != null)
+        {
+          _sortingOrderLinked.SetSortingOrder(newVal + 1);
+        }
+      };
+
+      _dynamicSortingOrder.SubscribeOnUpdate(_updateLinkedSortingOrderValueCallback);
+    }
   }
 
   public void DropItem()
   {
     if (!_holdingItem) return;
 
-    if(_dropItemPosition) _holdingItem.Drop(_dropItemPosition.position);
+    RemoveSortingOrderLink();
+
+    if (_dropItemPosition) _holdingItem.Drop(_dropItemPosition.position);
     _holdingItem = null;
   }
 
   public void ThrowItem()
   {
+    RemoveSortingOrderLink();
+
     if (_holdingItem)
     {
       _holdingItem.Throw(_throwItemPoint.position, directionPlayer, Const.THROW_FORCE);
       _holdingItem = null;
     }
   }
+
+  private void RemoveSortingOrderLink()
+  {
+    if (_dynamicSortingOrder != null && _sortingOrderLinked != null && _updateLinkedSortingOrderValueCallback != null)
+    {
+      _dynamicSortingOrder.UnsubscribeOnUpdate(_updateLinkedSortingOrderValueCallback);
+      _sortingOrderLinked.AdjustSortingOrder();
+      _sortingOrderLinked = null;
+    }
+  }
+
   public void StartInteractObject()
   {
     if (!_objDetector) return;

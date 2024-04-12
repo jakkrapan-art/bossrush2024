@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(DynamicSortingOrder))]
 public class Entity : MonoBehaviour
 {
   protected Rigidbody2D _rb;

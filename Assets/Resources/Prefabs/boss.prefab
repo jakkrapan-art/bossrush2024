@@ -874,6 +874,7 @@ GameObject:
   - component: {fileID: 6994314006586880707}
   - component: {fileID: 6636995134784059005}
   - component: {fileID: 4973821335972762724}
+  - component: {fileID: 541124444819200632}
   m_Layer: 0
   m_Name: boss
   m_TagString: Untagged
@@ -1073,6 +1074,20 @@ MonoBehaviour:
   _rage: 50
   _ragePointIncreased: 0.16
   _thinkingBubble: {fileID: 2386182659162338646}
+--- !u!114 &541124444819200632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4687577424507276347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28739b5ccbdb5e04584b2a3e2b64ff9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _alwaysUpdate: 1
+  _sr: {fileID: 4199935814421838968}
 --- !u!1 &6420525935037220521
 GameObject:
   m_ObjectHideFlags: 0
