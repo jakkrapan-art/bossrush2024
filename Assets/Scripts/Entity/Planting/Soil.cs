@@ -21,7 +21,7 @@ public class Soil : InteractableObject
     _coll2d.enabled = true;
   }
 
-  public override ResultData Interact(Item interactingItem)
+  public override InteractResultData Interact(Item interactingItem)
   {
     if (interactingItem != null && _plant == null)
     {
@@ -47,7 +47,7 @@ public class Soil : InteractableObject
               });
             });
           }
-          return new ResultData { clearHand = true };
+          return new InteractResultData { clearHand = true };
       }
     }
     return base.Interact(interactingItem);

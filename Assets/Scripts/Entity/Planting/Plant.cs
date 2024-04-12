@@ -110,7 +110,7 @@ public class Plant : InteractableObject, IPoolingObject
 
   public State GetCurrentState() => _stateMachine.GetCurrentState();
 
-  public override ResultData Interact(Item interactingItem)
+  public override InteractResultData Interact(Item interactingItem)
   {
     if (_stateMachine.CurrentState is PlantSeedState)
     {
@@ -126,7 +126,7 @@ public class Plant : InteractableObject, IPoolingObject
             {
               AddFertilizer();
               fertilizer.Use();
-              return new ResultData { clearHand = true };
+              return new InteractResultData { clearHand = true };
             }
             break;
         }

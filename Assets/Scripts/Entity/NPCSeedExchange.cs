@@ -40,7 +40,7 @@ public class NPCSeedExchange : InteractableObject
     }
   }
 
-  public override ResultData Interact(Item interactingItem)
+  public override InteractResultData Interact(Item interactingItem)
   {
     UICreator.GetInstance().OpenSeedExchangeDialog(_normalShopSlotParams, _exclusiveShopSlotParams, (plantName) => 
     {
@@ -48,7 +48,7 @@ public class NPCSeedExchange : InteractableObject
       if(seed != null) _resultSeed = seed;
     });
 
-    return new ResultData { waitResult = waitForChooseSeed };
+    return new InteractResultData { waitResult = waitForChooseSeed };
   }
 
   private WaitResultData waitForChooseSeed()

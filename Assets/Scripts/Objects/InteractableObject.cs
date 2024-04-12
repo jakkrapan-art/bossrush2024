@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
-  public struct ResultData
+  public struct InteractResultData
   {
     public Item returnItem;
     public float waitTime;
@@ -20,7 +20,6 @@ public class InteractableObject : MonoBehaviour
   protected Rigidbody2D _rb;
   protected Collider2D _coll2d;
 
-  [SerializeField] protected RecipeFoods _listItemCanInteract;
   [SerializeField] protected float _timeToInteract = 0;
   [SerializeField] protected Item _ItemsOutput;
 
@@ -30,7 +29,7 @@ public class InteractableObject : MonoBehaviour
     _coll2d = GetComponent<Collider2D>();
   }
 
-  public virtual ResultData Interact(Item interactingItem)
+  public virtual InteractResultData Interact(Item interactingItem)
   {
     Item returnItem = null;
     if(_ItemsOutput != null)
@@ -38,6 +37,6 @@ public class InteractableObject : MonoBehaviour
       returnItem = ObjectPool.GetInstance().Get<Item>(_ItemsOutput.name);
     }
 
-    return new ResultData { waitTime = _timeToInteract, returnItem = returnItem };
+    return new InteractResultData { waitTime = _timeToInteract, returnItem = returnItem };
   }
 }

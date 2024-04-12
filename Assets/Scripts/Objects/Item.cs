@@ -67,6 +67,7 @@ public class Item : InteractableObject, IPoolingObject
 
   public void ReturnToPool()
   {
+    if (_coll2d) _coll2d.enabled = true;
     ObjectPool.ReturnObjectToPool(this);
   }
 

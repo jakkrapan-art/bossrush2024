@@ -12,7 +12,7 @@ public class OvenCookState : OvenStateBase
   public override void OnEnter()
   {
     base.OnEnter();
-    _cookTime = _oven.CookTime;
+    _cookTime = _oven._cookTime;
   }
 
   public override void Update()
@@ -20,6 +20,7 @@ public class OvenCookState : OvenStateBase
     base.Update();
     if(Time.time >= _startTime + _cookTime)
     {
+      _oven.CookSuccess();
       _stateMachine.ChangeState(_stateMachine.IdleState);
     }
   }

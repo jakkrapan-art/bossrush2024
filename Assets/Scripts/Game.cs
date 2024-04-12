@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  [Header("Cooking System")]
+  [SerializeField]
+  private FoodRecipeList recipeList = null;
+  //database obj
+  private FoodRecipeDB recipeDB = null;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  [SerializeField]
+  private Oven ovenTemplate = default;
+  [SerializeField]
+  private Vector3 ovenPos = default;
+
+  public void Setup()
+  {
+    recipeDB = new FoodRecipeDB(recipeList.Recipes);
+
+    //create oven
+    var oven = Instantiate(ovenTemplate, ovenPos, Quaternion.identity);
+    oven.Setup(recipeDB);
+  }
 }
