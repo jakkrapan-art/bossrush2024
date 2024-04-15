@@ -87,16 +87,22 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        lfs: true
 
       - uses: actions/download-artifact@v4
         with:
           name: Build-WebGL
-          path: build/WebGL
+          path: /
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Build-WebGL
+          path: /
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: build/WebGL
-          target-folder: "."
+          folder: /
+          target-folder: /
           force: true
