@@ -13,7 +13,7 @@ public class Boss : Entity, IHitableObject
   private BossStomach _stomach = null;
 
   [SerializeField]
-  private GameObject _thinkingBubble = null;
+  private UIBossParticle _thinkingBubble = null;
 
   private UIBar _bossRageBar = null;
   private FoodRequest _foodRequest = null;
@@ -60,6 +60,11 @@ public class Boss : Entity, IHitableObject
     UpdateRageValue(_ragePointIncreased * Time.deltaTime);
     _stateMachine?.Update();
     if (_skillController != null && _skillController.CanUse()) _skillController.TriggerSkill(_rage);
+
+    if(Input.GetKeyDown(KeyCode.Space))
+    {
+      ShowThinking(null);
+    }
   }
 
   private void FixedUpdate()
@@ -151,15 +156,7 @@ public class Boss : Entity, IHitableObject
 
   public void ShowThinking(Action callback)
   {
-    StartCoroutine(DoShowThinking(4, callback));
-  }
-
-  private IEnumerator DoShowThinking(float second, Action callback)
-  {
-    SetActiveThinkingBubble(true);
-    yield return new WaitForSeconds(second);
-    callback?.Invoke();
-    HideThinking();
+    SetActiveThinkingBubble(true, 4, callback);
   }
 
   public void HideThinking()
@@ -167,11 +164,17 @@ public class Boss : Entity, IHitableObject
     SetActiveThinkingBubble(false);
   }
 
-  private void SetActiveThinkingBubble(bool active)
+  private void SetActiveThinkingBubble(bool active, float second = 0, Action callback = null)
   {
     if (_thinkingBubble == null) return;
-
-    _thinkingBubble.SetActive(active);
+    if(active)
+    {
+      _thinkingBubble.Show(second, callback);
+    }
+    else
+    {
+      _thinkingBubble.Hide();
+    }
   }
 
   private bool Eat(Product food)

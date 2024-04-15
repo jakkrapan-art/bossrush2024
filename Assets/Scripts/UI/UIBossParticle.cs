@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +7,7 @@ public class UIBossParticle : MonoBehaviour
 {
   private Coroutine _hideDelayCoroutine = null;
 
-  private void Start()
-  {
-    Hide();
-  }
-
-  public void Show(float second)
+  public void Show(float second, Action callback = null)
   {
     gameObject.SetActive(true);
     if(_hideDelayCoroutine != null)
@@ -20,12 +16,13 @@ public class UIBossParticle : MonoBehaviour
       _hideDelayCoroutine = null;
     }
 
-    _hideDelayCoroutine = StartCoroutine(DelayHide(second));
+    _hideDelayCoroutine = StartCoroutine(DelayHide(second, callback));
   }
 
-  private IEnumerator DelayHide(float second)
+  private IEnumerator DelayHide(float second, Action callback)
   {
     yield return new WaitForSeconds(second);
+    callback?.Invoke();
     Hide();
   }
 
