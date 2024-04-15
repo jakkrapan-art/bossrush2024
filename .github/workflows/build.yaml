@@ -98,3 +98,5 @@ jobs:
         with:
           branch: gh-pages
           folder: build/WebGL
+          target-folder: "."
+          force: true
