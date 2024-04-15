@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BossData_1
   m_EditorClassIdentifier: 
   MoveSpeed: 0
-  <MaxPlant>k__BackingField: 1
+  <MaxPlant>k__BackingField: 7
   <PossibleRequestFoods>k__BackingField: {fileID: 11400000, guid: 848ad47c6bb088a4b8c3b3ae9acb8be0, type: 2}
