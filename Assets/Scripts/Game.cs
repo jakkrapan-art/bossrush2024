@@ -4,23 +4,33 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-  [Header("Cooking System")]
   [SerializeField]
   private FoodRecipeList recipeList = null;
   //database obj
-  private FoodRecipeDB recipeDB = null;
+  private FoodRecipeDB _recipeDB = null;
 
+  [Header("Cooking System")]
   [SerializeField]
-  private Oven ovenTemplate = default;
+  private Oven _ovenTemplate = default;
   [SerializeField]
-  private Vector3 ovenPos = default;
+  private Vector3 _ovenPos = default;
+
+  [Header("Boss")]
+  [SerializeField]
+  private Boss _bossTemplate = default;
+  [SerializeField]
+  private Vector3 _bossPos = default;
 
   public void Setup()
   {
-    recipeDB = new FoodRecipeDB(recipeList.Recipes);
+    _recipeDB = new FoodRecipeDB(recipeList.Recipes);
 
     //create oven
-    var oven = Instantiate(ovenTemplate, ovenPos, Quaternion.identity);
-    oven.Setup(recipeDB);
+    var oven = Instantiate(_ovenTemplate, _ovenPos, Quaternion.identity);
+    oven.Setup(_recipeDB);
+
+    //create boss
+    var boss = Instantiate(_bossTemplate, _bossPos, Quaternion.identity);
+    boss.Setup(_recipeDB);
   }
 }

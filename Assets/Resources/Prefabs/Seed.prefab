@@ -113,8 +113,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1401664662915767906}
   - component: {fileID: 8879592318451907872}
-  - component: {fileID: 1728337710100339136}
   - component: {fileID: 7648452174339640678}
+  - component: {fileID: 457852417362584599}
   m_Layer: 0
   m_Name: Seed
   m_TagString: Untagged
@@ -154,13 +154,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9722a5b093094ea47aa87281fb5a0367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactColl: {fileID: 1728337710100339136}
+  _interactColl: {fileID: 457852417362584599}
   _timeToInteract: 0
   _ItemsOutput: {fileID: 0}
   _timeToDestroy: 60
   _ItemData: {fileID: 0}
   _product: {fileID: 0}
---- !u!70 &1728337710100339136
+--- !u!114 &7648452174339640678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407046876034968973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28739b5ccbdb5e04584b2a3e2b64ff9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _alwaysUpdate: 0
+  _sr: {fileID: 411485904315590091}
+  _updateOtherOffset: 1
+  _linkTo: {fileID: 0}
+--- !u!70 &457852417362584599
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,25 +208,9 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.02, y: -0.42}
-  m_Size: {x: 0.41, y: 0.12}
+  m_Offset: {x: -0.01, y: -0.36}
+  m_Size: {x: 0.44, y: 0.17}
   m_Direction: 1
---- !u!114 &7648452174339640678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5407046876034968973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28739b5ccbdb5e04584b2a3e2b64ff9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _alwaysUpdate: 0
-  _sr: {fileID: 411485904315590091}
-  _updateOtherOffset: 1
-  _linkTo: {fileID: 0}
 --- !u!1 &6909944497757512889
 GameObject:
   m_ObjectHideFlags: 0

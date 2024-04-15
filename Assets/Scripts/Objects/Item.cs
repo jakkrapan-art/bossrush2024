@@ -31,7 +31,7 @@ public class Item : InteractableObject, IPoolingObject
 
   private bool _countingTime = false;
 
-  public Sprite GetIconItem() {  return _ItemData.iconItem; }
+  public Sprite GetIconSprite() {  return _ItemData.icon; }
   public ItemData GetItemData() {  return _ItemData; }
 
   protected override void Awake()

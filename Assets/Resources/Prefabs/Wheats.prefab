@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3060854969770788028}
   - component: {fileID: 8949604085074829175}
   - component: {fileID: 7888387690043430907}
+  - component: {fileID: 8613075049281372571}
   m_Layer: 0
   m_Name: Wheats
   m_TagString: Untagged
@@ -133,8 +134,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6fc0eb59b9a52c40b18b6f9c48daee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _listItemCanInteract: {fileID: 0}
+  _interactColl: {fileID: 8949604085074829175}
   _timeToInteract: 0
   _ItemsOutput: {fileID: 0}
   _timeToDestroy: 60
-  _ItemData: {fileID: 0}
+  _ItemData: {fileID: 11400000, guid: b6dca94347a139744a2ec16b20f1c4f4, type: 2}
+--- !u!114 &8613075049281372571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090321861617251798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28739b5ccbdb5e04584b2a3e2b64ff9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _alwaysUpdate: 0
+  _sr: {fileID: 3060854969770788028}
+  _updateOtherOffset: 0
+  _linkTo: {fileID: 0}

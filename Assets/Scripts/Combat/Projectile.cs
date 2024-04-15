@@ -7,11 +7,18 @@ public class Projectile : MonoBehaviour
   private Action _onStop;
   private Item _source;
   private Rigidbody2D _rb;
+  private bool _isMoved = false;
+  private Vector2 _startPos;
 
   public void Setup(Item source, float speed, Vector2 direction, Action<IHitableObject> onHit, Action onStop = null)
   {
-    _rb = GetComponent<Rigidbody2D>();
-    if(_rb) _rb.freezeRotation = true;
+    if(TryGetComponent(out _rb))
+    {
+      _rb.freezeRotation = true;
+      _rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+    }
+
+    _startPos = transform.position;
     _onHit = onHit;
     _source = source;
     _onStop = onStop;
@@ -25,7 +32,6 @@ public class Projectile : MonoBehaviour
     {
       _rb.AddForce(speed * direction);
       _rb.drag = 0f;
-      //_rb.velocity = speed * direction * Time.fixedDeltaTime;
     }
   }
 
@@ -34,8 +40,8 @@ public class Projectile : MonoBehaviour
     _onHit?.Invoke(hitObj);
     if (hitObj.OnHit(_source))
     {
-      Destroy(this);
       ReturnObjectToPool();
+      Destroy(this);
     }
     else
     {
@@ -70,13 +76,20 @@ public class Projectile : MonoBehaviour
     if(_rb != null)
     {
       _rb.drag += 0.08f;
-      if(_rb.velocity == Vector2.zero)
+
+      if (_isMoved && _rb.velocity == Vector2.zero)
       {
         _onStop?.Invoke();
         Destroy(this);
       }
+
+      if (!_isMoved)
+      {
+        _isMoved = Mathf.Abs(Vector2.Distance(_startPos, transform.position)) > 0;
+      }
     }
   }
+
   private void OnTriggerEnter2D(Collider2D otherCollider)
   {
     if (otherCollider.gameObject.TryGetComponent(out IHitableObject hitable))
@@ -84,6 +97,18 @@ public class Projectile : MonoBehaviour
       OnHit(hitable);
     }
     else if (!otherCollider.transform.root.GetComponent<Player>() && !otherCollider.isTrigger)
+    {
+      Knockback();
+    }
+  }
+
+  private void OnCollisionEnter2D(Collision2D collision)
+  {
+    if (collision.collider.TryGetComponent(out IHitableObject hitable))
+    {
+      OnHit(hitable);
+    }
+    else if (!collision.transform.root.GetComponent<Player>() && !collision.collider.isTrigger)
     {
       Knockback();
     }

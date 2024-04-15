@@ -6,10 +6,18 @@ using UnityEngine.UI;
 
 public struct FoodRequestData
 {
-  public Image FoodImage { get; private set; }
-  public Image Material1 {  get; private set; } 
-  public Image Material2 {  get; private set; } 
-  public Image Material3 {  get; private set; }
+  public Sprite FoodImage { get; private set; }
+  public Sprite Material1 {  get; private set; } 
+  public Sprite Material2 {  get; private set; } 
+  public Sprite Material3 {  get; private set; }
+
+  public FoodRequestData(Sprite foodSprite, Sprite material1Sprite, Sprite material2Sprite, Sprite material3Sprite)
+  {
+    FoodImage = foodSprite;
+    Material1 = material1Sprite;
+    Material2 = material2Sprite;
+    Material3 = material3Sprite;
+  }
 }
 
 public class UIFoodRequest : UIDialogBase
@@ -29,6 +37,23 @@ public class UIFoodRequest : UIDialogBase
   private float START_MATERIAL_X = -25;
   private float MATERIAL_SLOT_WIDTH = 127.5f;
 
+  private void Update()
+  {
+    if(Input.GetKeyDown(KeyCode.O))
+    {
+
+    }
+    else if(Input.GetKeyDown(KeyCode.P)) 
+    { 
+
+    }
+  }
+
+  public void Setup()
+  {
+    ShowFoodRequest(new FoodRequestData());
+  }
+
   public void ShowFoodRequest(FoodRequestData data)
   {
     int materialCount = 0;
@@ -37,7 +62,7 @@ public class UIFoodRequest : UIDialogBase
       if(data.FoodImage != null)
       {
         _foodImage.gameObject.SetActive(true);
-        _foodImage = data.FoodImage;
+        _foodImage.sprite = data.FoodImage;
       }
       else
       {
@@ -51,7 +76,7 @@ public class UIFoodRequest : UIDialogBase
       {
         materialCount++;
         _materialSlot1.gameObject.SetActive(true);
-        _materialSlot1 = data.Material1;
+        _materialSlot1.sprite = data.Material1;
       }
       else
       {
@@ -65,7 +90,7 @@ public class UIFoodRequest : UIDialogBase
       {
         materialCount++;
         _materialSlot2.gameObject.SetActive(true);
-        _materialSlot2 = data.Material2;
+        _materialSlot2.sprite = data.Material2;
       }
       else
       {
@@ -79,7 +104,7 @@ public class UIFoodRequest : UIDialogBase
       {
         materialCount++;
         _materialSlot3.gameObject.SetActive(true);
-        _materialSlot3 = data.Material3;
+        _materialSlot3.sprite = data.Material3;
       }
       else
       {
@@ -111,6 +136,7 @@ public class UIFoodRequest : UIDialogBase
     float targetX = 208;
 
     yield return SlowSetRectWidth(targetX);
+    ShowFoodRequest(new FoodRequestData());
   }
 
   private IEnumerator SlowSetRectWidth(float target, float time = 0.5f)

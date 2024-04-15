@@ -5,6 +5,6 @@ using UnityEngine;
 
 public class ItemData : ScriptableObject
 {
-  public Sprite iconItem;
+  public Sprite icon;
 
 }

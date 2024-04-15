@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6197d8f1e7fa3f0419ce9e21a7ad3a46, type: 3}
-  m_Name: Potato
+  m_Name: Cabbage
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: f47fb5e9c7d32464b9ad4466e90e118e, type: 3}
+  icon: {fileID: 21300000, guid: 59041a4ba0f43864aa5cbef3f10741b2, type: 3}

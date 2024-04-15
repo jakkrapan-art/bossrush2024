@@ -23,10 +23,10 @@ public class BossStomach
     _maxPlantEat = maxPlantEat;
   }
 
-  public void SetupRequestFoods(PossibleFoodList possibleFoodList)
+  public void Setup(PossibleFoodList possibleFoodList, FoodRecipeDB recipeDB)
   {
     if (_foodRequest != null) throw new System.Exception("foodList already setup for BossStomatch.");
-    _foodRequest = new FoodRequest(possibleFoodList);
+    _foodRequest = new FoodRequest(possibleFoodList, recipeDB);
   }
 
   public EatResult Eat(Product product)
@@ -70,6 +70,8 @@ public class BossStomach
   {
     _eatCount = 0;
     _desireFood = null;
+
+    _foodRequest.HideUI();
   }
 
   public void RandomRequestFood()
@@ -88,5 +90,6 @@ public class BossStomach
     }
 
     Debug.LogWarning("I WANT TO EAT " + _desireFood + "!!!");
+    _foodRequest.ShowUI(randomResult);
   }
 }

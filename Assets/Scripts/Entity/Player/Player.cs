@@ -99,6 +99,11 @@ public class Player : Entity
 
       _dynamicSortingOrder.SubscribeOnUpdate(_updateLinkedSortingOrderValueCallback);
     }
+
+    if(item.TryGetComponent(out Projectile projectile))
+    {
+      Destroy(projectile);
+    }
   }
 
   public void DropItem()

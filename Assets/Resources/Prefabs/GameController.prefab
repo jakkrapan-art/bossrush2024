@@ -45,5 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recipeList: {fileID: 11400000, guid: a3c27af56b30fe84aab62d19d73610a1, type: 2}
-  ovenTemplate: {fileID: 6878116557344285987, guid: 5b4299321fff64e4b994b7dfcebc27f7, type: 3}
-  ovenPos: {x: 0.41, y: -0.6, z: 0}
+  _ovenTemplate: {fileID: 6878116557344285987, guid: 5b4299321fff64e4b994b7dfcebc27f7, type: 3}
+  _ovenPos: {x: 0.12, y: -0.6, z: 0}
+  _bossTemplate: {fileID: 4973821335972762724, guid: b3bf1933d70f88c4693d0108f9d25736, type: 3}
+  _bossPos: {x: 0.07, y: 2.45, z: 0}

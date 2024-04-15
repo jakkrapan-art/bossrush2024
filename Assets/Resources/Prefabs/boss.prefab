@@ -1088,6 +1088,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _alwaysUpdate: 1
   _sr: {fileID: 4199935814421838968}
+  _updateOtherOffset: 0
+  _linkTo: {fileID: 0}
 --- !u!1 &6420525935037220521
 GameObject:
   m_ObjectHideFlags: 0

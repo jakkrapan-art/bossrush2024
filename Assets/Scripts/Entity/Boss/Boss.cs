@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Assertions.Comparers;
 
 public class Boss : Entity, IHitableObject
 {
@@ -22,12 +20,6 @@ public class Boss : Entity, IHitableObject
   protected override void Awake()
   {
     base.Awake();
-    BossData bossData = GetBossData();
-    _stateMachine = new BossStateMachine(this);
-    _skillController = new BossSkillController(this);
-    _stomach = new BossStomach(bossData.MaxPlant);
-
-    SetupPossibleRequestFood();
   }
 
   private void Start()
@@ -86,6 +78,15 @@ public class Boss : Entity, IHitableObject
     }
   }
 
+  public void Setup(FoodRecipeDB recipeDB)
+  {
+    BossData bossData = GetBossData();
+    _stateMachine = new BossStateMachine(this);
+    _skillController = new BossSkillController(this);
+    _stomach = new BossStomach(bossData.MaxPlant);
+    SetupPossibleRequestFood(recipeDB);
+  }
+
   private void StartRageIncreaseTimer()
   {
 
@@ -142,7 +143,7 @@ public class Boss : Entity, IHitableObject
     switch(hitObj)
     {
       case Product product:
-        return DoEat(product);
+        return Eat(product);
       default:
         return false;
     }
@@ -173,14 +174,17 @@ public class Boss : Entity, IHitableObject
     _thinkingBubble.SetActive(active);
   }
 
-  private bool DoEat(Product food)
+  private bool Eat(Product food)
   {
     if (_stomach != null)
     {
       var eatResult = _stomach.Eat(food);
       if(eatResult == BossStomach.EatResult.Think || eatResult == BossStomach.EatResult.Eat)
       {
-        if (eatResult == BossStomach.EatResult.Think) ShowThinking(_stomach.RandomRequestFood);
+        if (eatResult == BossStomach.EatResult.Think) ShowThinking(()=>
+        {
+          _stomach.RandomRequestFood();
+        });
 
         UpdateRageValue(-food.GetDamage());
         return true;
@@ -194,11 +198,11 @@ public class Boss : Entity, IHitableObject
     return false;
   }
 
-  private void SetupPossibleRequestFood()
+  private void SetupPossibleRequestFood(FoodRecipeDB recipeDB)
   {
     var foodList = GetBossData().PossibleRequestFoods;
     if (_stomach == null) return;
-    _stomach.SetupRequestFoods(foodList);
+    _stomach.Setup(foodList, recipeDB);
   }
 
   private BossData GetBossData()
