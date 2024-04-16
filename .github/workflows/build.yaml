@@ -84,6 +84,8 @@ jobs:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     needs: build
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -95,15 +97,11 @@ jobs:
           name: Build-WebGL
           path: build/WebGL
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Build-WebGL-From-Deploy
-          path: build/WebGL
-
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: build/WebGL
-          target-folder: /
+          target-folder: .
           force: true
+          clean: true
