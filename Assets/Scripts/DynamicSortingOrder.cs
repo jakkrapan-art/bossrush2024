@@ -8,6 +8,8 @@ public class DynamicSortingOrder : MonoBehaviour
   [SerializeField]
   private SpriteRenderer _sr;
   [SerializeField]
+  private int _updateSelfOffset = 0;
+  [SerializeField]
   private int _updateOtherOffset = 0;
   [SerializeField]
   private DynamicSortingOrder _linkTo = null;
@@ -62,7 +64,7 @@ public class DynamicSortingOrder : MonoBehaviour
 
   public void SetSortingOrder(int value)
   {
-    _sr.sortingOrder = value;
+    _sr.sortingOrder = value + _updateSelfOffset;
     onUpdate?.Invoke(value + _updateOtherOffset);
   }
 

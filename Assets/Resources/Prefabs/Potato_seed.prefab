@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: _product
       value: 
       objectReference: {fileID: -4160941051960552110, guid: bbb1bb0aa1a56194ab2a26ed468a22f5, type: 3}
+    - target: {fileID: 8879592318451907872, guid: 6365a757e795da442ba01ae24e95c432, type: 3}
+      propertyPath: _ItemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 17a5c477a2ee87b42bba431d0fb74bb1, type: 2}
     - target: {fileID: 9217737067584028142, guid: 6365a757e795da442ba01ae24e95c432, type: 3}
       propertyPath: m_Sprite
       value: 

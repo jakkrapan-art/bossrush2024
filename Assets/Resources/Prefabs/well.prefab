@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3316084881862230170}
   - component: {fileID: 6659610452952417848}
   - component: {fileID: 5172425771941379467}
+  - component: {fileID: 6949748142287869670}
   m_Layer: 0
   m_Name: well
   m_TagString: Untagged
@@ -170,9 +171,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ec21e6ea83afe4aa67dc0308ce6356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _listItemCanInteract: {fileID: 0}
+  _interactColl: {fileID: 3316084881862230170}
   _timeToInteract: 0
   _ItemsOutput: {fileID: 6988261509655823464, guid: 6a19eb6b03c51b8408b5a6a16f4ca218, type: 3}
+--- !u!114 &6949748142287869670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2892944287197598883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28739b5ccbdb5e04584b2a3e2b64ff9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _alwaysUpdate: 0
+  _sr: {fileID: 89265649830163370}
+  _updateSelfOffset: 0
+  _updateOtherOffset: 0
+  _linkTo: {fileID: 0}
 --- !u!1 &5059178070946423563
 GameObject:
   m_ObjectHideFlags: 0

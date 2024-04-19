@@ -7,6 +7,9 @@ public class Oven : InteractableObject
   [SerializeField]
   private Animator _animator = default;
 
+  [SerializeField]
+  private SpriteRenderer _foodOutput = default;
+
   private bool _isCooking = false;
   private Product[] _itemInput = new Product[3];
   private int _currentIndex = 0;
@@ -49,6 +52,8 @@ public class Oven : InteractableObject
   public void Setup(FoodRecipeDB recipeDB)
   {
     _foodRecipeDB = recipeDB;
+
+    HideOutput();
   }
 
   public override InteractResultData Interact(Item interactingItem)
@@ -57,6 +62,7 @@ public class Oven : InteractableObject
     {
       var output = ObjectPool.GetInstance().Get<Product>(_ItemsOutput.name);
       _ItemsOutput = null;
+      HideOutput();
       return new InteractResultData { returnItem = output };
     }
     else if(!_isCooking && interactingItem != null && interactingItem is Product prod) 
@@ -112,6 +118,7 @@ public class Oven : InteractableObject
 
   public void CookSuccess()
   {
+    ShowOutput(_cookingProduct.GetIconSprite());
     _ItemsOutput = _cookingProduct;
     _cookingProduct = null;
 
@@ -124,5 +131,20 @@ public class Oven : InteractableObject
     {
       _itemInput[i] = null;
     }
+  }
+
+  public void ShowOutput(Sprite foodSprite)
+  {
+    if (_foodOutput == null) return;
+
+    _foodOutput.sprite = foodSprite;
+    _foodOutput.gameObject.SetActive(true);
+  }
+
+  public void HideOutput()
+  {
+    if (_foodOutput == null) return;
+
+    _foodOutput.gameObject.SetActive(false);
   }
 }
