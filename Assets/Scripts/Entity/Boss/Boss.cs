@@ -9,14 +9,18 @@ public class Boss : Entity, IHitableObject
   private float _rage = 50.00f;
   [SerializeField]
   private float _ragePointIncreased = 0.16f;
+  [field: SerializeField]
+  public Animator Animator { get; private set; } = null;
   private BossSkillController _skillController = null;
   private BossStomach _stomach = null;
 
+  [Header("Bubbles")]
   [SerializeField]
   private UIBossParticle _thinkingBubble = null;
+  [SerializeField]
+  private UIFoodRequestBubble _foodRequestBubble = null;
 
   private UIBar _bossRageBar = null;
-  private FoodRequest _foodRequest = null;
   protected override void Awake()
   {
     base.Awake();
@@ -60,11 +64,6 @@ public class Boss : Entity, IHitableObject
     UpdateRageValue(_ragePointIncreased * Time.deltaTime);
     _stateMachine?.Update();
     if (_skillController != null && _skillController.CanUse()) _skillController.TriggerSkill(_rage);
-
-    if(Input.GetKeyDown(KeyCode.Space))
-    {
-      ShowThinking(null);
-    }
   }
 
   private void FixedUpdate()
@@ -99,6 +98,8 @@ public class Boss : Entity, IHitableObject
 
   private void handleStateByRagePoint()
   {
+    if (_stateMachine.GetCurrentState() is BossEatState) return;
+
     float ragePercentage = getRagePointPercentage();
     BossStateMachine bossStateMachine = (BossStateMachine)_stateMachine;
     if (ragePercentage >= 0.80f && ragePercentage < 0.99f)
@@ -167,7 +168,7 @@ public class Boss : Entity, IHitableObject
   private void SetActiveThinkingBubble(bool active, float second = 0, Action callback = null)
   {
     if (_thinkingBubble == null) return;
-    if(active)
+    if (active)
     {
       _thinkingBubble.Show(second, callback);
     }
@@ -177,6 +178,19 @@ public class Boss : Entity, IHitableObject
     }
   }
 
+  private void ShowFoodRequestBubble(Sprite foodIcon)
+  {
+    if (_foodRequestBubble == null) return;
+    _foodRequestBubble.SetFoodImage(foodIcon);
+    _foodRequestBubble.Show(-1);
+  }
+
+  private void HideFoodRequestBubble()
+  {
+    if (_foodRequestBubble == null) return;
+    _foodRequestBubble.Hide();
+  }
+
   private bool Eat(Product food)
   {
     if (_stomach != null)
@@ -184,9 +198,16 @@ public class Boss : Entity, IHitableObject
       var eatResult = _stomach.Eat(food);
       if(eatResult == BossStomach.EatResult.Think || eatResult == BossStomach.EatResult.Eat)
       {
+        HideFoodRequestBubble();
+
+        _stateMachine.ChangeState(GetStateMachine().EatState);
+
         if (eatResult == BossStomach.EatResult.Think) ShowThinking(()=>
         {
-          _stomach.RandomRequestFood();
+          _stomach.RandomRequestFood((result) => 
+          {
+            ShowFoodRequestBubble(result.GetIconSprite());
+          });
         });
 
         UpdateRageValue(-food.GetDamage());
@@ -213,4 +234,6 @@ public class Boss : Entity, IHitableObject
     if (_data is BossData == false) throw new Exception("Data in Boss " + name + " is not a type of BossData.");
     return (BossData)_data;
   }
+
+  private BossStateMachine GetStateMachine() => (BossStateMachine) _stateMachine;
 }

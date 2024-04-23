@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IdleState : BossStateBase
 {
-    public IdleState(BossStateMachine stateMachine) : base(stateMachine)
+    public IdleState(BossStateMachine stateMachine, Boss boss) : base(stateMachine, boss, "idle", true)
     {
     }
     public override void OnEnter()

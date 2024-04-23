@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnrageState : BossStateBase
 {
-    public EnrageState(BossStateMachine stateMachine) : base(stateMachine)
+    public EnrageState(BossStateMachine stateMachine, Boss boss) : base(stateMachine, boss)
     {
     }
     public override void OnEnter()

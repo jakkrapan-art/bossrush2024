@@ -10,6 +10,7 @@ public class UIBossParticle : MonoBehaviour
   public void Show(float second, Action callback = null)
   {
     gameObject.SetActive(true);
+    if (second < 0) return;
     if(_hideDelayCoroutine != null)
     {
       StopCoroutine(_hideDelayCoroutine);
@@ -22,12 +23,12 @@ public class UIBossParticle : MonoBehaviour
   private IEnumerator DelayHide(float second, Action callback)
   {
     yield return new WaitForSeconds(second);
-    callback?.Invoke();
-    Hide();
+    Hide(callback);
   }
 
-  public void Hide()
+  public void Hide(Action callback = null)
   {
+    callback?.Invoke();
     gameObject.SetActive(false);
   }
 }

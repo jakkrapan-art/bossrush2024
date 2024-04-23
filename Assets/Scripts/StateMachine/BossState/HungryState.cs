@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HungryState : BossStateBase
 {
-    public HungryState(BossStateMachine stateMachine) : base(stateMachine) { }
+    public HungryState(BossStateMachine stateMachine, Boss boss) : base(stateMachine, boss) { }
     public override void OnEnter()
     {
         Debug.Log("Enter HungryState state.");

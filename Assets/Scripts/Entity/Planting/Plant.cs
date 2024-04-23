@@ -61,6 +61,10 @@ public class Plant : InteractableObject, IPoolingObject
   {
     var product = ObjectPool.GetInstance().Get<Product>(Product.name);
     product.transform.position = transform.position;
+    if(product.TryGetComponent(out Collider2D col))
+    {
+      col.enabled = true;
+    }
     _onFullyGrowth?.Invoke(product);
     //return to pool process
     ObjectPool.ReturnObjectToPool(this);

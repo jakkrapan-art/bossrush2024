@@ -5,7 +5,7 @@ using UnityEngine;
 public class ThinkState : BossStateBase
 {
   float think_time = 0;
-  public ThinkState(BossStateMachine stateMachine, float think_time = 20) : base(stateMachine)
+  public ThinkState(BossStateMachine stateMachine, Boss boss, float think_time = 20) : base(stateMachine, boss)
   {
     this.think_time = think_time;
   }

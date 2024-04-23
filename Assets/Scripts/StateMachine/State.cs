@@ -5,8 +5,13 @@ using UnityEngine;
 public abstract class State
 {
   protected float _startTime = 0;
+  public bool SavePrevious { get; } = false;
 
-  public State() { }
+  public State(bool savePrevious = false) 
+  { 
+    SavePrevious = savePrevious;
+  }
+
   public virtual void OnEnter() 
   {
     _startTime = Time.time;

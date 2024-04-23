@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [System.Serializable]
@@ -74,7 +75,7 @@ public class BossStomach
     _foodRequest.HideUI();
   }
 
-  public void RandomRequestFood()
+  public void RandomRequestFood(Action<Product> callback)
   {
     if (_foodRequest == null) throw new System.Exception("Cannot call RandomRequestFood if not setup yet");
 
@@ -91,5 +92,6 @@ public class BossStomach
 
     Debug.LogWarning("I WANT TO EAT " + _desireFood + "!!!");
     _foodRequest.ShowUI(randomResult);
+    callback?.Invoke(randomResult);
   }
 }

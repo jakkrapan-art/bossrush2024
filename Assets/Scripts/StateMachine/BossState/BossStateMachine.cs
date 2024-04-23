@@ -12,18 +12,20 @@ public class BossStateMachine : StateMachine
   public AlmostFullState AlmostFullState { get; private set; }
   public FullState FullState { get; private set; }
   public ThinkState ThinkState { get; private set; }
+  public BossEatState EatState { get; private set; }
 
   public BossStateMachine(Boss boss)
   {
     Boss = boss;
 
-    IdleState = new IdleState(this);
-    HungryState = new HungryState(this);
-    RageState = new RageState(this);
-    EnrageState = new EnrageState(this);
-    AlmostFullState = new AlmostFullState(this);
-    FullState = new FullState(this);
-    ThinkState = new ThinkState(this, 5);
+    IdleState = new IdleState(this, boss);
+    HungryState = new HungryState(this, boss);
+    RageState = new RageState(this, boss);
+    EnrageState = new EnrageState(this, boss);
+    AlmostFullState = new AlmostFullState(this, boss);
+    FullState = new FullState(this, boss);
+    ThinkState = new ThinkState(this, boss, 5);
+    EatState = new BossEatState(this, boss);
 
     Init();
   }

@@ -18,7 +18,7 @@ public abstract class StateMachine
   public void ChangeState(State state)
   {
     CurrentState?.OnExit();
-    PreviousState = CurrentState;
+    if(CurrentState.SavePrevious) PreviousState = CurrentState;
     state.OnEnter();
     CurrentState = state;
   }
