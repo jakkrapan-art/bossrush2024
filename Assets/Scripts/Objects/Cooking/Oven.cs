@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Oven : InteractableObject
@@ -9,6 +10,10 @@ public class Oven : InteractableObject
 
   [SerializeField]
   private SpriteRenderer _foodOutput = default;
+
+  [SerializeField]
+  private SpriteRenderer _itemInputSr = null;
+  private Coroutine _addMaterialCoroutine = null;
 
   private bool _isCooking = false;
   private Product[] _itemInput = new Product[3];
@@ -79,11 +84,47 @@ public class Oven : InteractableObject
     if (_currentIndex >= _itemInput.Length) return;
     _itemInput[_currentIndex++] = product;
 
-    if (_currentIndex == _itemInput.Length)
+    if (_addMaterialCoroutine != null) StopCoroutine(_addMaterialCoroutine);
+
+    _addMaterialCoroutine = StartCoroutine(SlowAddMaterial(product, () =>
     {
-      Cook();
-      _currentIndex = 0;
+      if (_currentIndex == _itemInput.Length)
+      {
+        Cook();
+        _currentIndex = 0;
+      }
+    }));
+  }
+
+  private IEnumerator SlowAddMaterial(Product product, Action callback)
+  {
+    float estimateTimeUsed = 1.5f;
+    if(_itemInputSr != null) 
+    {
+      _itemInputSr.sprite = product.GetIconSprite();
+      _itemInputSr.gameObject.SetActive(true);
+
+      var itemTransform = _itemInputSr.transform;
+      itemTransform.localPosition = new Vector2(0, 4.5f);
+      itemTransform.localScale = new Vector2(3f, 3f);
+
+      var targetPos = new Vector3(0, 1.6f);
+      var start = Time.time;
+      var interpolates = 0.02f;
+      while (start + estimateTimeUsed > Time.time)
+      {
+        var newPos = Vector3.Lerp(itemTransform.localPosition, targetPos, interpolates);
+        var newScale = Vector3.Lerp(itemTransform.localScale, new Vector3(1, 1, 1), interpolates);
+
+        itemTransform.localPosition = newPos;
+        itemTransform.localScale = newScale;
+
+        yield return new WaitForFixedUpdate();
+      }
     }
+
+    _itemInputSr.gameObject.SetActive(false);
+    callback?.Invoke();
   }
 
   private void Cook()
