@@ -41,6 +41,8 @@ public class FoodRequest
   {
     UICreator.GetInstance().CreateFoodRequestUI(ui =>
     {
+      if (ui == null) throw new System.Exception("Food Request create ui failed.");
+
       ui.Setup();
       _ui = ui;
     });

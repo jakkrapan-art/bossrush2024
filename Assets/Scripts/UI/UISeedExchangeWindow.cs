@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class UISeedExchangeWindow : UIDialogBase
 {
   [SerializeField]
-  private Button _closeBtn;
-  [SerializeField]
   private List<UISeedExchangeSlot> _normalSlots;
   [SerializeField]
   private List<UISeedExchangeSlot> _exclusiveSlots;
@@ -44,11 +42,6 @@ public class UISeedExchangeWindow : UIDialogBase
 
     setupSlot(_normalSlots, nmSlotsParam);
     setupSlot(_exclusiveSlots, exSlotsParam);
-
-    if (_closeBtn) _closeBtn.onClick.AddListener(() => 
-    {
-      Close();
-    });
 
     Canvas.ForceUpdateCanvases();
   }

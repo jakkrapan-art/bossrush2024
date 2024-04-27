@@ -43,7 +43,7 @@ public class ObjectPool : MonoBehaviour
 
   public void Return<T>(string key, T obj) where T : IPoolingObject
   {
-    if (!objectsInPool.ContainsKey(key)) throw new System.Exception("Cannot return object to not exist key. key = " + key);
+    if (!objectsInPool.ContainsKey(key)) return;
     SetActiveObject(obj, false);
     obj.ResetPoolingObject();
     objectsInPool[key].Enqueue(obj);

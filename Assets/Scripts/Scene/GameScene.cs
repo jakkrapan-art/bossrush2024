@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameScene : MonoBehaviour
 {
@@ -12,7 +11,18 @@ public class GameScene : MonoBehaviour
     if(gameControllerTemplate != null)
     {
       var gameController = Instantiate(gameControllerTemplate);
-      gameController.Setup();
+
+      gameController.Setup(ShowGameEndDialog, ShowGameEndDialog);
     }
+  }
+
+  private void ShowGameEndDialog()
+  {
+    UICreator uiCreator = UICreator.GetInstance();
+    uiCreator.CreateGameEndDialog((ui) =>
+    {
+      if (ui == null) return;
+      ui.Setup(()=> SceneManager.LoadScene(Const.GAME_SCENE_NAME, LoadSceneMode.Single));
+    });
   }
 }

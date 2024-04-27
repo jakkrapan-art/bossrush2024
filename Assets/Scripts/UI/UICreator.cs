@@ -60,21 +60,18 @@ public class UICreator : MonoBehaviour
 
   }
 
-  public void CreateBossRageBar(Action<UIBar> onCreateSuccess)
+  public void CreateBossRageBar(Action<UIBar> callback)
   {
-    CreateUI<UIBar>("BossHpBar", (ui) =>
-    {
-      if (!ui) return;
-      onCreateSuccess?.Invoke(ui);
-    });
+    CreateUI("BossHpBar", callback);
   }
 
-  public void CreateFoodRequestUI(Action<UIFoodRequest> onCreateSuccess)
+  public void CreateFoodRequestUI(Action<UIFoodRequest> callback)
   {
-    CreateUI<UIFoodRequest>("UI/UIFoodRequest", (ui) =>
-    {
-      if (ui == null) return;
-      onCreateSuccess?.Invoke(ui);
-    });
+    CreateUI("UI/UIFoodRequest", callback);
+  }
+
+  public void CreateGameEndDialog(Action<UIGameEnd> callback)
+  {
+    CreateUI("UI/GameEndDialog", callback);
   }
 }

@@ -21,14 +21,55 @@ public class Boss : Entity, IHitableObject
   private UIFoodRequestBubble _foodRequestBubble = null;
 
   private UIBar _bossRageBar = null;
-  protected override void Awake()
+
+  private Action _onRageMax = null;
+  private Action _onRageMin = null;
+
+  private Func<bool> _isEnded = null;
+
+  protected override void Update()
   {
-    base.Awake();
+    if (_isEnded?.Invoke() ?? false) return;
+    UpdateRageValue(_ragePointIncreased);
+    _stateMachine?.Update();
+    if (_skillController != null && _skillController.CanUse()) _skillController.TriggerSkill(_rage);
   }
 
-  private void Start()
+  private void FixedUpdate()
   {
-    UICreator.GetInstance().CreateBossRageBar((bar) => 
+    if (_isEnded?.Invoke() ?? false) return;
+    _stateMachine?.FixedUpdate();
+  }
+
+  private void UpdateRageValue(float updateValue)
+  {
+    _rage = Mathf.Clamp(_rage + updateValue, 0, MAX_RAGE);
+
+    if (_rage <= 0)
+    {
+      _onRageMin?.Invoke();
+      return;
+    }
+    else if(_rage >= MAX_RAGE)
+    {
+      _onRageMax?.Invoke();
+      return;
+    }
+
+
+    handleStateByRagePoint();
+
+    if (_bossRageBar)
+    {
+      _bossRageBar.UpdateValue(getRagePointPercentage());
+    }
+  }
+
+  public void Setup(Func<bool> isEndCheck, FoodRecipeDB recipeDB, Action onRageMin, Action onRageMax)
+  {
+    _isEnded = isEndCheck;
+
+    UICreator.GetInstance().CreateBossRageBar((bar) =>
     {
       if (!bar) return;
 
@@ -57,38 +98,15 @@ public class Boss : Entity, IHitableObject
     });
 
     HideThinking();
-  }
 
-  protected override void Update()
-  {
-    UpdateRageValue(_ragePointIncreased * Time.deltaTime);
-    _stateMachine?.Update();
-    if (_skillController != null && _skillController.CanUse()) _skillController.TriggerSkill(_rage);
-  }
-
-  private void FixedUpdate()
-  {
-    _stateMachine?.FixedUpdate();
-  }
-
-  private void UpdateRageValue(float updateValue)
-  {
-    _rage = Mathf.Clamp(_rage + updateValue, 0, MAX_RAGE);
-    handleStateByRagePoint();
-
-    if (_bossRageBar)
-    {
-      _bossRageBar.UpdateValue(getRagePointPercentage());
-    }
-  }
-
-  public void Setup(FoodRecipeDB recipeDB)
-  {
     BossData bossData = GetBossData();
     _stateMachine = new BossStateMachine(this);
     _skillController = new BossSkillController(this);
     _stomach = new BossStomach(bossData.MaxPlant);
     SetupPossibleRequestFood(recipeDB);
+
+    _onRageMin = onRageMin;
+    _onRageMax = onRageMax;
   }
 
   private void StartRageIncreaseTimer()
@@ -102,6 +120,7 @@ public class Boss : Entity, IHitableObject
 
     float ragePercentage = getRagePointPercentage();
     BossStateMachine bossStateMachine = (BossStateMachine)_stateMachine;
+
     if (ragePercentage >= 0.80f && ragePercentage < 0.99f)
     {
       if (!bossStateMachine.GetCurrentState().Equals(bossStateMachine.RageState))

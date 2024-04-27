@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,9 @@ public class Game : MonoBehaviour
   [SerializeField]
   private Vector3 _bossPos = default;
 
-  public void Setup()
+  private bool _isEnded = false;
+
+  public void Setup(Action onWinGame, Action onLoseGame)
   {
     _recipeDB = new FoodRecipeDB(recipeList.Recipes);
 
@@ -31,6 +34,17 @@ public class Game : MonoBehaviour
 
     //create boss
     var boss = Instantiate(_bossTemplate, _bossPos, Quaternion.identity);
-    boss.Setup(_recipeDB);
+    boss.Setup(() => 
+    {
+      return _isEnded;
+    },_recipeDB, () => 
+    {
+      _isEnded = true;
+      onLoseGame?.Invoke();
+    }, () => 
+    {
+      _isEnded = true;
+      onWinGame?.Invoke();
+    });
   }
 }
