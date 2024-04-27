@@ -30,7 +30,7 @@ public class Boss : Entity, IHitableObject
   protected override void Update()
   {
     if (_isEnded?.Invoke() ?? false) return;
-    UpdateRageValue(_ragePointIncreased);
+    UpdateRageValue(_ragePointIncreased * Time.deltaTime);
     _stateMachine?.Update();
     if (_skillController != null && _skillController.CanUse()) _skillController.TriggerSkill(_rage);
   }
