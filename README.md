@@ -1,5 +1,27 @@
-# bossrush2024
+# Defeed
 This game is made for participate Boss Rush Game Jam 2024
-Contributor
- - ChinnyRzFz
- - jakkrapan-art
+
+## Contributors
+Mechanics Design
+ - ChinnyRzFz - Main
+ - Andoi - Main
+
+Programmers
+ - jakkrapan-art - Main
+ - RazerTotozz
+ - bananazaza
+
+Art & Asset
+ - Sunsnakinwza007
+ - Andoi
+ - ทิว
+
+## Game Systems
+### Farming  
+-- detail of farming system --
+### Cooking
+-- detail of cooking system --
+### Boss Fight!
+-- detail of boss fight system --
+
+### [Play Demo](https://jakkrapan-art.github.io/bossrush2024/WebGL/)
