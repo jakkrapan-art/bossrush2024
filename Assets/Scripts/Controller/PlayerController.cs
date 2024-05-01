@@ -16,22 +16,14 @@ public class PlayerController : EntityController
 
     AddKeyAction(() => { return Input.GetButtonDown("Throw"); }, () =>
     {
-      Debug.Log("throw");
       _player.ThrowItem();
 
     });
 
     AddKeyAction(() => { return Input.GetButtonDown("Interact"); }, () =>
     {
-      Debug.Log("InteractOject");
       _player.StartInteractObject();
     });
-
-    /*AddKeyAction(() => { return Input.GetButtonUp("Interact"); }, () =>
-    {
-      Debug.Log("CancelInteractOject");
-      _player.CancelInteractOject();
-    });*/
   }
 
   public override Vector2 GetMoveInput()

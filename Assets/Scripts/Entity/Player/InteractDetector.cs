@@ -37,6 +37,8 @@ public class InteractDetector : MonoBehaviour
     {
       if(detectedObj.TryGetComponent(out InteractableObject obj))
       {
+        if (!obj.enabled) continue;
+
         float itemDistance = Vector2.Distance(GetPosition(), obj.transform.position);
         if (!nearestInteractObj || (itemDistance < nearestDistance))
         {

@@ -9,6 +9,7 @@ public class NPCSeedExchange : InteractableObject
   private List<UISeedExchangeWindow.SlotParam> _exclusiveShopSlotParams;
 
   private Seed _resultSeed;
+  private bool _closed = false;
 
   private void Start()
   {
@@ -42,10 +43,14 @@ public class NPCSeedExchange : InteractableObject
 
   public override InteractResultData Interact(Item interactingItem)
   {
+    _closed = false; ;
     UICreator.GetInstance().OpenSeedExchangeDialog(_normalShopSlotParams, _exclusiveShopSlotParams, (plantName) => 
     {
       var seed = ObjectPool.GetInstance().Get<Seed>(plantName.Replace(" ", "") + "_seed");
       if(seed != null) _resultSeed = seed;
+    }, () => 
+    {
+      _closed = true;
     });
 
     return new InteractResultData { waitResult = waitForChooseSeed };
@@ -53,6 +58,8 @@ public class NPCSeedExchange : InteractableObject
 
   private WaitResultData waitForChooseSeed()
   {
+    if (_closed) return new WaitResultData { finish = true };
+
     if(_resultSeed == null) return new WaitResultData { finish = false };
 
     Seed resultSeed = _resultSeed;

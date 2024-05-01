@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9878d46f746c4864d946e534aadc9eb6, type: 3}
-  m_Name: BossData_1
+  m_Script: {fileID: 11500000, guid: 8585ff9b5ad583a4d888ab7d34c758f7, type: 3}
+  m_Name: RockThrow
   m_EditorClassIdentifier: 
-  MoveSpeed: 0
-  <MaxPlant>k__BackingField: 2
-  <PossibleRequestFoods>k__BackingField: {fileID: 11400000, guid: 848ad47c6bb088a4b8c3b3ae9acb8be0, type: 2}
+  _cooldownTime: 10
+  _rockDuration: 6

@@ -46,12 +46,12 @@ public class UICreator : MonoBehaviour
     }
   }
 
-  public void OpenSeedExchangeDialog(List<UISeedExchangeWindow.SlotParam> normalExchangeSlotParams, List<UISeedExchangeWindow.SlotParam> exclusiveExchangeSlotParams, Action<string> onChoose)
+  public void OpenSeedExchangeDialog(List<UISeedExchangeWindow.SlotParam> normalExchangeSlotParams, List<UISeedExchangeWindow.SlotParam> exclusiveExchangeSlotParams, Action<string> onChoose, Action onClose)
   {
     CreateUI<UISeedExchangeWindow>("UISeedExchange", (ui) =>
     {
       if (!ui) return;
-      ui.Setup(normalExchangeSlotParams, exclusiveExchangeSlotParams, onChoose);
+      ui.Setup(normalExchangeSlotParams, exclusiveExchangeSlotParams, onChoose, onClose);
     });
   }
 

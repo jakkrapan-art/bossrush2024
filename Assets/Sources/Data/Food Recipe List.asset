@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Food Recipe List
   m_EditorClassIdentifier: 
   <Recipes>k__BackingField:
-  - <Food>k__BackingField: {fileID: -8240322045746239133, guid: cc07d6a4e8d5ce14996920b59bf3ac14, type: 3}
+  - <Food>k__BackingField: {fileID: -8240322045746239133, guid: 3424da96223a8d349820ae4386fb0f05, type: 3}
     <Materials>k__BackingField:
     - {fileID: 3480728207790079179, guid: 570c1cb3b557dcf48a850608ddbb8796, type: 3}
     - {fileID: 8075015159592406130, guid: b003e02672c629246879ca67265956e3, type: 3}

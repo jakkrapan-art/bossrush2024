@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9878d46f746c4864d946e534aadc9eb6, type: 3}
-  m_Name: BossData_1
+  m_Script: {fileID: 11500000, guid: 6197d8f1e7fa3f0419ce9e21a7ad3a46, type: 3}
+  m_Name: Stew
   m_EditorClassIdentifier: 
-  MoveSpeed: 0
-  <MaxPlant>k__BackingField: 2
-  <PossibleRequestFoods>k__BackingField: {fileID: 11400000, guid: 848ad47c6bb088a4b8c3b3ae9acb8be0, type: 2}
+  icon: {fileID: 21300000, guid: a872429b094b2d24ab914883689c1c2c, type: 3}

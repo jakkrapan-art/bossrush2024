@@ -15,7 +15,11 @@ public class Entity : MonoBehaviour
   protected bool _enableMove = true;
   public void SetEnableMove(bool enable)
   {
-    Debug.Log("set enable move to " + enable);
+    if(!enable && _rb != null)
+    {
+      _rb.velocity = Vector3.zero;
+    }
+
     _enableMove = enable;
   }
 

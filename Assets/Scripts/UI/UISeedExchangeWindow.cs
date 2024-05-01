@@ -17,8 +17,10 @@ public class UISeedExchangeWindow : UIDialogBase
     public string seedName;
   }
 
-  public void Setup(List<SlotParam> nmSlotsParam, List<SlotParam> exSlotsParam, Action<string> onChoose)
+  public void Setup(List<SlotParam> nmSlotsParam, List<SlotParam> exSlotsParam, Action<string> onChoose, Action onClose)
   {
+    AddCloseListener(onClose);
+
     void setupSlot(List<UISeedExchangeSlot> slotList, List<SlotParam> slotParamList)
     {
       if (slotList != null && slotParamList != null)
