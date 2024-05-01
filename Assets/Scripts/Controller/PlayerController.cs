@@ -24,6 +24,11 @@ public class PlayerController : EntityController
     {
       _player.StartInteractObject();
     });
+
+    AddKeyAction(() => { return Input.GetKeyDown(KeyCode.Space); }, () =>
+    {
+      Utility.Shake(_player.gameObject);
+    });
   }
 
   public override Vector2 GetMoveInput()

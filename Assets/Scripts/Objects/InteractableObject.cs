@@ -23,6 +23,8 @@ public class InteractableObject : MonoBehaviour
   protected Collider2D _interactColl;
 
   [SerializeField] protected float _timeToInteract = 0;
+  [SerializeField] protected float _cooldown = 0;
+  protected float _lastInteract = 0;
   [SerializeField] protected Item _ItemsOutput;
 
   protected virtual void Awake()
@@ -34,12 +36,15 @@ public class InteractableObject : MonoBehaviour
 
   public virtual InteractResultData Interact(Item interactingItem)
   {
+    if (_lastInteract != 0 && Time.time < _lastInteract + _cooldown) return new InteractResultData();
+
     Item returnItem = null;
     if(_ItemsOutput != null)
     {
       returnItem = ObjectPool.GetInstance().Get<Item>(_ItemsOutput.name);
     }
 
+    _lastInteract = Time.time;
     return new InteractResultData { waitTime = _timeToInteract, returnItem = returnItem };
   }
 }
