@@ -14,7 +14,7 @@ Programmers
 Art & Asset
  - Sunsnakinwza007
  - Andoi
- - Komosu
+ - Kosumo
 
 ## Game Systems
 ### Farming  
