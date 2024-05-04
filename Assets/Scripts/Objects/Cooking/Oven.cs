@@ -65,15 +65,21 @@ public class Oven : InteractableObject
   {
     if(_ItemsOutput != null)
     {
-      var output = ObjectPool.GetInstance().Get<Product>(_ItemsOutput.name);
+      var output = ObjectPool.GetInstance().Get<Product>("Product/" + _ItemsOutput.name);
       _ItemsOutput = null;
       HideOutput();
       return new InteractResultData { returnItem = output };
     }
     else if(!_isCooking && interactingItem != null && interactingItem is Product prod) 
     {
-      AddMaterial(prod);
-      return new InteractResultData { clearHand = true };
+      if(prod.GetProductData().Material)
+      {
+        AddMaterial(prod);
+        return new InteractResultData { clearHand = true };
+      }
+      else {
+        return new InteractResultData();
+      }
     }
 
     return new InteractResultData { waitTime = 0 };

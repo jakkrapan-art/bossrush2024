@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -8240322045746239133}
   - component: {fileID: 8613075049281372571}
   m_Layer: 0
-  m_Name: HealthyStew
+  m_Name: CabbageAndCarrotSoup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 722823095
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1704377450e14614d81bf26a23dec01c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e978224d30304984d9223cd895d5b04f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -136,9 +136,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactColl: {fileID: 6202396434398758643}
   _timeToInteract: 0
+  _cooldown: 0
+  _cooldownUI: {fileID: 0}
   _ItemsOutput: {fileID: 0}
   _timeToDestroy: 60
-  _ItemData: {fileID: 11400000, guid: 14a680986242b0d4da9221542418f102, type: 2}
+  _ItemData: {fileID: 11400000, guid: 118370fd9e4942944b7cdb2632d54c9c, type: 2}
 --- !u!114 &8613075049281372571
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -8240322045746239133}
   - component: {fileID: 8613075049281372571}
   m_Layer: 0
-  m_Name: Cabbage
+  m_Name: HotFrenchFries
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 722823095
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 59041a4ba0f43864aa5cbef3f10741b2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ddb62bb2897abdc41a988d2f4570f108, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -136,9 +136,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactColl: {fileID: 6202396434398758643}
   _timeToInteract: 0
+  _cooldown: 0
+  _cooldownUI: {fileID: 0}
   _ItemsOutput: {fileID: 0}
   _timeToDestroy: 60
-  _ItemData: {fileID: 11400000, guid: 14a680986242b0d4da9221542418f102, type: 2}
+  _ItemData: {fileID: 11400000, guid: d77c7a4ad7e4edc4cbcae8a27c48aa25, type: 2}
 --- !u!114 &8613075049281372571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,5 +155,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _alwaysUpdate: 0
   _sr: {fileID: 3060854969770788028}
+  _updateSelfOffset: 0
   _updateOtherOffset: 0
   _linkTo: {fileID: 0}

@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8975851919024247910}
   - component: {fileID: 3060854969770788028}
-  - component: {fileID: -5491051607646460727}
-  - component: {fileID: -4160941051960552110}
+  - component: {fileID: 6202396434398758643}
+  - component: {fileID: -8240322045746239133}
   - component: {fileID: 8613075049281372571}
   m_Layer: 0
-  m_Name: Potato
+  m_Name: HotpotDeluxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 722823095
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f47fb5e9c7d32464b9ad4466e90e118e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8eacf0791fbe8a5439fbb5d9bad10c42, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!58 &-5491051607646460727
+--- !u!58 &6202396434398758643
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,7 +122,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &-4160941051960552110
+--- !u!114 &-8240322045746239133
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,11 +134,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6fc0eb59b9a52c40b18b6f9c48daee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactColl: {fileID: -5491051607646460727}
+  _interactColl: {fileID: 6202396434398758643}
   _timeToInteract: 0
+  _cooldown: 0
+  _cooldownUI: {fileID: 0}
   _ItemsOutput: {fileID: 0}
   _timeToDestroy: 60
-  _ItemData: {fileID: 11400000, guid: 17a5c477a2ee87b42bba431d0fb74bb1, type: 2}
+  _ItemData: {fileID: 11400000, guid: 0aa7f0fb78554d14a846039c80ebabae, type: 2}
 --- !u!114 &8613075049281372571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,5 +155,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _alwaysUpdate: 0
   _sr: {fileID: 3060854969770788028}
+  _updateSelfOffset: 0
   _updateOtherOffset: 0
   _linkTo: {fileID: 0}

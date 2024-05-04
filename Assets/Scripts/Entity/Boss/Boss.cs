@@ -212,6 +212,8 @@ public class Boss : Entity, IHitableObject
 
   private bool Eat(Product food)
   {
+    if (!food.GetProductData().Eatable) return false;
+
     if (_stomach != null)
     {
       var eatResult = _stomach.Eat(food);

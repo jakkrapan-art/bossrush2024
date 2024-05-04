@@ -113,5 +113,10 @@ public class Projectile : MonoBehaviour
       Knockback();
     }
   }
+
+  private void OnDestroy()
+  {
+    if(_source != null) _source.enabled = true;
+  }
   #endregion
 }

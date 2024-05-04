@@ -59,7 +59,7 @@ public class Plant : InteractableObject, IPoolingObject
 
   public void OnFullyGrowth()
   {
-    var product = ObjectPool.GetInstance().Get<Product>(Product.name);
+    var product = ObjectPool.GetInstance().Get<Product>("Product/" + Product.name);
     product.transform.position = transform.position;
     if(product.TryGetComponent(out Collider2D col))
     {

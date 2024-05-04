@@ -5,7 +5,7 @@ public class Item : InteractableObject, IPoolingObject
 {
   
   public float _timeToDestroy = 60;
-  [SerializeField]private ItemData _ItemData;
+  [SerializeField]protected ItemData _ItemData;
   private Action _onPickedAction = null;
   private DynamicSortingOrder _sortingOrder;
 

@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(DynamicSortingOrder))]
 public class InteractableObject : MonoBehaviour
@@ -24,6 +26,7 @@ public class InteractableObject : MonoBehaviour
 
   [SerializeField] protected float _timeToInteract = 0;
   [SerializeField] protected float _cooldown = 0;
+  [SerializeField] protected Image _cooldownUI = null;
   protected float _lastInteract = 0;
   [SerializeField] protected Item _ItemsOutput;
 
@@ -34,17 +37,54 @@ public class InteractableObject : MonoBehaviour
     if(!gameObject.TryGetComponent(out DynamicSortingOrder _)) gameObject.AddComponent<DynamicSortingOrder>();
   }
 
+  private void Start()
+  {
+    SetActiveCooldownUI(false);
+  }
+
+  private void Update()
+  {
+    if(isCooldown)
+    {
+      UpdateCooldownUI();
+    }
+    else
+    {
+      SetActiveCooldownUI(false);
+    }
+  }
+
   public virtual InteractResultData Interact(Item interactingItem)
   {
-    if (_lastInteract != 0 && Time.time < _lastInteract + _cooldown) return new InteractResultData();
+    if (isCooldown)
+    {
+      return new InteractResultData();
+    }
 
     Item returnItem = null;
     if(_ItemsOutput != null)
     {
-      returnItem = ObjectPool.GetInstance().Get<Item>(_ItemsOutput.name);
+      var prefix = Const.GetObjectPrefix(_ItemsOutput.GetType());
+      returnItem = ObjectPool.GetInstance().Get<Item>(prefix + _ItemsOutput.name);
     }
 
     _lastInteract = Time.time;
     return new InteractResultData { waitTime = _timeToInteract, returnItem = returnItem };
+  }
+
+  private bool isCooldown => _lastInteract != 0 && Time.time < _lastInteract + _cooldown;
+
+  private void UpdateCooldownUI()
+  {
+    if (_cooldownUI == null) return;
+
+    if (!_cooldownUI.gameObject.activeSelf) SetActiveCooldownUI(true);
+    var fillAmount = Mathf.Clamp((Time.time - _lastInteract) / _cooldown, 0, 1);
+    _cooldownUI.fillAmount = fillAmount;
+  }
+
+  private void SetActiveCooldownUI(bool active)
+  {
+    if (_cooldownUI != null) _cooldownUI.gameObject.SetActive(active);
   }
 }

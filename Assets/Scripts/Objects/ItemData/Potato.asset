@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6197d8f1e7fa3f0419ce9e21a7ad3a46, type: 3}
+  m_Script: {fileID: 11500000, guid: 630e3f66dd943214d9d0a97bb01b7c74, type: 3}
   m_Name: Potato
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: f47fb5e9c7d32464b9ad4466e90e118e, type: 3}
+  <Eatable>k__BackingField: 1
+  <Material>k__BackingField: 1

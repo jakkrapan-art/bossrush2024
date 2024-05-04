@@ -2305,6 +2305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactColl: {fileID: 0}
   _timeToInteract: 0
+  _cooldown: 0
   _ItemsOutput: {fileID: 2258033856786144890, guid: cabeebd1c57b29a4a8621b073c5c31f7, type: 3}
 --- !u!114 &1524387197
 MonoBehaviour:
@@ -2706,6 +2707,71 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 7
+--- !u!1001 &1843319758
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 848751065970304941, guid: e5315aa3b8dcd0943abd623fefc409f7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 848751065970304941, guid: e5315aa3b8dcd0943abd623fefc409f7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 848751065970304941, guid: e5315aa3b8dcd0943abd623fefc409f7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 848751065970304941, guid: e5315aa3b8dcd0943abd623fefc409f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 848751065970304941, guid: e5315aa3b8dcd0943abd623fefc409f7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 848751065970304941, guid: e5315aa3b8dcd0943abd623fefc409f7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 848751065970304941, guid: e5315aa3b8dcd0943abd623fefc409f7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 848751065970304941, guid: e5315aa3b8dcd0943abd623fefc409f7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 848751065970304941, guid: e5315aa3b8dcd0943abd623fefc409f7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 848751065970304941, guid: e5315aa3b8dcd0943abd623fefc409f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 848751065970304941, guid: e5315aa3b8dcd0943abd623fefc409f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 848751065970304941, guid: e5315aa3b8dcd0943abd623fefc409f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8391690530183652844, guid: e5315aa3b8dcd0943abd623fefc409f7, type: 3}
+      propertyPath: m_Name
+      value: npc_buch
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e5315aa3b8dcd0943abd623fefc409f7, type: 3}
 --- !u!1001 &1859092207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2875,7 +2941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36cbb3fa98c9f2e4c97621a18706e9bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ability: {fileID: 11400000, guid: 4902fa61579707147b18e53723cd442c, type: 2}
+  _abilities: []
 --- !u!1001 &1963722901162063044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3083,3 +3149,4 @@ SceneRoots:
   - {fileID: 1114917919}
   - {fileID: 1859092207}
   - {fileID: 1038494437}
+  - {fileID: 1843319758}

@@ -58,7 +58,7 @@ public class NPCSeedExchange : InteractableObject
 
   private WaitResultData waitForChooseSeed()
   {
-    if (_closed) return new WaitResultData { finish = true };
+    if (_closed && _resultSeed == null) return new WaitResultData { finish = true };
 
     if(_resultSeed == null) return new WaitResultData { finish = false };
 

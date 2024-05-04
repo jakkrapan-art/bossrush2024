@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -27,7 +26,8 @@ public class ObjectPool : MonoBehaviour
     }
 
     string key = mono.name.Replace("(Clone)", "");
-    pool.Return(key, obj);
+    string prefix = Const.GetObjectPrefix(obj.GetType());
+    pool.Return(prefix + key, obj);
   }
 
   private Dictionary<string, Queue<object>> objectsInPool = new Dictionary<string, Queue<object>>();

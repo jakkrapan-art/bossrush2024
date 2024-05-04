@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6197d8f1e7fa3f0419ce9e21a7ad3a46, type: 3}
+  m_Script: {fileID: 11500000, guid: 630e3f66dd943214d9d0a97bb01b7c74, type: 3}
   m_Name: Chicken
   m_EditorClassIdentifier: 
-  iconItem: {fileID: 21300000, guid: 5f8208e71b55720409e53afe5f256604, type: 3}
+  icon: {fileID: 21300000, guid: 7fc6a68a3b788944d8539567a20eb7a8, type: 3}
+  <Eatable>k__BackingField: 0
+  <Material>k__BackingField: 1
