@@ -156,6 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactColl: {fileID: 457852417362584599}
   _timeToInteract: 0
+  _cooldown: 0
+  _cooldownUI: {fileID: 0}
   _ItemsOutput: {fileID: 0}
   _timeToDestroy: 60
   _ItemData: {fileID: 0}
@@ -174,6 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _alwaysUpdate: 0
   _sr: {fileID: 411485904315590091}
+  _updateSelfOffset: 0
   _updateOtherOffset: 1
   _linkTo: {fileID: 0}
 --- !u!70 &457852417362584599
@@ -310,5 +313,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _alwaysUpdate: 0
   _sr: {fileID: 9217737067584028142}
+  _updateSelfOffset: 0
   _updateOtherOffset: 0
   _linkTo: {fileID: 7648452174339640678}

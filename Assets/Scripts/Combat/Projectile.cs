@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviour
     _onHit = onHit;
     _source = source;
     _onStop = onStop;
-    source.enabled = false;
+    //source.enabled = false;
     SetFlyVelocity(speed, direction);
   }
 
