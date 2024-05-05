@@ -2306,6 +2306,7 @@ MonoBehaviour:
   _interactColl: {fileID: 0}
   _timeToInteract: 0
   _cooldown: 0
+  _cooldownUI: {fileID: 0}
   _ItemsOutput: {fileID: 2258033856786144890, guid: cabeebd1c57b29a4a8621b073c5c31f7, type: 3}
 --- !u!114 &1524387197
 MonoBehaviour:
@@ -2942,6 +2943,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _abilities: []
+  _cooldown: 15
+  _initialCooldown: 8
 --- !u!1001 &1963722901162063044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3148,5 +3151,5 @@ SceneRoots:
   - {fileID: 1951040762}
   - {fileID: 1114917919}
   - {fileID: 1859092207}
-  - {fileID: 1038494437}
   - {fileID: 1843319758}
+  - {fileID: 1038494437}

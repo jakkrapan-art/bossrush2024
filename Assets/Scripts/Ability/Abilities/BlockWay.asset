@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8585ff9b5ad583a4d888ab7d34c758f7, type: 3}
   m_Name: BlockWay
   m_EditorClassIdentifier: 
-  _name: RockThrow
+  _name: BlockWay
   _cooldownTime: 30
   _rockDuration: 10
   _unbreakable: 0
