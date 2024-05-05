@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8393548979221941452}
   - component: {fileID: 5383248005894157622}
   - component: {fileID: 594621797965327353}
+  - component: {fileID: 6834934323408978494}
   m_Layer: 0
   m_Name: Soil
   m_TagString: Untagged
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1346980283
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.2924528, g: 0.19117004, b: 0.13656995, a: 1}
@@ -98,8 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a25b80793c29b42961ceedd6d3726a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _listItemCanInteract: {fileID: 0}
+  _interactColl: {fileID: 594621797965327353}
   _timeToInteract: 0
+  _cooldown: 0
+  _cooldownUI: {fileID: 0}
   _ItemsOutput: {fileID: 0}
 --- !u!61 &594621797965327353
 BoxCollider2D:
@@ -146,3 +149,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &6834934323408978494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4753617213715699519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28739b5ccbdb5e04584b2a3e2b64ff9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _alwaysUpdate: 0
+  _sr: {fileID: 8393548979221941452}
+  _updateSelfOffset: 0
+  _updateOtherOffset: 0
+  _linkTo: {fileID: 0}

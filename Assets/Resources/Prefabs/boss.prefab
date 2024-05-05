@@ -924,6 +924,7 @@ GameObject:
   - component: {fileID: 6636995134784059005}
   - component: {fileID: 4973821335972762724}
   - component: {fileID: 541124444819200632}
+  - component: {fileID: 1519566059635765515}
   m_Layer: 0
   m_Name: boss
   m_TagString: Untagged
@@ -1123,6 +1124,7 @@ MonoBehaviour:
   _rage: 50
   _ragePointIncreased: 0.16
   <Animator>k__BackingField: {fileID: 7913409741123432466}
+  _bossAbilities: {fileID: 1519566059635765515}
   _thinkingBubble: {fileID: 6992011751146074215}
   _foodRequestBubble: {fileID: 5784347830142450399}
 --- !u!114 &541124444819200632
@@ -1142,6 +1144,25 @@ MonoBehaviour:
   _updateSelfOffset: 0
   _updateOtherOffset: 0
   _linkTo: {fileID: 0}
+--- !u!114 &1519566059635765515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4687577424507276347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36cbb3fa98c9f2e4c97621a18706e9bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _abilities:
+  - <ability>k__BackingField: {fileID: 11400000, guid: 4902fa61579707147b18e53723cd442c, type: 2}
+    <triggerChance>k__BackingField: 1
+    <rageMin>k__BackingField: 0
+    <rageMax>k__BackingField: 100
+  _cooldown: 5
+  _initialCooldown: 1
 --- !u!1 &6420525935037220521
 GameObject:
   m_ObjectHideFlags: 0

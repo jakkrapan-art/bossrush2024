@@ -14,6 +14,10 @@ public class Boss : Entity, IHitableObject
   private BossSkillController _skillController = null;
   private BossStomach _stomach = null;
 
+  [Header("Skill")]
+  [SerializeField]
+  private AbilityHolder _bossAbilities = null;
+
   [Header("Bubbles")]
   [SerializeField]
   private UIBossParticle _thinkingBubble = null;
@@ -33,12 +37,21 @@ public class Boss : Entity, IHitableObject
     UpdateRageValue(_ragePointIncreased * Time.deltaTime);
     _stateMachine?.Update();
     if (_skillController != null && _skillController.CanUse()) _skillController.TriggerSkill(_rage);
+
+    ActiveAbility();
   }
 
   private void FixedUpdate()
   {
     if (_isEnded?.Invoke() ?? false) return;
     _stateMachine?.FixedUpdate();
+  }
+
+  private void ActiveAbility()
+  {
+    if (_bossAbilities == null || (_bossAbilities != null && !_bossAbilities.IsReady())) return;
+
+    _bossAbilities.ActiveAbility(_rage);
   }
 
   private void UpdateRageValue(float updateValue)

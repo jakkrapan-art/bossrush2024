@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630e3f66dd943214d9d0a97bb01b7c74, type: 3}
   m_Name: Meat
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: c5ebd037a0700e5459188d151f259a65, type: 3}
+  icon: {fileID: 21300000, guid: e8e6c57e0da3a6947a8900f74894f5fc, type: 3}
   <Eatable>k__BackingField: 0
   <Material>k__BackingField: 1

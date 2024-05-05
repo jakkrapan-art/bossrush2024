@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Ability/RockThrow", fileName = "RockThrow")]
-public class RockThrowAbility : Ability
+[CreateAssetMenu(menuName = "Ability/BlockWay", fileName = "BlockWay")]
+public class BlockWayAbility : Ability
 {
-  private List<Transform> _possibleTargets = new List<Transform>();
-  private List<int> _targetIndexes = new List<int>();
+  private List<Transform> _possibleTargets;
+  private List<int> _targetIndexes;
   private ObjectPool _objectPool;
 
   [SerializeField]
@@ -18,6 +19,9 @@ public class RockThrowAbility : Ability
 
   public override void Setup()
   {
+    _possibleTargets = new();
+    _targetIndexes = new();
+
     var bridges = FindObjectsOfType<Bridge>();
     foreach (var bridge in bridges) 
     {
@@ -37,11 +41,11 @@ public class RockThrowAbility : Ability
     if(_objectPool != null)
     {
       List<int> randomIndexes = new List<int>(_targetIndexes);
-      int removeCount = _targetIndexes.Count - _rockCount;
+      int removeCount = randomIndexes.Count - _rockCount;
 
       for (int i = 0; i < removeCount; i++) 
       {
-        randomIndexes.Remove(Random.Range(0, randomIndexes.Count));
+        randomIndexes.RemoveAt(Random.Range(0, randomIndexes.Count));
       }
 
       foreach (int index in randomIndexes)

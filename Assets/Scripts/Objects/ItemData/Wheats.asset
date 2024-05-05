@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630e3f66dd943214d9d0a97bb01b7c74, type: 3}
   m_Name: Wheats
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: ad75ba0cf9dde164ba9edd2cda41d471, type: 3}
+  icon: {fileID: 21300000, guid: 0bc7782843c4d9e488f41c8ce855f834, type: 3}
   <Eatable>k__BackingField: 1
   <Material>k__BackingField: 1
