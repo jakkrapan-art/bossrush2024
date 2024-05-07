@@ -1,4 +1,4 @@
-const cacheName = "DefaultCompany-bossrush2024-0.0.204";
+const cacheName = "DefaultCompany-bossrush2024-0.0.205";
 const contentToCache = [
     "Build/WebGL.loader.js",
     "Build/WebGL.framework.js",
