@@ -18,10 +18,23 @@ Art & Asset
 
 ## Game Systems
 ### Farming  
--- detail of farming system --
+Planting the product for feed the boss or use it as materials
+
+![farming-sys](https://github.com/jakkrapan-art/bossrush2024/assets/57596151/724209f8-6adf-4c71-9b78-e7950a36f69f)
+
 ### Cooking
--- detail of cooking system --
+Cook the delicious food for feed the boss and make it happy!
+
+![cooking-sys](https://github.com/jakkrapan-art/bossrush2024/assets/57596151/89938139-f2b3-4147-8376-27f03990bc70)
+
 ### Boss Fight!
--- detail of boss fight system --
+Feeding the raw materials to make boss happier
+
+![feed-boss](https://github.com/jakkrapan-art/bossrush2024/assets/57596151/4f4cc211-4ed3-4121-88a9-de57c2307e0d)
+
+#### Boss Skill
+Rock Block!
+
+![way-block](https://github.com/jakkrapan-art/bossrush2024/assets/57596151/d9747fc5-74ee-4496-9a13-fe1daa67545f)
 
 ### [Play Demo](https://jakkrapan-art.github.io/bossrush2024/WebGL/)
