@@ -28,7 +28,7 @@ Cook the delicious food for feed the boss and make it happy!
 ![cooking-sys](https://github.com/jakkrapan-art/bossrush2024/assets/57596151/89938139-f2b3-4147-8376-27f03990bc70)
 
 ### Boss Fight!
-Feeding the raw materials to make boss happier
+Feeding the Foods or Raw materials to make boss happy!
 
 ![feed-boss](https://github.com/jakkrapan-art/bossrush2024/assets/57596151/4f4cc211-4ed3-4121-88a9-de57c2307e0d)
 
