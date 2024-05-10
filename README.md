@@ -16,6 +16,9 @@ Art & Asset
  - Andoi
  - Kosumo
 
+## Goal
+Reduce the boss's anger by feeding to the boss until it reaches zero!
+
 ## Game Systems
 ### Farming  
 Planting the product for feed the boss or use it as materials
@@ -36,5 +39,12 @@ Feeding the Foods or Raw materials to make boss happy!
 Rock Block!
 
 ![way-block](https://github.com/jakkrapan-art/bossrush2024/assets/57596151/d9747fc5-74ee-4496-9a13-fe1daa67545f)
+
+## Control Inputs
+
+W A S D - Move Character  
+F - Interact  
+Left Click - Pickup/Drop Item  
+Right Click - Throw Item  
 
 ### [Play Demo](https://jakkrapan-art.github.io/bossrush2024/WebGL/)
